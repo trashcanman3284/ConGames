@@ -123,12 +123,12 @@ Plans:
   2. User can move single cards to free cells and ordered sequences between columns, with multi-card moves respecting the (freeCells+1) x 2^emptyCols formula
   3. Cards auto-move to foundation when safe, user can undo any number of moves
   4. Win is detected with celebration animation and stats recorded
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 08-01: TBD
-- [ ] 08-02: TBD
-- [ ] 08-03: TBD
+- [ ] 08-01-PLAN.md — Engine (FreeCell logic, seeded deals, multi-card formula, auto-foundation, undo) + HTML skeleton
+- [ ] 08-02-PLAN.md — UI module (rendering, tap/drag/double-tap, auto-foundation animation, shake, win celebration) + CSS
+- [ ] 08-03-PLAN.md — Human verification checkpoint
 
 ### Phase 9: Packaging
 **Goal**: The complete game suite is packaged as an APK and runs offline on Dad's tablet

@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-09T18:09:48.426Z"
+last_updated: "2026-03-09T19:35:14Z"
 progress:
-  total_phases: 6
+  total_phases: 7
   completed_phases: 6
-  total_plans: 17
-  completed_plans: 17
+  total_plans: 21
+  completed_plans: 18
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-08)
 
 **Core value:** Dad can pick up his tablet, tap a game, play it to completion, and return to the menu -- for all five games -- without needing any help.
-**Current focus:** Phase 8: FreeCell -- Complete. Phase 9 (APK Packaging) next.
+**Current focus:** Phase 08.1: Polish & Settings -- in progress.
 
 ## Current Position
 
-Phase: 8 of 9 (FreeCell) -- COMPLETE
-Plan: 3 of 3 in current phase
-Status: Phase Complete
-Last activity: 2026-03-09 -- Completed 08-03-PLAN.md (FreeCell verification approved)
+Phase: 08.1 of 9 (Polish & Settings)
+Plan: 2 of 4 in current phase (just completed)
+Status: In Progress
+Last activity: 2026-03-09 -- Completed 08.1-02-PLAN.md (Woord Soek drag-to-select)
 
-Progress: [##########] 100% (17 of 17 plans complete)
+Progress: [########--] 86% (18 of 21 plans complete)
 
 ## Performance Metrics
 
@@ -61,6 +61,7 @@ Progress: [##########] 100% (17 of 17 plans complete)
 | Phase 08 P01 | 3min | 2 tasks | 3 files |
 | Phase 08 P02 | 4min | 2 tasks | 2 files |
 | Phase 08 P03 | 1min | 1 tasks | 0 files |
+| Phase 08.1 P02 | 1min | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -106,10 +107,16 @@ Recent decisions affecting current work:
 - [Phase 08]: Double-tap auto-move tries foundation first, then free cell
 - [Phase 08]: No confirmation dialogs on new game/restart for fast interaction flow
 - [Phase 08]: FreeCell approved as playable and visually correct on tablet viewport
+- [Phase 08.1]: 2-cell movement threshold before drag activates to avoid false triggers on taps
+- [Phase 08.1]: 400ms ghost-click prevention timeout after drag completion
 
 ### Pending Todos
 
 None yet.
+
+### Roadmap Evolution
+
+- Phase 08.1 inserted after Phase 08: Polish & Settings — drag-to-select for Woord Soek, MS-style colour themes per card game, font size per game integration (URGENT)
 
 ### Blockers/Concerns
 
@@ -118,5 +125,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-09
-Stopped at: Completed 08-03-PLAN.md -- FreeCell verification approved. Phase 8 complete.
+Stopped at: Completed 08.1-02-PLAN.md -- Woord Soek drag-to-select added.
 Resume file: None

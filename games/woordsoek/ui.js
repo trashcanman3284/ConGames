@@ -104,8 +104,19 @@ var WoordSoekUI = (function() {
       }
     }
 
+    // Show cancel button only if a game is already in progress
+    var cancelBtn = el('ws-diff-cancel');
+    if (cancelBtn) {
+      cancelBtn.style.display = _puzzle ? 'block' : 'none';
+    }
+
     el('ws-difficulty-modal').classList.add('active');
     _gameActive = false;
+  }
+
+  function closeDifficultyModal() {
+    el('ws-difficulty-modal').classList.remove('active');
+    _gameActive = true;
   }
 
   // ── Confirm New Puzzle ─────────────────────────────────────
@@ -485,7 +496,8 @@ var WoordSoekUI = (function() {
     showDifficultyModal: showDifficultyModal,
     toggleLayout: toggleLayout,
     confirmNewPuzzle: confirmNewPuzzle,
-    closeConfirmModal: closeConfirmModal
+    closeConfirmModal: closeConfirmModal,
+    closeDifficultyModal: closeDifficultyModal
   };
 
 })();

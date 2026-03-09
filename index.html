@@ -269,15 +269,22 @@
     .ws-word-list-panel { flex:0 0 35%; overflow-y:auto; padding:var(--gap-md); border-left:1px solid var(--border-subtle); }
 
     .ws-layout.layout-below { flex-direction:column; }
-    .ws-layout.layout-below .ws-grid-container { flex:1 1 auto; }
-    .ws-layout.layout-below .ws-word-list-panel { flex:0 0 auto; max-height:30%; border-left:none; border-top:1px solid var(--border-subtle); }
+    .ws-layout.layout-below .ws-grid-container { flex:1 1 0; min-height:0; }
+    .ws-layout.layout-below .ws-word-list-panel { flex:0 0 auto; max-height:25%; border-left:none; border-top:1px solid var(--border-subtle); overflow-y:hidden; display:flex; flex-direction:column; }
+    .ws-layout.layout-below .ws-word-list-panel #ws-word-list { display:flex; flex-wrap:wrap; gap:6px 12px; overflow:hidden; }
 
     .ws-grid {
       display:grid;
       gap:2px;
       aspect-ratio:1;
       max-height:calc(100vh - 80px);
-      width:100%;
+      height:100%;
+      width:auto;
+      max-width:100%;
+    }
+
+    .ws-layout.layout-below .ws-grid {
+      max-height:100%;
       max-width:calc(100vh - 80px);
     }
 
@@ -432,6 +439,7 @@
           <button class="btn btn-secondary" id="ws-diff-medium" onclick="WoordSoekUI.startGame('medium')">Medium (12&#215;12, 12 woorde)</button>
           <button class="btn btn-secondary" id="ws-diff-hard" onclick="WoordSoekUI.startGame('hard')">Moeilik (15&#215;15, 18 woorde)</button>
         </div>
+        <button class="btn btn-secondary" id="ws-diff-cancel" onclick="WoordSoekUI.closeDifficultyModal()" style="margin-top:8px;display:none;">Kanselleer</button>
       </div>
     </div>
 

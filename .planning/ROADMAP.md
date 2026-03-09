@@ -60,10 +60,11 @@ Plans:
   1. A test page renders face-up cards showing rank and suit with red/black colour distinction
   2. Face-down cards display a distinct back pattern distinguishable from face-up cards
   3. Cards scale responsively to fill their container width and remain legible on a 10.4" tablet
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 04-01: TBD
+- [ ] 04-01-PLAN.md — Card CSS + JS factory + visual test page
+- [ ] 04-02-PLAN.md — Human visual verification checkpoint
 
 ### Phase 5: Solitaire
 **Goal**: Dad can play a full game of Klondike solitaire with tap-to-move, undo, and auto-complete

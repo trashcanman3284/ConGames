@@ -75,12 +75,12 @@ Plans:
   2. User can move cards between tableau columns (alternating colour, descending rank) and to foundations (ascending same-suit) by tapping
   3. User can undo any number of moves, and auto-complete triggers when all cards are face-up
   4. Win is detected with a celebration animation and the win is recorded in stats
-**Plans**: TBD
+**Plans:** 3 plans
 
 Plans:
-- [ ] 05-01: TBD
-- [ ] 05-02: TBD
-- [ ] 05-03: TBD
+- [ ] 05-01-PLAN.md — Engine (Klondike logic, move validation, undo, auto-complete) + HTML screen skeleton
+- [ ] 05-02-PLAN.md — UI module (rendering, tap-tap, drag-and-drop, auto-complete animation, win celebration)
+- [ ] 05-03-PLAN.md — Human verification checkpoint
 
 ### Phase 6: Spider Solitaire
 **Goal**: Dad can play Spider Solitaire in 1-suit mode with deal, sequence removal, and undo

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#1a1610" />
+  <title>Dad se Speletjies</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="css/shared.css" />
+  <style>
+    /* ── Welcome Screen ────────────────────────────────────── */
+    #screen-welcome {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 24px 40px;
+      gap: 32px;
+      position: relative;
+    }
+
+    /* Decorative background radial */
+    #screen-welcome::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(ellipse at center,
+        rgba(212, 162, 58, 0.07) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    .welcome-header {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .welcome-header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      color: var(--accent-gold);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      text-shadow: 0 0 60px rgba(212, 162, 58, 0.3);
+    }
+
+    .welcome-header p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* ── Game Grid ─────────────────────────────────────────── */
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      width: 100%;
+      max-width: 1100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .game-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 28px 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      cursor: pointer;
+      transition:
+        transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        border-color 200ms ease,
+        box-shadow 200ms ease,
+        background 200ms ease;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      min-height: 160px;
+    }
+
+    .game-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 200ms ease;
+      border-radius: inherit;
+    }
+
+    .game-btn:hover {
+      transform: translateY(-6px) scale(1.03);
+      border-color: var(--border-accent);
+      box-shadow:
+        0 12px 40px rgba(0,0,0,0.5),
+        0 0 30px rgba(212, 162, 58, 0.2);
+    }
+
+    .game-btn:hover::before {
+      opacity: 1;
+    }
+
+    .game-btn:active {
+      transform: translateY(-2px) scale(0.98);
+    }
+
+    /* Individual game colours */
+    .game-btn[data-game="woordsoek"]:hover { background: rgba(91, 155, 213, 0.08); }
+    .game-btn[data-game="woordsoek"] .game-icon { color: #5b9bd5; text-shadow: 0 0 20px rgba(91,155,213,0.4); }
+
+    .game-btn[data-game="solitaire"]:hover { background: rgba(212, 162, 58, 0.08); }
+    .game-btn[data-game="solitaire"] .game-icon { color: var(--accent-amber); text-shadow: 0 0 20px rgba(212,162,58,0.4); }
+
+    .game-btn[data-game="spider"]:hover { background: rgba(180, 100, 200, 0.08); }
+    .game-btn[data-game="spider"] .game-icon { color: #c87be8; text-shadow: 0 0 20px rgba(180,100,200,0.4); }
+
+    .game-btn[data-game="sudoku"]:hover { background: rgba(76, 175, 120, 0.08); }
+    .game-btn[data-game="sudoku"] .game-icon { color: var(--green-found); text-shadow: 0 0 20px rgba(76,175,120,0.4); }
+
+    .game-btn[data-game="freecell"]:hover { background: rgba(224, 87, 87, 0.08); }
+    .game-btn[data-game="freecell"] .game-icon { color: #e05757; text-shadow: 0 0 20px rgba(224,87,87,0.4); }
+
+    .game-icon {
+      font-size: 3rem;
+      line-height: 1;
+      transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .game-btn:hover .game-icon {
+      transform: scale(1.15);
+    }
+
+    .game-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .game-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    /* Stats chip on button */
+    .game-stats-chip {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Footer ────────────────────────────────────────────── */
+    .welcome-footer {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Stagger animation ─────────────────────────────────── */
+    .game-btn {
+      opacity: 0;
+      animation: btn-appear 400ms var(--ease-spring) forwards;
+    }
+
+    .game-btn:nth-child(1) { animation-delay: 80ms; }
+    .game-btn:nth-child(2) { animation-delay: 160ms; }
+    .game-btn:nth-child(3) { animation-delay: 240ms; }
+    .game-btn:nth-child(4) { animation-delay: 320ms; }
+    .game-btn:nth-child(5) { animation-delay: 400ms; }
+
+    @keyframes btn-appear {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .welcome-header {
+      opacity: 0;
+      animation: fade-down 400ms var(--ease-out) 0ms forwards;
+    }
+
+    @keyframes fade-down {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Settings Panel contents ───────────────────────────── */
+    .font-size-options {
+      display: flex;
+      gap: 8px;
+    }
+
+    .font-size-options button {
+      flex: 1;
+      height: 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-family: var(--font-body);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--dur-fast);
+    }
+
+    .font-size-options button.active,
+    .font-size-options button:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+      background: rgba(212,162,58,0.08);
+    }
+
+    .settings-version {
+      position: absolute;
+      bottom: var(--gap-md);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Responsive: portrait fallback ────────────────────────
+       (tablet will be landscape, but just in case) */
+    @media (orientation: portrait) {
+      .game-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto auto;
+      }
+
+      .game-btn:nth-child(4) { grid-column: 1; }
+      .game-btn:nth-child(5) { grid-column: 2; }
+    }
+
+    @media (max-width: 700px) {
+      .game-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ── Woord Soek ──────────────────────────────────────────── */
+    .ws-layout { display:flex; flex:1; overflow:hidden; }
+    .ws-grid-container { flex:0 0 65%; display:flex; align-items:center; justify-content:center; padding:var(--gap-md); }
+    .ws-word-list-panel { flex:0 0 35%; overflow-y:auto; padding:var(--gap-md); border-left:1px solid var(--border-subtle); }
+
+    .ws-layout.layout-below { flex-direction:column; }
+    .ws-layout.layout-below .ws-grid-container { flex:1 1 auto; }
+    .ws-layout.layout-below .ws-word-list-panel { flex:0 0 auto; max-height:30%; border-left:none; border-top:1px solid var(--border-subtle); }
+
+    .ws-grid {
+      display:grid;
+      gap:2px;
+      aspect-ratio:1;
+      max-height:calc(100vh - 80px);
+      width:100%;
+      max-width:calc(100vh - 80px);
+    }
+
+    .ws-cell {
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--font-body); font-weight:700;
+      font-size:clamp(0.85rem, 2.5vw, 1.3rem);
+      aspect-ratio:1;
+      border-radius:var(--radius-sm);
+      cursor:pointer;
+      min-height:0;
+      user-select:none;
+      -webkit-user-select:none;
+      background:var(--bg-card);
+      color:var(--text-primary);
+      transition:background var(--dur-fast), transform var(--dur-fast);
+      text-transform:uppercase;
+    }
+
+    .ws-cell:active { transform:scale(0.92); }
+    .ws-cell.selected { background:var(--accent-gold); color:var(--bg-base); }
+    .ws-cell.preview { background:rgba(212,162,58,0.25); }
+    .ws-cell.hint-flash { animation:ws-hint-flash 1.2s ease-out; }
+
+    @keyframes ws-hint-flash {
+      0%,100% { background:var(--bg-card); }
+      20%,60% { background:var(--blue-hint); color:white; }
+    }
+
+    .ws-word-item {
+      display:inline-block;
+      padding:6px 12px;
+      margin:4px;
+      font-weight:600;
+      font-size:0.95rem;
+      color:var(--text-primary);
+      border-radius:var(--radius-sm);
+      background:var(--bg-card);
+      transition:all var(--dur-fast);
+      text-transform:uppercase;
+    }
+
+    .ws-word-item.found {
+      text-decoration:line-through;
+      color:var(--text-muted);
+      background:transparent;
+    }
+
+    /* Difficulty button highlight for selected difficulty */
+    .ws-diff-selected {
+      border-color:var(--accent-gold) !important;
+      color:var(--accent-gold) !important;
+      background:rgba(212,162,58,0.12) !important;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ══════════════ WELCOME SCREEN ════════════════════════ -->
+  <section id="screen-welcome" data-screen="welcome" class="screen active">
+
+    <header class="welcome-header">
+      <h1>Dad se Speletjies</h1>
+      <p>Kies 'n speletjie om te begin</p>
+    </header>
+
+    <div class="game-grid">
+
+      <button class="game-btn" data-game="woordsoek" onclick="Router.go('woordsoek')">
+        <span class="game-icon">🔤</span>
+        <span class="game-name">Woord Soek</span>
+        <span class="game-sub">Afrikaans</span>
+        <span class="game-stats-chip" id="stats-woordsoek"></span>
+      </button>
+
+      <button class="game-btn" data-game="solitaire" onclick="Router.go('solitaire')">
+        <span class="game-icon">♠️</span>
+        <span class="game-name">Solitaire</span>
+        <span class="game-sub">Klondike</span>
+        <span class="game-stats-chip" id="stats-solitaire"></span>
+      </button>
+
+      <button class="game-btn" data-game="spider" onclick="Router.go('spider')">
+        <span class="game-icon">🕷️</span>
+        <span class="game-name">Spider</span>
+        <span class="game-sub">Solitaire</span>
+        <span class="game-stats-chip" id="stats-spider"></span>
+      </button>
+
+      <button class="game-btn" data-game="sudoku" onclick="Router.go('sudoku')">
+        <span class="game-icon">🔢</span>
+        <span class="game-name">Sudoku</span>
+        <span class="game-sub">Getalle legkaart</span>
+        <span class="game-stats-chip" id="stats-sudoku"></span>
+      </button>
+
+      <button class="game-btn" data-game="freecell" onclick="Router.go('freecell')">
+        <span class="game-icon">🃏</span>
+        <span class="game-name">FreeCell</span>
+        <span class="game-sub">Solitaire</span>
+        <span class="game-stats-chip" id="stats-freecell"></span>
+      </button>
+
+    </div>
+
+    <footer class="welcome-footer">
+      <button class="btn btn-ghost" onclick="openSettings()" style="font-size:1.4rem; padding: 0 16px;">⚙️</button>
+    </footer>
+
+  </section>
+
+  <!-- ══════════════ GAME SCREENS (placeholders) ════════════ -->
+  <!-- Each game will load its own full screen content -->
+
+  <section id="screen-woordsoek" data-screen="woordsoek" class="screen">
+    <div style="display:flex;flex-direction:column;height:100%;">
+      <!-- Header -->
+      <header class="game-header">
+        <button class="btn-back" onclick="Router.back()">&#8592; Terug</button>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <span class="timer" id="ws-timer">0:00</span>
+          <span class="badge badge-gold" id="ws-counter">0 / 0</span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn-icon" id="ws-hint-btn" onclick="WoordSoekUI.hint()" title="Wenk">&#128161;</button>
+          <button class="btn-icon" id="ws-difficulty-btn" onclick="WoordSoekUI.showDifficultyModal()" title="Moeilikheid">&#9881;</button>
+          <button class="btn-icon" id="ws-layout-btn" onclick="WoordSoekUI.toggleLayout()" title="Skuif woordlys">&#8645;</button>
+        </div>
+      </header>
+
+      <!-- Game area: grid + word list -->
+      <div class="ws-layout" id="ws-layout">
+        <div class="ws-grid-container" id="ws-grid-container">
+          <div class="ws-grid" id="ws-grid"></div>
+        </div>
+        <div class="ws-word-list-panel surface" id="ws-word-list-panel">
+          <h3 style="font-family:var(--font-display);color:var(--accent-gold);font-size:1rem;margin-bottom:12px;">Woorde</h3>
+          <div id="ws-word-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Difficulty Modal (reuses win-overlay pattern) -->
+    <div class="win-overlay" id="ws-difficulty-modal">
+      <div class="win-card">
+        <h2 style="font-size:1.8rem;">Woord Soek</h2>
+        <p>Kies moeilikheidsgraad</p>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <button class="btn btn-secondary" id="ws-diff-easy" onclick="WoordSoekUI.startGame('easy')">Maklik (10&#215;10, 8 woorde)</button>
+          <button class="btn btn-secondary" id="ws-diff-medium" onclick="WoordSoekUI.startGame('medium')">Medium (12&#215;12, 12 woorde)</button>
+          <button class="btn btn-secondary" id="ws-diff-hard" onclick="WoordSoekUI.startGame('hard')">Moeilik (15&#215;15, 18 woorde)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Win Overlay -->
+    <div class="win-overlay" id="ws-win-overlay">
+      <div class="win-card">
+        <h2>Baie goed!</h2>
+        <p id="ws-win-message"></p>
+        <div style="display:flex;gap:12px;justify-content:center;">
+          <button class="btn btn-primary" onclick="WoordSoekUI.showDifficultyModal()">Nuwe Raaisel</button>
+          <button class="btn btn-secondary" onclick="Router.go('welcome')">Tuis</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirm New Puzzle Dialog -->
+    <div class="win-overlay" id="ws-confirm-modal">
+      <div class="win-card">
+        <h2 style="font-size:1.4rem;">Nuwe Raaisel?</h2>
+        <p>Begin nuwe raaisel? Huidige vordering sal verlore gaan.</p>
+        <div style="display:flex;gap:12px;justify-content:center;">
+          <button class="btn btn-primary" onclick="WoordSoekUI.confirmNewPuzzle()">Ja</button>
+          <button class="btn btn-secondary" onclick="WoordSoekUI.closeConfirmModal()">Nee</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-solitaire" data-screen="solitaire" class="screen">
+    <div style="display:flex;flex-direction:column;height:100%;">
+      <header class="game-header">
+        <button class="btn-back" onclick="Router.back()">← Terug</button>
+        <h1>♠️ Solitaire</h1>
+        <div style="width:80px"></div>
+      </header>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:1.1rem;">
+        Kom binnekort — Phase 4
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-spider" data-screen="spider" class="screen">
+    <div style="display:flex;flex-direction:column;height:100%;">
+      <header class="game-header">
+        <button class="btn-back" onclick="Router.back()">← Terug</button>
+        <h1>🕷️ Spider Solitaire</h1>
+        <div style="width:80px"></div>
+      </header>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:1.1rem;">
+        Kom binnekort — Phase 5
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-sudoku" data-screen="sudoku" class="screen">
+    <div style="display:flex;flex-direction:column;height:100%;">
+      <header class="game-header">
+        <button class="btn-back" onclick="Router.back()">← Terug</button>
+        <h1>🔢 Sudoku</h1>
+        <div style="width:80px"></div>
+      </header>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:1.1rem;">
+        Kom binnekort — Phase 6
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-freecell" data-screen="freecell" class="screen">
+    <div style="display:flex;flex-direction:column;height:100%;">
+      <header class="game-header">
+        <button class="btn-back" onclick="Router.back()">← Terug</button>
+        <h1>🃏 FreeCell</h1>
+        <div style="width:80px"></div>
+      </header>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:1.1rem;">
+        Kom binnekort — Phase 7
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ SETTINGS PANEL ════════════════════════ -->
+  <div id="settings-panel" class="settings-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+      <h2 style="margin:0;">⚙️ Instellings</h2>
+      <button class="btn-icon" onclick="closeSettings()" style="font-size:1rem;">✕</button>
+    </div>
+
+    <div class="setting-row">
+      <label>Klanke</label>
+      <label class="toggle">
+        <input type="checkbox" id="toggle-sound" onchange="toggleSound(this.checked)" />
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+
+    <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:12px;">
+      <label>Lettertipe grootte</label>
+      <div class="font-size-options" style="width:100%;">
+        <button onclick="setFontSize('small')" id="fs-small">Klein</button>
+        <button onclick="setFontSize('medium')" id="fs-medium">Medium</button>
+        <button onclick="setFontSize('large')" id="fs-large">Groot</button>
+      </div>
+    </div>
+
+    <!-- Per-game stats -->
+    <div style="margin-top:32px;">
+      <h3 style="font-family:var(--font-display);color:var(--text-secondary);font-size:1rem;margin-bottom:16px;">Statistieke</h3>
+      <div id="all-stats" style="display:flex;flex-direction:column;gap:10px;"></div>
+    </div>
+
+    <span class="settings-version">v1.0 · Dad se Speletjies</span>
+  </div>
+
+  <!-- Settings overlay -->
+  <div id="settings-overlay" style="
+    display:none;
+    position:fixed;inset:0;
+    background:rgba(0,0,0,0.5);
+    z-index:399;
+  " onclick="closeSettings()"></div>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toast-container"></div>
+
+</div>
+
+<!-- ══════════════ SCRIPTS ═══════════════════════════════════ -->
+<script src="js/settings.js"></script>
+<script src="js/router.js"></script>
+<script src="js/audio.js"></script>
+<script src="games/woordsoek/engine.js"></script>
+<script src="games/woordsoek/ui.js"></script>
+
+<script>
+  // ── App init ────────────────────────────────────────────
+  Settings.init();
+  Audio.init();
+
+  // ── Register PWA service worker ─────────────────────────
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(err => {
+      console.log('SW registration failed (normal in dev):', err);
+    });
+  }
+
+  // ── Load win stats onto welcome buttons ─────────────────
+  function refreshStats() {
+    const games = ['woordsoek', 'solitaire', 'spider', 'sudoku', 'freecell'];
+    games.forEach(id => {
+      const s = Settings.getStats(id);
+      const el = document.getElementById(`stats-${id}`);
+      if (el && s.played > 0) {
+        el.textContent = `${s.wins}/${s.played}`;
+      }
+    });
+  }
+
+  refreshStats();
+
+  // ── Settings panel ──────────────────────────────────────
+  function openSettings() {
+    document.getElementById('settings-panel').classList.add('open');
+    document.getElementById('settings-overlay').style.display = 'block';
+
+    // Sync state
+    document.getElementById('toggle-sound').checked = Audio.isEnabled();
+
+    // Sync font size
+    const fs = Settings.get('fontSize', 'medium');
+    ['small', 'medium', 'large'].forEach(s => {
+      document.getElementById(`fs-${s}`).classList.toggle('active', s === fs);
+    });
+
+    // Render stats
+    const games = [
+      { id: 'woordsoek', label: '🔤 Woord Soek' },
+      { id: 'solitaire', label: '♠️ Solitaire' },
+      { id: 'spider',    label: '🕷️ Spider' },
+      { id: 'sudoku',    label: '🔢 Sudoku' },
+      { id: 'freecell',  label: '🃏 FreeCell' },
+    ];
+
+    const container = document.getElementById('all-stats');
+    container.innerHTML = games.map(g => {
+      const s = Settings.getStats(g.id);
+      const best = s.bestTime ? formatTime(s.bestTime) : '—';
+      return `
+        <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--text-secondary);padding:6px 0;border-bottom:1px solid var(--border-subtle);">
+          <span>${g.label}</span>
+          <span style="color:var(--text-muted);">${s.wins}W / ${s.played}P · Beste: ${best}</span>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function closeSettings() {
+    document.getElementById('settings-panel').classList.remove('open');
+    document.getElementById('settings-overlay').style.display = 'none';
+  }
+
+  function toggleSound(enabled) {
+    Audio.setEnabled(enabled);
+    showToast(enabled ? '🔊 Klanke aan' : '🔇 Klanke af');
+  }
+
+  function setFontSize(size) {
+    Settings.set('fontSize', size);
+    Settings.applyFontSize();
+    ['small', 'medium', 'large'].forEach(s => {
+      document.getElementById(`fs-${s}`).classList.toggle('active', s === size);
+    });
+    showToast('Lettertipe grootte gestel');
+  }
+
+  // ── Toast helper ────────────────────────────────────────
+  function showToast(message, duration = 2200) {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add('out');
+      setTimeout(() => toast.remove(), 300);
+    }, duration);
+  }
+
+  // Expose globally for game screens to use
+  window.showToast = showToast;
+
+  // ── Time formatter ──────────────────────────────────────
+  function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${String(s).padStart(2, '0')}`;
+  }
+
+  window.formatTime = formatTime;
+</script>
+
+</body>
+</html>

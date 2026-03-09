@@ -406,7 +406,8 @@
 
     /* Destination highlight glow */
     .sol-pile.valid-target,
-    .sol-column.valid-target {
+    .sol-column.valid-target,
+    .spd-column.valid-target {
       box-shadow: 0 0 12px 3px var(--accent-gold);
       border-radius: var(--card-radius);
     }
@@ -698,6 +699,10 @@
     <div class="win-overlay" id="spd-settings-modal">
       <div class="win-card">
         <h2 style="font-size:1.4rem;">Spel Instellings</h2>
+        <div class="setting-row">
+          <label>Wys bestemmings</label>
+          <label class="toggle"><input type="checkbox" id="spd-toggle-hints" /><span class="toggle-track"></span></label>
+        </div>
         <div class="setting-row">
           <label>Wys tyd</label>
           <label class="toggle"><input type="checkbox" id="spd-toggle-timer" /><span class="toggle-track"></span></label>

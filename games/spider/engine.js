@@ -429,6 +429,34 @@ var SpiderEngine = (function() {
     return true;
   }
 
+  /**
+   * 9. getValidMoves(col, cardIndex) — Return array of valid destination column indices
+   */
+  function getValidMoves(col, cardIndex) {
+    if (!_state) return [];
+    var srcCol = _state.tableau[col];
+    if (cardIndex < 0 || cardIndex >= srcCol.length) return [];
+    if (!isMovableSequence(col, cardIndex)) return [];
+
+    var movingCard = srcCol[cardIndex];
+    var moves = [];
+
+    for (var d = 0; d < 10; d++) {
+      if (d === col) continue;
+      var destCol = _state.tableau[d];
+      if (destCol.length === 0) {
+        moves.push(d);
+      } else {
+        var topCard = destCol[destCol.length - 1];
+        if (rankValue(topCard.rank) === rankValue(movingCard.rank) + 1) {
+          moves.push(d);
+        }
+      }
+    }
+
+    return moves;
+  }
+
   // ── Public interface ──────────────────────────────────────
 
   return {
@@ -440,6 +468,7 @@ var SpiderEngine = (function() {
     isWon: isWon,
     canDeal: canDeal,
     isMovableSequence: isMovableSequence,
+    getValidMoves: getValidMoves,
     SUITS: SUITS,
     RANKS: RANKS
   };

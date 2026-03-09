@@ -53,9 +53,26 @@ const Router = (() => {
 
   function back() {
     if (_history.length <= 1) return;
-    _history.pop();
+    const leaving = _history.pop();
     const target = _history[_history.length - 1];
-    go(target, { replace: true, force: true });
+
+    // Call onLeave for the screen we're actually leaving
+    if (_onLeave[leaving]) {
+      try { _onLeave[leaving](); } catch (e) { console.warn('Router onLeave error:', e); }
+    }
+
+    // Hide the screen we're actually leaving
+    const fromEl = getEl(leaving);
+    if (fromEl) fromEl.classList.remove('active');
+
+    // Show target
+    const toEl = getEl(target);
+    if (toEl) toEl.classList.add('active');
+
+    // Call onEnter for target
+    if (_onEnter[target]) {
+      try { _onEnter[target](); } catch (e) { console.warn('Router onEnter error:', e); }
+    }
   }
 
   function current() {

@@ -49,6 +49,9 @@ var SpiderUI = (function() {
     el('spd-settings-btn').addEventListener('click', onSettingsOpen);
 
     // Wire settings toggles
+    el('spd-toggle-hints').addEventListener('change', function() {
+      Settings.set('spider_show_hints', this.checked);
+    });
     el('spd-toggle-timer').addEventListener('change', function() {
       Settings.set('spider_show_timer', this.checked);
       el('spd-timer').style.display = this.checked ? '' : 'none';
@@ -154,6 +157,7 @@ var SpiderUI = (function() {
   }
 
   function applySettingsVisibility() {
+    var showHints = Settings.get('spider_show_hints', true);
     var showTimer = Settings.get('spider_show_timer', true);
     var showMoves = Settings.get('spider_show_moves', true);
     var showScoring = Settings.get('spider_show_scoring', true);
@@ -163,6 +167,7 @@ var SpiderUI = (function() {
     el('spd-score').style.display = showScoring ? '' : 'none';
 
     // Sync toggle checkboxes
+    el('spd-toggle-hints').checked = showHints;
     el('spd-toggle-timer').checked = showTimer;
     el('spd-toggle-moves').checked = showMoves;
     el('spd-toggle-scoring').checked = showScoring;
@@ -448,6 +453,15 @@ var SpiderUI = (function() {
         cards[i].classList.add('selected');
       }
     }
+
+    // Highlight valid destination columns if hints enabled
+    if (Settings.get('spider_show_hints', true)) {
+      var moves = SpiderEngine.getValidMoves(col, cardIndex);
+      for (var m = 0; m < moves.length; m++) {
+        var destEl = el('spd-col' + moves[m]);
+        if (destEl) destEl.classList.add('valid-target');
+      }
+    }
   }
 
   function clearSelection() {
@@ -461,6 +475,12 @@ var SpiderUI = (function() {
       }
     }
     _selectedCard = null;
+
+    // Remove valid-target highlights from all columns
+    for (var c = 0; c < 10; c++) {
+      var col = el('spd-col' + c);
+      if (col) col.classList.remove('valid-target');
+    }
   }
 
   // ── Stock / Deal handling ──────────────────────────────────

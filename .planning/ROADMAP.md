@@ -157,11 +157,11 @@ Plans:
   1. Service worker caches all game assets and the app works fully offline after first load
   2. APK is built via PWA Builder, signed, and installs on Samsung Galaxy Tab S6 Lite
   3. All five games are playable from the APK without internet connection
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 09-01: TBD
-- [ ] 09-02: TBD
+- [ ] 09-01-PLAN.md — Path fixes for /ConGames/ subdirectory, SW finalization, splash screen, version footer, "Dateer op" button
+- [ ] 09-02-PLAN.md — Icon generation (192x192 + 512x512) and human verification checkpoint
 
 ## Progress
 

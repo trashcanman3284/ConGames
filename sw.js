@@ -1,9 +1,9 @@
 /**
- * sw.js — Service Worker for Dad's Game Suite
+ * sw.js — Service Worker for Con se Speletjies
  * Caches all app assets for full offline support
  */
 
-const CACHE_NAME = 'congames-v1';
+const CACHE_NAME = 'congames-v2';
 
 // All files to cache on install
 const CORE_ASSETS = [

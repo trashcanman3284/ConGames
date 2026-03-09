@@ -9,8 +9,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Woord Soek
 
-- [ ] **WS-01**: User can start a new Woord Soek puzzle with 10-15 Afrikaans words placed in a 12x12 grid
-- [ ] **WS-02**: Words are placed in all 8 directions (N/S/E/W/NE/NW/SE/SW) with collision-safe placement
+- [x] **WS-01**: User can start a new Woord Soek puzzle with 10-15 Afrikaans words placed in a 12x12 grid
+- [x] **WS-02**: Words are placed in all 8 directions (N/S/E/W/NE/NW/SE/SW) with collision-safe placement
 - [ ] **WS-03**: User can select a word by tapping first letter then last letter
 - [ ] **WS-04**: Found words are highlighted on grid with unique colours and struck through in word list
 - [ ] **WS-05**: Sound effect plays when word is found and when puzzle is complete
@@ -113,8 +113,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| WS-01 | Phase 3: Woord Soek | Pending |
-| WS-02 | Phase 3: Woord Soek | Pending |
+| WS-01 | Phase 3: Woord Soek | Complete |
+| WS-02 | Phase 3: Woord Soek | Complete |
 | WS-03 | Phase 3: Woord Soek | Pending |
 | WS-04 | Phase 3: Woord Soek | Pending |
 | WS-05 | Phase 3: Woord Soek | Pending |

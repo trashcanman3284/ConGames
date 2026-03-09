@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Scaffold** - Shared CSS, router, settings, audio, PWA shell (DONE)
 - [x] **Phase 2: Welcome Screen** - Game menu with 5 buttons, settings panel (DONE)
-- [ ] **Phase 3: Woord Soek** - Afrikaans word search with dictionary, 8-direction placement, tap selection
+- [x] **Phase 3: Woord Soek** - Afrikaans word search with dictionary, 8-direction placement, tap selection
 - [ ] **Phase 4: Card Renderer** - Pure CSS card components shared by all three card games
 - [ ] **Phase 5: Solitaire** - Full Klondike with undo, auto-complete, win detection
 - [ ] **Phase 6: Spider Solitaire** - 1-suit mode with 10 columns, sequence removal
@@ -37,6 +37,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 ### Phase 3: Woord Soek
 **Goal**: Dad can play a complete Afrikaans word search puzzle from start to finish
 **Depends on**: Phase 2
+**Status**: Complete
 **Requirements**: WS-01, WS-02, WS-03, WS-04, WS-05, WS-06, WS-07, WS-08, PLT-03, PLT-04, PLT-05, PLT-06, PLT-07
 **Success Criteria** (what must be TRUE):
   1. User can start a new puzzle and see 10-15 Afrikaans words hidden in a 12x12 grid with a word list alongside
@@ -47,9 +48,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Puzzle engine (word placement, grid generation, selection validation) + HTML skeleton
-- [ ] 03-02-PLAN.md — UI module (grid rendering, tap-tap selection, game flow, modals, timer, hints)
-- [ ] 03-03-PLAN.md — Human verification checkpoint
+- [x] 03-01-PLAN.md — Puzzle engine (word placement, grid generation, selection validation) + HTML skeleton
+- [x] 03-02-PLAN.md — UI module (grid rendering, tap-tap selection, game flow, modals, timer, hints)
+- [x] 03-03-PLAN.md — Human verification checkpoint
 
 ### Phase 4: Card Renderer
 **Goal**: Reusable CSS card components that look great on the tablet for all three card games
@@ -152,7 +153,7 @@ Phases execute in numeric order: 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9
 |-------|----------------|--------|-----------|
 | 1. Scaffold | - | Complete | - |
 | 2. Welcome Screen | - | Complete | - |
-| 3. Woord Soek | 0/3 | Not started | - |
+| 3. Woord Soek | 3/3 | Complete | 2026-03-09 |
 | 4. Card Renderer | 0/1 | Not started | - |
 | 5. Solitaire | 0/3 | Not started | - |
 | 6. Spider Solitaire | 0/3 | Not started | - |

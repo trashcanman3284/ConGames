@@ -55,6 +55,27 @@ var WoordSoekUI = (function() {
       el('ws-layout').classList.remove('layout-below');
     }
 
+    // Apply timer visibility setting
+    el('ws-timer').style.display = Settings.get('ws-showTimer', true) ? '' : 'none';
+
+    // Wire settings modal
+    el('ws-settings-btn').addEventListener('click', function() { openSettings(); });
+    el('ws-settings-close').addEventListener('click', function() { closeSettings(); });
+
+    // Wire settings toggle change handlers
+    el('ws-toggle-timer').addEventListener('change', function() {
+      Settings.set('ws-showTimer', this.checked);
+      el('ws-timer').style.display = this.checked ? '' : 'none';
+    });
+    el('ws-toggle-autocontinue').addEventListener('change', function() {
+      Settings.set('ws-auto-continue', this.checked);
+    });
+    el('ws-toggle-layout').addEventListener('change', function() {
+      _isBelow = this.checked;
+      el('ws-layout').classList.toggle('layout-below', _isBelow);
+      Settings.set('ws-layout-below', _isBelow);
+    });
+
     // Load words if not cached
     if (_words) {
       showDifficultyModal();
@@ -195,6 +216,7 @@ var WoordSoekUI = (function() {
 
     // Reset and start timer
     el('ws-timer').textContent = '0:00';
+    el('ws-timer').style.display = Settings.get('ws-showTimer', true) ? '' : 'none';
     startTimer();
   }
 
@@ -586,6 +608,19 @@ var WoordSoekUI = (function() {
     Settings.set('ws-layout-below', _isBelow);
   }
 
+  // ── Settings Modal ──────────────────────────────────────────
+
+  function openSettings() {
+    el('ws-toggle-timer').checked = Settings.get('ws-showTimer', true);
+    el('ws-toggle-autocontinue').checked = Settings.get('ws-auto-continue', false);
+    el('ws-toggle-layout').checked = Settings.get('ws-layout-below', false);
+    el('ws-settings-modal').classList.add('active');
+  }
+
+  function closeSettings() {
+    el('ws-settings-modal').classList.remove('active');
+  }
+
   // ── Public API ─────────────────────────────────────────────
 
   return {
@@ -597,7 +632,9 @@ var WoordSoekUI = (function() {
     toggleLayout: toggleLayout,
     confirmNewPuzzle: confirmNewPuzzle,
     closeConfirmModal: closeConfirmModal,
-    closeDifficultyModal: closeDifficultyModal
+    closeDifficultyModal: closeDifficultyModal,
+    openSettings: openSettings,
+    closeSettings: closeSettings
   };
 
 })();

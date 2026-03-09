@@ -88,6 +88,23 @@ var SudokuUI = (function() {
     el('sdk-hint-btn').addEventListener('click', function() { handleHint(); });
     el('sdk-check-btn').addEventListener('click', function() { handleCheck(); });
 
+    // Wire settings modal
+    el('sdk-settings-btn').addEventListener('click', function() { openSettings(); });
+    el('sdk-settings-close').addEventListener('click', function() { closeSettings(); });
+
+    // Wire settings toggle change handlers
+    el('sdk-toggle-timer').addEventListener('change', function() {
+      Settings.set('sdk-showTimer', this.checked);
+      el('sdk-timer').style.display = this.checked ? '' : 'none';
+    });
+    el('sdk-toggle-highlight').addEventListener('change', function() {
+      Settings.set('sdk-highlightSame', this.checked);
+      render();
+    });
+    el('sdk-toggle-errors').addEventListener('change', function() {
+      Settings.set('sdk-showErrors', this.checked);
+    });
+
     // Wire win overlay buttons
     el('sdk-win-newgame').addEventListener('click', function() {
       hideOverlay('sdk-win-overlay');
@@ -160,8 +177,8 @@ var SudokuUI = (function() {
       // Update notes button visual
       el('sdk-notes-btn').classList.remove('sdk-notes-active');
 
-      // Show timer
-      el('sdk-timer').style.display = '';
+      // Show timer (respect setting)
+      el('sdk-timer').style.display = Settings.get('sdk-showTimer', true) ? '' : 'none';
       el('sdk-timer').textContent = formatTime(0);
 
       buildGrid();
@@ -279,8 +296,8 @@ var SudokuUI = (function() {
       if (row === _selectedCell.row && col === _selectedCell.col) {
         cell.classList.add('sdk-selected');
       }
-      // Same number highlight
-      else if (selectedNumber > 0 && value === selectedNumber) {
+      // Same number highlight (if enabled)
+      else if (selectedNumber > 0 && value === selectedNumber && Settings.get('sdk-highlightSame', true)) {
         cell.classList.add('sdk-highlighted');
       }
       // Related cells (same row, column, or 3x3 box)
@@ -518,8 +535,8 @@ var SudokuUI = (function() {
     // Update notes button visual
     el('sdk-notes-btn').classList.remove('sdk-notes-active');
 
-    // Show timer
-    el('sdk-timer').style.display = '';
+    // Show timer (respect setting)
+    el('sdk-timer').style.display = Settings.get('sdk-showTimer', true) ? '' : 'none';
     el('sdk-timer').textContent = formatTime(_elapsedSeconds);
 
     buildGrid();
@@ -679,6 +696,20 @@ var SudokuUI = (function() {
     hideOverlay('sdk-resume-modal');
     hideOverlay('sdk-pause-overlay');
     showOverlay('sdk-difficulty-modal');
+  }
+
+  // ── Settings Modal ──────────────────────────────────────────
+
+  function openSettings() {
+    // Sync toggle states from Settings
+    el('sdk-toggle-timer').checked = Settings.get('sdk-showTimer', true);
+    el('sdk-toggle-highlight').checked = Settings.get('sdk-highlightSame', true);
+    el('sdk-toggle-errors').checked = Settings.get('sdk-showErrors', false);
+    showOverlay('sdk-settings-modal');
+  }
+
+  function closeSettings() {
+    hideOverlay('sdk-settings-modal');
   }
 
   // ── Public API ────────────────────────────────────────────

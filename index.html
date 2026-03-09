@@ -828,16 +828,84 @@
   </section>
 
   <section id="screen-freecell" data-screen="freecell" class="screen">
-    <div style="display:flex;flex-direction:column;height:100%;">
-      <header class="game-header">
-        <button class="btn-back" onclick="Router.back()">← Terug</button>
-        <h1>🃏 FreeCell</h1>
-        <div style="width:80px"></div>
-      </header>
-      <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:1.1rem;">
-        Kom binnekort — Phase 7
+    <div class="fc-container">
+      <!-- Top row: 4 free cells | center controls | 4 foundations -->
+      <div class="fc-top-row" id="fc-top-row">
+        <div class="fc-free-cells">
+          <div class="fc-pile fc-free" id="fc-free0"></div>
+          <div class="fc-pile fc-free" id="fc-free1"></div>
+          <div class="fc-pile fc-free" id="fc-free2"></div>
+          <div class="fc-pile fc-free" id="fc-free3"></div>
+        </div>
+        <div class="fc-center-controls">
+          <span id="fc-deal-number" class="badge badge-gold" style="font-size:1rem;">Spel #1</span>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <span class="timer" id="fc-timer" style="display:none;">0:00</span>
+            <span class="badge" id="fc-moves" style="display:none;">0 skuiwe</span>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn-icon" id="fc-undo-btn" title="Ontdoen">&#8617;</button>
+            <button class="btn-icon" id="fc-restart-btn" title="Herbegin">&#x21BA;</button>
+            <button class="btn-icon" id="fc-newgame-btn" title="Nuwe Spel">&#x1F504;</button>
+            <button class="btn-icon" id="fc-settings-btn" title="Instellings">&#9881;</button>
+          </div>
+        </div>
+        <div class="fc-foundations">
+          <div class="fc-pile fc-found" id="fc-f0"></div>
+          <div class="fc-pile fc-found" id="fc-f1"></div>
+          <div class="fc-pile fc-found" id="fc-f2"></div>
+          <div class="fc-pile fc-found" id="fc-f3"></div>
+        </div>
+      </div>
+
+      <!-- Back button row -->
+      <div style="padding:0 12px;">
+        <button class="btn-back" onclick="Router.back()" style="font-size:0.9rem;">&#8592; Terug</button>
+      </div>
+
+      <!-- Tableau: 8 columns -->
+      <div class="fc-tableau" id="fc-tableau">
+        <div class="fc-column card-stack" id="fc-col0"></div>
+        <div class="fc-column card-stack" id="fc-col1"></div>
+        <div class="fc-column card-stack" id="fc-col2"></div>
+        <div class="fc-column card-stack" id="fc-col3"></div>
+        <div class="fc-column card-stack" id="fc-col4"></div>
+        <div class="fc-column card-stack" id="fc-col5"></div>
+        <div class="fc-column card-stack" id="fc-col6"></div>
+        <div class="fc-column card-stack" id="fc-col7"></div>
       </div>
     </div>
+
+    <!-- Win overlay -->
+    <div class="win-overlay" id="fc-win-overlay">
+      <div class="win-card">
+        <h2>Geluk!</h2>
+        <p id="fc-win-message"></p>
+        <div style="display:flex;gap:12px;justify-content:center;">
+          <button class="btn btn-primary" id="fc-win-newgame">Nuwe Spel</button>
+          <button class="btn btn-secondary" id="fc-win-home">Tuis</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings modal -->
+    <div class="win-overlay" id="fc-settings-modal">
+      <div class="win-card">
+        <h2 style="font-size:1.4rem;">Spel Instellings</h2>
+        <div class="setting-row">
+          <label>Wys tyd</label>
+          <label class="toggle"><input type="checkbox" id="fc-toggle-timer" /><span class="toggle-track"></span></label>
+        </div>
+        <div class="setting-row">
+          <label>Wys skuiwe</label>
+          <label class="toggle"><input type="checkbox" id="fc-toggle-moves" /><span class="toggle-track"></span></label>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:16px;width:100%;" id="fc-settings-close">Sluit</button>
+      </div>
+    </div>
+
+    <!-- Win animation container -->
+    <div id="fc-win-animation" style="display:none;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:100;"></div>
   </section>
 
   <!-- ══════════════ SETTINGS PANEL ════════════════════════ -->
@@ -899,6 +967,8 @@
 <script src="games/spider/ui.js"></script>
 <script src="games/sudoku/engine.js"></script>
 <script src="games/sudoku/ui.js"></script>
+<script src="games/freecell/engine.js"></script>
+<script src="games/freecell/ui.js"></script>
 
 <script>
   // ── App init ────────────────────────────────────────────

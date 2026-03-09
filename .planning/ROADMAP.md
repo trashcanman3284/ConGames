@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Woord Soek** - Afrikaans word search with dictionary, 8-direction placement, tap selection
 - [ ] **Phase 4: Card Renderer** - Pure CSS card components shared by all three card games
 - [ ] **Phase 5: Solitaire** - Full Klondike with undo, auto-complete, win detection
-- [ ] **Phase 6: Spider Solitaire** - 1-suit mode with 10 columns, sequence removal
+- [ ] **Phase 6: Spider Solitaire** - 1/2/4 suit modes with 10 columns, sequence removal
 - [ ] **Phase 7: Sudoku** - 4 difficulty levels, number pad, notes mode, hints
 - [ ] **Phase 8: FreeCell** - Free cells, multi-card moves, deal numbers
 - [ ] **Phase 9: Packaging** - Service worker finalization, APK build, sideload
@@ -83,20 +83,20 @@ Plans:
 - [ ] 05-03-PLAN.md — Human verification checkpoint
 
 ### Phase 6: Spider Solitaire
-**Goal**: Dad can play Spider Solitaire in 1-suit mode with deal, sequence removal, and undo
+**Goal**: Dad can play Spider Solitaire in 1/2/4 suit modes with deal, sequence removal, undo, and win detection
 **Depends on**: Phase 4
 **Requirements**: SPI-01, SPI-02, SPI-03, SPI-04, SPI-05, SPI-06, SPI-07
 **Success Criteria** (what must be TRUE):
-  1. User can start a 1-suit Spider game with 10 columns of cards and a stock pile for dealing
+  1. User can start a Spider game in 1, 2, or 4 suit mode with 10 columns of cards and a stock pile for dealing
   2. User can move descending sequences between columns and deal new rows from stock
   3. A complete K-to-A same-suit sequence auto-removes to foundation
   4. User can undo moves, and win is detected with celebration animation and stats recorded
-**Plans**: TBD
+**Plans:** 3 plans
 
 Plans:
-- [ ] 06-01: TBD
-- [ ] 06-02: TBD
-- [ ] 06-03: TBD
+- [ ] 06-01-PLAN.md — Engine (Spider logic, 3 suit modes, move validation, deal, sequence detection, undo) + HTML skeleton
+- [ ] 06-02-PLAN.md — UI module (rendering, tap/drag interaction, deal animation, sequence completion, win celebration, settings)
+- [ ] 06-03-PLAN.md — Human verification checkpoint
 
 ### Phase 7: Sudoku
 **Goal**: Dad can play Sudoku at any difficulty with number pad, notes, hints, and error checking

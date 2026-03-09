@@ -1,0 +1,150 @@
+/* ============================================================
+   CARD RENDERER — Pure CSS Playing Cards
+   Used by: Solitaire, Spider Solitaire, FreeCell
+   Target: Samsung Galaxy Tab S6 Lite, 10.4", landscape
+   ============================================================ */
+
+/* === CARD VARIABLES === */
+:root {
+  --card-red: #c0392b;
+  --card-black: #1a1a1a;
+  --card-bg: #f5f0e8;
+  --card-border: #d0c8b8;
+  --card-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  --card-back-bg: #2c5f8a;
+  --card-back-pattern: #1e4568;
+  --card-back-border: #4a7fa8;
+  --card-radius: 8px;
+}
+
+/* === BASE CARD === */
+.card {
+  width: 100%;
+  aspect-ratio: 5 / 7;
+  position: relative;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  font-family: var(--font-body);
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform var(--dur-fast, 150ms) var(--ease-out, ease-out);
+}
+
+/* === FACE-UP === */
+.card.face-up {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+}
+
+/* Suit colours */
+.card.suit-hearts,
+.card.suit-diamonds {
+  color: var(--card-red);
+}
+
+.card.suit-spades,
+.card.suit-clubs {
+  color: var(--card-black);
+}
+
+/* === CORNER LABELS === */
+.card-corner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+  font-weight: 700;
+  font-size: clamp(0.7rem, 1.2vw, 1.1rem);
+}
+
+.card-corner.top-left {
+  top: 4px;
+  left: 5px;
+}
+
+.card-corner.bottom-right {
+  bottom: 4px;
+  right: 5px;
+  transform: rotate(180deg);
+}
+
+.suit-symbol {
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+/* === CENTER PIP === */
+.card-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  line-height: 1;
+}
+
+/* === FACE-DOWN === */
+.card.face-down {
+  background: var(--card-back-bg);
+  border: 2px solid var(--card-back-border);
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 4px,
+      var(--card-back-pattern) 4px,
+      var(--card-back-pattern) 5px
+    );
+}
+
+/* Inner border on card back for visual polish */
+.card.face-down::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid var(--card-back-border);
+  border-radius: calc(var(--card-radius) - 3px);
+  pointer-events: none;
+}
+
+/* === CARD STACKING === */
+.card-stack {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.card-stack .card {
+  margin-top: -75%;
+}
+
+.card-stack .card:first-child {
+  margin-top: 0;
+}
+
+/* Face-down cards overlap more (show less) */
+.card-stack .card.face-down {
+  margin-top: -82%;
+}
+
+.card-stack .card.face-down:first-child {
+  margin-top: 0;
+}
+
+/* === SELECTED STATE === */
+.card.selected {
+  box-shadow: 0 0 0 3px var(--accent-gold, #d4a23a);
+  z-index: 10;
+}
+
+/* === PLACEHOLDER (empty card slot) === */
+.card-placeholder {
+  width: 100%;
+  aspect-ratio: 5 / 7;
+  border: 2px dashed var(--border-subtle, #4a3f2f);
+  border-radius: var(--card-radius);
+  background: transparent;
+  opacity: 0.5;
+}

@@ -474,7 +474,7 @@
   <!-- Each game will load its own full screen content -->
 
   <section id="screen-woordsoek" data-screen="woordsoek" class="screen">
-    <div style="display:flex;flex-direction:column;height:100%;">
+    <div class="theme-parchment" style="display:flex;flex-direction:column;height:100%;">
       <!-- Header -->
       <header class="game-header">
         <button class="btn-back" onclick="Router.back()">&#8592; Terug</button>
@@ -484,7 +484,7 @@
         </div>
         <div style="display:flex;gap:8px;">
           <button class="btn-icon" id="ws-hint-btn" onclick="WoordSoekUI.hint()" title="Wenk">&#128161;</button>
-          <button class="btn-icon" id="ws-difficulty-btn" onclick="WoordSoekUI.showDifficultyModal()" title="Moeilikheid">&#9881;</button>
+          <button class="btn-icon" id="ws-difficulty-btn" onclick="WoordSoekUI.showDifficultyModal()" title="Moeilikheid">&#9776;</button>
           <button class="btn-icon" id="ws-layout-btn" onclick="WoordSoekUI.toggleLayout()" title="Skuif woordlys">&#8645;</button>
         </div>
       </header>
@@ -541,7 +541,7 @@
   </section>
 
   <section id="screen-solitaire" data-screen="solitaire" class="screen">
-    <div class="sol-container">
+    <div class="sol-container theme-felt">
       <!-- Header bar -->
       <header class="game-header">
         <button class="btn-back" onclick="Router.back()">&#8592; Terug</button>
@@ -633,7 +633,7 @@
   </section>
 
   <section id="screen-spider" data-screen="spider" class="screen">
-    <div class="spd-container">
+    <div class="spd-container theme-felt">
       <!-- Header bar -->
       <header class="game-header">
         <button class="btn-back" onclick="Router.back()">&#8592; Terug</button>
@@ -828,7 +828,7 @@
   </section>
 
   <section id="screen-freecell" data-screen="freecell" class="screen">
-    <div class="fc-container">
+    <div class="fc-container theme-felt">
       <!-- Top row: 4 free cells | center controls | 4 foundations -->
       <div class="fc-top-row" id="fc-top-row">
         <div class="fc-free-cells">

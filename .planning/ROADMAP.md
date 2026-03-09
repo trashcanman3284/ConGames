@@ -44,12 +44,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User can see how many words remain (X of Y), see the timer counting, get a hint, and start a fresh puzzle at any time
   4. Sound plays on word found and on puzzle completion, with sound toggle working from settings
   5. Back button returns to welcome screen, all tap targets are comfortable (56px+), text is readable at arm's length
-**Plans**: TBD
+**Plans:** 3 plans
 
 Plans:
-- [ ] 03-01: TBD
-- [ ] 03-02: TBD
-- [ ] 03-03: TBD
+- [ ] 03-01-PLAN.md — Puzzle engine (word placement, grid generation, selection validation) + HTML skeleton
+- [ ] 03-02-PLAN.md — UI module (grid rendering, tap-tap selection, game flow, modals, timer, hints)
+- [ ] 03-03-PLAN.md — Human verification checkpoint
 
 ### Phase 4: Card Renderer
 **Goal**: Reusable CSS card components that look great on the tablet for all three card games

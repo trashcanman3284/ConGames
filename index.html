@@ -341,6 +341,62 @@
       color:var(--accent-gold) !important;
       background:rgba(212,162,58,0.12) !important;
     }
+
+    /* ── Solitaire ─────────────────────────────────────────────── */
+    .sol-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 0;
+    }
+
+    .sol-header-center {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .sol-top-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 16px;
+      gap: 16px;
+    }
+
+    .sol-stock-waste {
+      display: flex;
+      gap: 12px;
+    }
+
+    .sol-foundations {
+      display: flex;
+      gap: 12px;
+    }
+
+    .sol-pile {
+      width: clamp(70px, 10vw, 120px);
+      position: relative;
+    }
+
+    .sol-tableau {
+      display: flex;
+      gap: 8px;
+      padding: 8px 16px;
+      flex: 1;
+      align-items: flex-start;
+    }
+
+    .sol-column {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* Destination highlight glow */
+    .sol-pile.valid-target,
+    .sol-column.valid-target {
+      box-shadow: 0 0 12px 3px var(--accent-gold);
+      border-radius: var(--card-radius);
+    }
   </style>
 </head>
 <body>
@@ -471,16 +527,98 @@
   </section>
 
   <section id="screen-solitaire" data-screen="solitaire" class="screen">
-    <div style="display:flex;flex-direction:column;height:100%;">
+    <div class="sol-container">
+      <!-- Header bar -->
       <header class="game-header">
-        <button class="btn-back" onclick="Router.back()">← Terug</button>
-        <h1>♠️ Solitaire</h1>
-        <div style="width:80px"></div>
+        <button class="btn-back" onclick="Router.back()">&#8592; Terug</button>
+        <div class="sol-header-center">
+          <span class="timer" id="sol-timer" style="display:none;">0:00</span>
+          <span class="badge badge-gold" id="sol-moves" style="display:none;">0 skuiwe</span>
+          <span class="badge" id="sol-score" style="display:none;">0 punte</span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn-icon" id="sol-undo-btn" title="Ontdoen">&#8617;</button>
+          <button class="btn-icon" id="sol-newgame-btn" title="Nuwe Spel">&#x1F504;</button>
+          <button class="btn-icon" id="sol-settings-btn" title="Instellings">&#9881;</button>
+        </div>
       </header>
-      <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:1.1rem;">
-        Kom binnekort — Phase 4
+
+      <!-- Top row: stock, waste, gap, 4 foundations -->
+      <div class="sol-top-row" id="sol-top-row">
+        <div class="sol-stock-waste">
+          <div class="sol-pile" id="sol-stock"></div>
+          <div class="sol-pile" id="sol-waste"></div>
+        </div>
+        <div class="sol-foundations">
+          <div class="sol-pile" id="sol-f0"></div>
+          <div class="sol-pile" id="sol-f1"></div>
+          <div class="sol-pile" id="sol-f2"></div>
+          <div class="sol-pile" id="sol-f3"></div>
+        </div>
+      </div>
+
+      <!-- Tableau: 7 columns -->
+      <div class="sol-tableau" id="sol-tableau">
+        <div class="sol-column card-stack" id="sol-col0"></div>
+        <div class="sol-column card-stack" id="sol-col1"></div>
+        <div class="sol-column card-stack" id="sol-col2"></div>
+        <div class="sol-column card-stack" id="sol-col3"></div>
+        <div class="sol-column card-stack" id="sol-col4"></div>
+        <div class="sol-column card-stack" id="sol-col5"></div>
+        <div class="sol-column card-stack" id="sol-col6"></div>
       </div>
     </div>
+
+    <!-- Draw mode modal (shown before first game) -->
+    <div class="win-overlay" id="sol-draw-modal">
+      <div class="win-card">
+        <h2 style="font-size:1.8rem;">Solitaire</h2>
+        <p>Kies trek-modus</p>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <button class="btn btn-secondary" id="sol-draw1-btn">Trek 1 kaart</button>
+          <button class="btn btn-secondary" id="sol-draw3-btn">Trek 3 kaarte</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Win overlay -->
+    <div class="win-overlay" id="sol-win-overlay">
+      <div class="win-card">
+        <h2>Geluk!</h2>
+        <p id="sol-win-message"></p>
+        <div style="display:flex;gap:12px;justify-content:center;">
+          <button class="btn btn-primary" id="sol-win-newgame">Nuwe Spel</button>
+          <button class="btn btn-secondary" id="sol-win-home">Tuis</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game settings modal -->
+    <div class="win-overlay" id="sol-settings-modal">
+      <div class="win-card">
+        <h2 style="font-size:1.4rem;">Spel Instellings</h2>
+        <div class="setting-row">
+          <label>Wys bestemmings</label>
+          <label class="toggle"><input type="checkbox" id="sol-toggle-hints" /><span class="toggle-track"></span></label>
+        </div>
+        <div class="setting-row">
+          <label>Wys tyd</label>
+          <label class="toggle"><input type="checkbox" id="sol-toggle-timer" /><span class="toggle-track"></span></label>
+        </div>
+        <div class="setting-row">
+          <label>Wys skuiwe</label>
+          <label class="toggle"><input type="checkbox" id="sol-toggle-moves" /><span class="toggle-track"></span></label>
+        </div>
+        <div class="setting-row">
+          <label>Puntestelsel</label>
+          <label class="toggle"><input type="checkbox" id="sol-toggle-scoring" /><span class="toggle-track"></span></label>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:16px;width:100%;" id="sol-settings-close">Sluit</button>
+      </div>
+    </div>
+
+    <!-- Win animation canvas (for bouncing cards) -->
+    <div id="sol-win-animation" style="display:none;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:100;"></div>
   </section>
 
   <section id="screen-spider" data-screen="spider" class="screen">
@@ -574,6 +712,8 @@
 <script src="js/audio.js"></script>
 <script src="games/woordsoek/engine.js"></script>
 <script src="games/woordsoek/ui.js"></script>
+<script src="games/solitaire/engine.js"></script>
+<script src="games/solitaire/ui.js"></script>
 
 <script>
   // ── App init ────────────────────────────────────────────

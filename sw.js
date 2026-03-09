@@ -3,7 +3,7 @@
  * Caches all app assets for full offline support
  */
 
-const CACHE_NAME = 'congames-v3';
+const CACHE_NAME = 'congames-v4';
 
 // All files to cache on install
 const CORE_ASSETS = [

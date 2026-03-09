@@ -376,21 +376,24 @@
     .sol-top-row {
       padding-top: 6px;
       padding-bottom: 2px;
-      justify-content: flex-start;
+      justify-content: center;
     }
 
     .sol-tableau {
       padding-top: 4px;
       flex: 1;
       align-items: flex-start;
+      justify-content: center;
       overflow: hidden;
     }
 
-    /* All piles and columns share the same flexible width */
+    /* Card width capped so height fits landscape viewport.
+       Max 130px wide → ~182px tall. Top row ~195px, leaves ~950px for tableau. */
     .sol-pile,
     .sol-column {
       flex: 1;
       min-width: 0;
+      max-width: 130px;
       position: relative;
     }
 
@@ -398,6 +401,7 @@
     .sol-top-spacer {
       flex: 1;
       min-width: 0;
+      max-width: 130px;
     }
 
     /* Destination highlight glow */

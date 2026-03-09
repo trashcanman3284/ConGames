@@ -11,12 +11,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **WS-01**: User can start a new Woord Soek puzzle with 10-15 Afrikaans words placed in a 12x12 grid
 - [x] **WS-02**: Words are placed in all 8 directions (N/S/E/W/NE/NW/SE/SW) with collision-safe placement
-- [ ] **WS-03**: User can select a word by tapping first letter then last letter
-- [ ] **WS-04**: Found words are highlighted on grid with unique colours and struck through in word list
-- [ ] **WS-05**: Sound effect plays when word is found and when puzzle is complete
-- [ ] **WS-06**: User can request a hint that flashes the first letter of a random unfound word
-- [ ] **WS-07**: User can start a new puzzle via "Nuwe Raaisel" button
-- [ ] **WS-08**: Timer counts up during play and word counter shows X of Y found
+- [x] **WS-03**: User can select a word by tapping first letter then last letter
+- [x] **WS-04**: Found words are highlighted on grid with unique colours and struck through in word list
+- [x] **WS-05**: Sound effect plays when word is found and when puzzle is complete
+- [x] **WS-06**: User can request a hint that flashes the first letter of a random unfound word
+- [x] **WS-07**: User can start a new puzzle via "Nuwe Raaisel" button
+- [x] **WS-08**: Timer counts up during play and word counter shows X of Y found
 
 ### Card Renderer
 
@@ -72,11 +72,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **PLT-01**: All game assets cached by service worker for full offline play
 - [ ] **PLT-02**: APK packaged via PWA Builder, signed, and sideloadable on Samsung Galaxy Tab S6 Lite
-- [ ] **PLT-03**: Sound toggle (on/off) accessible from settings panel
-- [ ] **PLT-04**: Game timer counts up per session, wins/played stats shown on welcome screen buttons
-- [ ] **PLT-05**: Back button on every game screen returns to welcome screen
-- [ ] **PLT-06**: All tap targets are minimum 56px for comfortable use by older hands
-- [ ] **PLT-07**: Text readable at arm's length on 10.4" tablet in landscape
+- [x] **PLT-03**: Sound toggle (on/off) accessible from settings panel
+- [x] **PLT-04**: Game timer counts up per session, wins/played stats shown on welcome screen buttons
+- [x] **PLT-05**: Back button on every game screen returns to welcome screen
+- [x] **PLT-06**: All tap targets are minimum 56px for comfortable use by older hands
+- [x] **PLT-07**: Text readable at arm's length on 10.4" tablet in landscape
 
 ## v2 Requirements
 
@@ -115,12 +115,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 |-------------|-------|--------|
 | WS-01 | Phase 3: Woord Soek | Complete |
 | WS-02 | Phase 3: Woord Soek | Complete |
-| WS-03 | Phase 3: Woord Soek | Pending |
-| WS-04 | Phase 3: Woord Soek | Pending |
-| WS-05 | Phase 3: Woord Soek | Pending |
-| WS-06 | Phase 3: Woord Soek | Pending |
-| WS-07 | Phase 3: Woord Soek | Pending |
-| WS-08 | Phase 3: Woord Soek | Pending |
+| WS-03 | Phase 3: Woord Soek | Complete |
+| WS-04 | Phase 3: Woord Soek | Complete |
+| WS-05 | Phase 3: Woord Soek | Complete |
+| WS-06 | Phase 3: Woord Soek | Complete |
+| WS-07 | Phase 3: Woord Soek | Complete |
+| WS-08 | Phase 3: Woord Soek | Complete |
 | CR-01 | Phase 4: Card Renderer | Pending |
 | CR-02 | Phase 4: Card Renderer | Pending |
 | CR-03 | Phase 4: Card Renderer | Pending |
@@ -158,11 +158,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FC-07 | Phase 8: FreeCell | Pending |
 | PLT-01 | Phase 9: Packaging | Pending |
 | PLT-02 | Phase 9: Packaging | Pending |
-| PLT-03 | Phase 3: Woord Soek | Pending |
-| PLT-04 | Phase 3: Woord Soek | Pending |
-| PLT-05 | Phase 3: Woord Soek | Pending |
-| PLT-06 | Phase 3: Woord Soek | Pending |
-| PLT-07 | Phase 3: Woord Soek | Pending |
+| PLT-03 | Phase 3: Woord Soek | Complete |
+| PLT-04 | Phase 3: Woord Soek | Complete |
+| PLT-05 | Phase 3: Woord Soek | Complete |
+| PLT-06 | Phase 3: Woord Soek | Complete |
+| PLT-07 | Phase 3: Woord Soek | Complete |
 
 **Coverage:**
 - v1 requirements: 50 total

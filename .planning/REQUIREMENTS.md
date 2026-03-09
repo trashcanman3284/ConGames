@@ -30,10 +30,10 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **SOL-01**: User can play full Klondike solitaire with 52-card deck, 7 tableau columns, 4 foundations
 - [x] **SOL-02**: Tableau follows alternating colour, descending rank rules
 - [x] **SOL-03**: Foundation follows ascending same-suit rules (A->K)
-- [ ] **SOL-04**: User can move cards by tapping card then tapping target (auto-move to best target)
+- [x] **SOL-04**: User can move cards by tapping card then tapping target (auto-move to best target)
 - [x] **SOL-05**: User can undo moves with unlimited undo stack
 - [x] **SOL-06**: Auto-complete triggers when all cards are face-up
-- [ ] **SOL-07**: Win condition detected with celebration animation and stats recorded
+- [x] **SOL-07**: Win condition detected with celebration animation and stats recorded
 
 ### Spider Solitaire
 
@@ -128,10 +128,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SOL-01 | Phase 5: Solitaire | Complete |
 | SOL-02 | Phase 5: Solitaire | Complete |
 | SOL-03 | Phase 5: Solitaire | Complete |
-| SOL-04 | Phase 5: Solitaire | Pending |
+| SOL-04 | Phase 5: Solitaire | Complete |
 | SOL-05 | Phase 5: Solitaire | Complete |
 | SOL-06 | Phase 5: Solitaire | Complete |
-| SOL-07 | Phase 5: Solitaire | Pending |
+| SOL-07 | Phase 5: Solitaire | Complete |
 | SPI-01 | Phase 6: Spider Solitaire | Pending |
 | SPI-02 | Phase 6: Spider Solitaire | Pending |
 | SPI-03 | Phase 6: Spider Solitaire | Pending |

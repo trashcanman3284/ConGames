@@ -37,12 +37,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Spider Solitaire
 
-- [ ] **SPI-01**: User can play Spider Solitaire with 10 columns, 104 cards, 5 deal piles
-- [ ] **SPI-02**: 1-suit mode available (MVP difficulty)
-- [ ] **SPI-03**: User can move any descending sequence regardless of suit
-- [ ] **SPI-04**: Complete K->A same-suit sequence auto-removes to foundation
-- [ ] **SPI-05**: User can deal new row of cards from stock pile
-- [ ] **SPI-06**: User can undo moves with unlimited undo stack
+- [x] **SPI-01**: User can play Spider Solitaire with 10 columns, 104 cards, 5 deal piles
+- [x] **SPI-02**: 1-suit mode available (MVP difficulty)
+- [x] **SPI-03**: User can move any descending sequence regardless of suit
+- [x] **SPI-04**: Complete K->A same-suit sequence auto-removes to foundation
+- [x] **SPI-05**: User can deal new row of cards from stock pile
+- [x] **SPI-06**: User can undo moves with unlimited undo stack
 - [ ] **SPI-07**: Win condition detected with celebration animation and stats recorded
 
 ### Sudoku
@@ -132,12 +132,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SOL-05 | Phase 5: Solitaire | Complete |
 | SOL-06 | Phase 5: Solitaire | Complete |
 | SOL-07 | Phase 5: Solitaire | Complete |
-| SPI-01 | Phase 6: Spider Solitaire | Pending |
-| SPI-02 | Phase 6: Spider Solitaire | Pending |
-| SPI-03 | Phase 6: Spider Solitaire | Pending |
-| SPI-04 | Phase 6: Spider Solitaire | Pending |
-| SPI-05 | Phase 6: Spider Solitaire | Pending |
-| SPI-06 | Phase 6: Spider Solitaire | Pending |
+| SPI-01 | Phase 6: Spider Solitaire | Complete |
+| SPI-02 | Phase 6: Spider Solitaire | Complete |
+| SPI-03 | Phase 6: Spider Solitaire | Complete |
+| SPI-04 | Phase 6: Spider Solitaire | Complete |
+| SPI-05 | Phase 6: Spider Solitaire | Complete |
+| SPI-06 | Phase 6: Spider Solitaire | Complete |
 | SPI-07 | Phase 6: Spider Solitaire | Pending |
 | SDK-01 | Phase 7: Sudoku | Pending |
 | SDK-02 | Phase 7: Sudoku | Pending |

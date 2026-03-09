@@ -20,10 +20,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Card Renderer
 
-- [ ] **CR-01**: Pure CSS card rendering with rank, suit, and face-up/face-down states
-- [ ] **CR-02**: Red suits (hearts/diamonds) and black suits (spades/clubs) with distinct colours
-- [ ] **CR-03**: Face-down cards show a subtle CSS pattern (diagonal lines or dots)
-- [ ] **CR-04**: Cards are responsive and fill column width appropriately
+- [x] **CR-01**: Pure CSS card rendering with rank, suit, and face-up/face-down states
+- [x] **CR-02**: Red suits (hearts/diamonds) and black suits (spades/clubs) with distinct colours
+- [x] **CR-03**: Face-down cards show a subtle CSS pattern (diagonal lines or dots)
+- [x] **CR-04**: Cards are responsive and fill column width appropriately
 
 ### Solitaire
 
@@ -121,10 +121,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | WS-06 | Phase 3: Woord Soek | Complete |
 | WS-07 | Phase 3: Woord Soek | Complete |
 | WS-08 | Phase 3: Woord Soek | Complete |
-| CR-01 | Phase 4: Card Renderer | Pending |
-| CR-02 | Phase 4: Card Renderer | Pending |
-| CR-03 | Phase 4: Card Renderer | Pending |
-| CR-04 | Phase 4: Card Renderer | Pending |
+| CR-01 | Phase 4: Card Renderer | Complete |
+| CR-02 | Phase 4: Card Renderer | Complete |
+| CR-03 | Phase 4: Card Renderer | Complete |
+| CR-04 | Phase 4: Card Renderer | Complete |
 | SOL-01 | Phase 5: Solitaire | Pending |
 | SOL-02 | Phase 5: Solitaire | Pending |
 | SOL-03 | Phase 5: Solitaire | Pending |

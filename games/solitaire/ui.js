@@ -591,56 +591,79 @@ var SolitaireUI = (function() {
   // ── Drag and Drop ─────────────────────────────────────────
 
   function addDragHandlers(cardEl, zone, col, cardIndex) {
-    cardEl.addEventListener('touchstart', function(e) {
+    function onPointerDown(clientX, clientY) {
       if (_isAutoCompleting) return;
-      var touch = e.touches[0];
-      if (!touch) return;
-
       _dragState = {
-        startX: touch.clientX,
-        startY: touch.clientY,
+        startX: clientX,
+        startY: clientY,
         zone: zone,
         col: col,
         cardIndex: cardIndex,
         floatEl: null,
         moved: false
       };
-    }, { passive: true });
+    }
 
-    cardEl.addEventListener('touchmove', function(e) {
+    function onPointerMove(clientX, clientY, preventFn) {
       if (!_dragState || _isAutoCompleting) return;
-      var touch = e.touches[0];
-      if (!touch) return;
-
-      var dx = touch.clientX - _dragState.startX;
-      var dy = touch.clientY - _dragState.startY;
+      var dx = clientX - _dragState.startX;
+      var dy = clientY - _dragState.startY;
 
       if (!_dragState.moved && Math.sqrt(dx * dx + dy * dy) > 10) {
         _dragState.moved = true;
         _isDragging = true;
         _preventClick = true;
-        startDrag(touch);
+        startDrag({ clientX: clientX, clientY: clientY });
       }
 
       if (_dragState.moved && _dragState.floatEl) {
-        e.preventDefault();
-        _dragState.floatEl.style.left = (touch.clientX - _dragState.offsetX) + 'px';
-        _dragState.floatEl.style.top = (touch.clientY - _dragState.offsetY) + 'px';
+        if (preventFn) preventFn();
+        _dragState.floatEl.style.left = (clientX - _dragState.offsetX) + 'px';
+        _dragState.floatEl.style.top = (clientY - _dragState.offsetY) + 'px';
       }
+    }
+
+    function onPointerUp(clientX, clientY) {
+      if (!_dragState) return;
+      if (_dragState.moved && _dragState.floatEl) {
+        endDrag(clientX, clientY);
+      }
+      _dragState = null;
+      _isDragging = false;
+      setTimeout(function() { _preventClick = false; }, 50);
+    }
+
+    // Touch events
+    cardEl.addEventListener('touchstart', function(e) {
+      var t = e.touches[0];
+      if (t) onPointerDown(t.clientX, t.clientY);
+    }, { passive: true });
+
+    cardEl.addEventListener('touchmove', function(e) {
+      var t = e.touches[0];
+      if (t) onPointerMove(t.clientX, t.clientY, function() { e.preventDefault(); });
     }, { passive: false });
 
     cardEl.addEventListener('touchend', function(e) {
-      if (!_dragState) return;
+      var t = e.changedTouches ? e.changedTouches[0] : null;
+      onPointerUp(t ? t.clientX : _dragState.startX, t ? t.clientY : _dragState.startY);
+    });
 
-      if (_dragState.moved && _dragState.floatEl) {
-        endDrag(e);
+    // Mouse events
+    cardEl.addEventListener('mousedown', function(e) {
+      if (e.button !== 0) return; // left click only
+      onPointerDown(e.clientX, e.clientY);
+
+      function onMouseMove(ev) {
+        onPointerMove(ev.clientX, ev.clientY, function() { ev.preventDefault(); });
       }
-
-      _dragState = null;
-      _isDragging = false;
-
-      // Delay clearing prevent click to avoid tap firing
-      setTimeout(function() { _preventClick = false; }, 50);
+      function onMouseUp(ev) {
+        onPointerUp(ev.clientX, ev.clientY);
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+      }
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
     });
   }
 
@@ -700,18 +723,14 @@ var SolitaireUI = (function() {
     markDragSourceCards(true);
   }
 
-  function endDrag(e) {
+  function endDrag(clientX, clientY) {
     if (!_dragState || !_dragState.floatEl) return;
 
     var floatEl = _dragState.floatEl;
     floatEl.style.display = 'none';
 
-    // Find drop target
-    var touch = e.changedTouches ? e.changedTouches[0] : null;
-    var dropTarget = null;
-    if (touch) {
-      dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
-    }
+    // Find drop target at pointer position
+    var dropTarget = document.elementFromPoint(clientX, clientY);
 
     floatEl.style.display = '';
 

@@ -107,12 +107,12 @@ Plans:
   2. User can enter numbers via on-screen pad, toggle notes mode for pencil marks, and erase entries
   3. User can tap a number to see all instances highlighted, request a hint to reveal a cell, and check work to see errors flash red
   4. Timer counts up with pause support, and completing the puzzle triggers celebration animation with stats recorded
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 07-01: TBD
-- [ ] 07-02: TBD
-- [ ] 07-03: TBD
+- [x] 07-01-PLAN.md — Engine (backtracking generator, solver, game state, undo, save/load) + HTML skeleton
+- [ ] 07-02-PLAN.md — UI module (grid rendering, cell-first input, notes, highlighting, timer, auto-save, win celebration) + CSS
+- [ ] 07-03-PLAN.md — Human verification checkpoint
 
 ### Phase 8: FreeCell
 **Goal**: Dad can play FreeCell with free cells, multi-card moves, auto-foundation, and deal replay
@@ -158,6 +158,6 @@ Phases execute in numeric order: 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9
 | 4. Card Renderer | 0/1 | Not started | - |
 | 5. Solitaire | 0/3 | Not started | - |
 | 6. Spider Solitaire | 0/3 | Not started | - |
-| 7. Sudoku | 0/3 | Not started | - |
+| 7. Sudoku | 1/3 | In progress | - |
 | 8. FreeCell | 0/3 | Not started | - |
 | 9. Packaging | 0/2 | Not started | - |

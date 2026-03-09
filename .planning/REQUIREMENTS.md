@@ -70,9 +70,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Polish & Settings (Phase 08.1)
 
-- [ ] **POL-01**: Card games (Solitaire, Spider, FreeCell) display MS-style green felt background
-- [ ] **POL-02**: Face-down cards show classic MS blue crosshatch pattern as default
-- [ ] **POL-03**: Woord Soek displays parchment/cream background with readable dark text
+- [x] **POL-01**: Card games (Solitaire, Spider, FreeCell) display MS-style green felt background
+- [x] **POL-02**: Face-down cards show classic MS blue crosshatch pattern as default
+- [x] **POL-03**: Woord Soek displays parchment/cream background with readable dark text
 - [x] **POL-04**: User can drag from first letter to last letter in Woord Soek to select a word (alongside tap-tap)
 - [ ] **POL-05**: All 5 games have a standardized gear-icon settings modal with game-specific toggles
 - [ ] **POL-06**: Font size setting (Klein/Medium/Groot) propagates to all game text without breaking card or grid layouts
@@ -165,9 +165,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FC-05 | Phase 8: FreeCell | Complete |
 | FC-06 | Phase 8: FreeCell | Complete |
 | FC-07 | Phase 8: FreeCell | Complete |
-| POL-01 | Phase 08.1: Polish & Settings | Pending |
-| POL-02 | Phase 08.1: Polish & Settings | Pending |
-| POL-03 | Phase 08.1: Polish & Settings | Pending |
+| POL-01 | Phase 08.1: Polish & Settings | Complete |
+| POL-02 | Phase 08.1: Polish & Settings | Complete |
+| POL-03 | Phase 08.1: Polish & Settings | Complete |
 | POL-04 | Phase 08.1: Polish & Settings | Complete |
 | POL-05 | Phase 08.1: Polish & Settings | Pending |
 | POL-06 | Phase 08.1: Polish & Settings | Pending |

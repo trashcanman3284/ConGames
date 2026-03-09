@@ -8,7 +8,7 @@ progress:
   total_phases: 7
   completed_phases: 6
   total_plans: 21
-  completed_plans: 18
+  completed_plans: 19
 ---
 
 # Project State
@@ -23,11 +23,11 @@ See: .planning/PROJECT.md (updated 2026-03-08)
 ## Current Position
 
 Phase: 08.1 of 9 (Polish & Settings)
-Plan: 2 of 4 in current phase (just completed)
+Plan: 3 of 4 in current phase (just completed 08.1-01)
 Status: In Progress
-Last activity: 2026-03-09 -- Completed 08.1-02-PLAN.md (Woord Soek drag-to-select)
+Last activity: 2026-03-09 -- Completed 08.1-01-PLAN.md (Game themes + card backs)
 
-Progress: [########--] 86% (18 of 21 plans complete)
+Progress: [#########-] 90% (19 of 21 plans complete)
 
 ## Performance Metrics
 
@@ -61,6 +61,7 @@ Progress: [########--] 86% (18 of 21 plans complete)
 | Phase 08 P01 | 3min | 2 tasks | 3 files |
 | Phase 08 P02 | 4min | 2 tasks | 2 files |
 | Phase 08 P03 | 1min | 1 tasks | 0 files |
+| Phase 08.1 P01 | 2min | 2 tasks | 3 files |
 | Phase 08.1 P02 | 1min | 1 tasks | 1 files |
 
 ## Accumulated Context
@@ -107,6 +108,9 @@ Recent decisions affecting current work:
 - [Phase 08]: Double-tap auto-move tries foundation first, then free cell
 - [Phase 08]: No confirmation dialogs on new game/restart for fast interaction flow
 - [Phase 08]: FreeCell approved as playable and visually correct on tablet viewport
+- [Phase 08.1]: MS blue crosshatch replaces default card back permanently (no toggle)
+- [Phase 08.1]: Parchment theme overrides all colour variables for full light-theme in Woord Soek
+- [Phase 08.1]: Woord Soek difficulty icon changed from gear to bars to reserve gear for settings
 - [Phase 08.1]: 2-cell movement threshold before drag activates to avoid false triggers on taps
 - [Phase 08.1]: 400ms ghost-click prevention timeout after drag completion
 
@@ -125,5 +129,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-09
-Stopped at: Completed 08.1-02-PLAN.md -- Woord Soek drag-to-select added.
+Stopped at: Completed 08.1-01-PLAN.md -- Game themes and card backs applied.
 Resume file: None

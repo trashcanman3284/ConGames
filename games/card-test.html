@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Renderer Test</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/cards.css">
+  <style>
+    /* Override shared.css body overflow for this test page */
+    html, body {
+      overflow: auto;
+      height: auto;
+    }
+    .test-page {
+      padding: 20px 24px 60px;
+      max-width: 2000px;
+      margin: 0 auto;
+    }
+    .test-page h1 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--accent-gold);
+      margin-bottom: 32px;
+    }
+    .test-page h2 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--text-primary);
+      margin: 32px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    /* Section 1: All 52 cards grid */
+    .all-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(13, 1fr);
+      gap: 8px;
+    }
+
+    /* Section 2: Face-down at different sizes */
+    .face-down-row {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    .face-down-container {
+      text-align: center;
+    }
+    .face-down-container .label {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-top: 6px;
+    }
+
+    /* Section 3: Card stacks */
+    .stack-row {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
+    .stack-container {
+      width: 140px;
+    }
+    .stack-container .label {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+    }
+
+    /* Section 4: Placeholder row */
+    .placeholder-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .placeholder-container {
+      width: 120px;
+    }
+
+    /* Section 5: Spider 10-column test */
+    .spider-test {
+      display: flex;
+      gap: 6px;
+    }
+    .spider-test .spider-col {
+      flex: 1;
+      min-width: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-page">
+    <h1>Card Renderer Test Page</h1>
+
+    <h2>1. All 52 Cards</h2>
+    <div id="all-cards" class="all-cards-grid"></div>
+
+    <h2>2. Face-Down Cards (multiple sizes)</h2>
+    <div id="face-down" class="face-down-row"></div>
+
+    <h2>3. Card Stack Demo</h2>
+    <div id="stacks" class="stack-row"></div>
+
+    <h2>4. Placeholder Slots</h2>
+    <div id="placeholders" class="placeholder-row"></div>
+
+    <h2>5. Spider Width Test (10 columns)</h2>
+    <div id="spider-test" class="spider-test"></div>
+  </div>
+
+  <script src="../js/cards.js"></script>
+  <script>
+    (function() {
+      var suits = ['hearts', 'diamonds', 'clubs', 'spades'];
+      var ranks = CardRenderer.RANKS;
+
+      // --- Section 1: All 52 face-up cards ---
+      var allCardsEl = document.getElementById('all-cards');
+      for (var s = 0; s < suits.length; s++) {
+        for (var r = 0; r < ranks.length; r++) {
+          allCardsEl.appendChild(CardRenderer.createCard(ranks[r], suits[s], true));
+        }
+      }
+
+      // --- Section 2: Face-down cards at different widths ---
+      var faceDownEl = document.getElementById('face-down');
+      var widths = [100, 150, 200, 250];
+      for (var w = 0; w < widths.length; w++) {
+        var container = document.createElement('div');
+        container.className = 'face-down-container';
+        container.style.width = widths[w] + 'px';
+
+        container.appendChild(CardRenderer.createCard('A', 'spades', false));
+
+        var label = document.createElement('div');
+        label.className = 'label';
+        label.textContent = widths[w] + 'px wide';
+        container.appendChild(label);
+
+        faceDownEl.appendChild(container);
+      }
+
+      // --- Section 3: Card stack demo ---
+      var stacksEl = document.getElementById('stacks');
+
+      // Stack 1: 5 cards, first 3 face-down, last 2 face-up
+      var stack1Container = document.createElement('div');
+      stack1Container.className = 'stack-container';
+      var stack1Label = document.createElement('div');
+      stack1Label.className = 'label';
+      stack1Label.textContent = '5 cards (3 down, 2 up)';
+      stack1Container.appendChild(stack1Label);
+
+      var stack1 = document.createElement('div');
+      stack1.className = 'card-stack';
+      stack1.appendChild(CardRenderer.createCard('2', 'hearts', false));
+      stack1.appendChild(CardRenderer.createCard('5', 'clubs', false));
+      stack1.appendChild(CardRenderer.createCard('J', 'diamonds', false));
+      stack1.appendChild(CardRenderer.createCard('9', 'spades', true));
+      stack1.appendChild(CardRenderer.createCard('8', 'hearts', true));
+      stack1Container.appendChild(stack1);
+      stacksEl.appendChild(stack1Container);
+
+      // Stack 2: 8 cards, first 6 face-down, last 2 face-up
+      var stack2Container = document.createElement('div');
+      stack2Container.className = 'stack-container';
+      var stack2Label = document.createElement('div');
+      stack2Label.className = 'label';
+      stack2Label.textContent = '8 cards (6 down, 2 up)';
+      stack2Container.appendChild(stack2Label);
+
+      var stack2 = document.createElement('div');
+      stack2.className = 'card-stack';
+      stack2.appendChild(CardRenderer.createCard('3', 'diamonds', false));
+      stack2.appendChild(CardRenderer.createCard('7', 'hearts', false));
+      stack2.appendChild(CardRenderer.createCard('K', 'spades', false));
+      stack2.appendChild(CardRenderer.createCard('4', 'clubs', false));
+      stack2.appendChild(CardRenderer.createCard('10', 'diamonds', false));
+      stack2.appendChild(CardRenderer.createCard('6', 'hearts', false));
+      stack2.appendChild(CardRenderer.createCard('Q', 'spades', true));
+      stack2.appendChild(CardRenderer.createCard('J', 'hearts', true));
+      stack2Container.appendChild(stack2);
+      stacksEl.appendChild(stack2Container);
+
+      // --- Section 4: Placeholder slots ---
+      var placeholdersEl = document.getElementById('placeholders');
+      for (var p = 0; p < 4; p++) {
+        var phContainer = document.createElement('div');
+        phContainer.className = 'placeholder-container';
+        phContainer.appendChild(CardRenderer.createPlaceholder());
+        placeholdersEl.appendChild(phContainer);
+      }
+
+      // --- Section 5: Spider width test (10 columns) ---
+      var spiderEl = document.getElementById('spider-test');
+      var spiderCards = [
+        { rank: 'K', suit: 'spades' },
+        { rank: 'Q', suit: 'hearts' },
+        { rank: 'J', suit: 'clubs' },
+        { rank: '10', suit: 'diamonds' },
+        { rank: '9', suit: 'spades' },
+        { rank: '8', suit: 'hearts' },
+        { rank: '7', suit: 'clubs' },
+        { rank: '6', suit: 'diamonds' },
+        { rank: '5', suit: 'spades' },
+        { rank: '4', suit: 'hearts' }
+      ];
+      for (var c = 0; c < spiderCards.length; c++) {
+        var col = document.createElement('div');
+        col.className = 'spider-col';
+        col.appendChild(CardRenderer.createCard(spiderCards[c].rank, spiderCards[c].suit, true));
+        spiderEl.appendChild(col);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -130,6 +130,25 @@ Plans:
 - [ ] 08-02-PLAN.md — UI module (rendering, tap/drag/double-tap, auto-foundation animation, shake, win celebration) + CSS
 - [ ] 08-03-PLAN.md — Human verification checkpoint
 
+### Phase 08.1: Polish & Settings (INSERTED)
+
+**Goal:** MS Solitaire-style themes, drag-to-select for Woord Soek, standardized settings modals, and font size propagation across all games
+**Requirements**: POL-01, POL-02, POL-03, POL-04, POL-05, POL-06
+**Depends on:** Phase 8
+**Success Criteria** (what must be TRUE):
+  1. Card games display classic MS green felt background with blue crosshatch card backs
+  2. Woord Soek displays parchment/cream background with readable dark text
+  3. User can drag from first letter to last letter in Woord Soek to select a word (alongside tap-tap)
+  4. All 5 games have a gear-icon settings modal with consistent styling and game-specific toggles
+  5. Font size Klein/Medium/Groot scales text across all games without breaking card or grid layouts
+**Plans:** 4 plans
+
+Plans:
+- [ ] 08.1-01-PLAN.md — CSS themes (green felt, parchment, MS card backs) + apply to game containers
+- [ ] 08.1-02-PLAN.md — Drag-to-select for Woord Soek (touch handling alongside tap-tap)
+- [ ] 08.1-03-PLAN.md — Settings modals (Sudoku + Woord Soek new, alignment) + font size audit
+- [ ] 08.1-04-PLAN.md — Human verification checkpoint
+
 ### Phase 9: Packaging
 **Goal**: The complete game suite is packaged as an APK and runs offline on Dad's tablet
 **Depends on**: Phase 3, Phase 5, Phase 6, Phase 7, Phase 8
@@ -147,7 +166,7 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9
+Phases execute in numeric order: 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 08.1 -> 9
 (Note: Phase 7 Sudoku has no dependency on Phase 4-6 and could execute in parallel if needed)
 
 | Phase | Plans Complete | Status | Completed |
@@ -160,4 +179,5 @@ Phases execute in numeric order: 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9
 | 6. Spider Solitaire | 0/3 | Not started | - |
 | 7. Sudoku | 1/3 | In progress | - |
 | 8. FreeCell | 0/3 | Not started | - |
+| 08.1. Polish & Settings | 0/4 | Not started | - |
 | 9. Packaging | 0/2 | Not started | - |

@@ -68,6 +68,15 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **FC-06**: Deal number displayed (seed-based for replay)
 - [x] **FC-07**: Win condition detected with celebration animation and stats recorded
 
+### Polish & Settings (Phase 08.1)
+
+- [ ] **POL-01**: Card games (Solitaire, Spider, FreeCell) display MS-style green felt background
+- [ ] **POL-02**: Face-down cards show classic MS blue crosshatch pattern as default
+- [ ] **POL-03**: Woord Soek displays parchment/cream background with readable dark text
+- [ ] **POL-04**: User can drag from first letter to last letter in Woord Soek to select a word (alongside tap-tap)
+- [ ] **POL-05**: All 5 games have a standardized gear-icon settings modal with game-specific toggles
+- [ ] **POL-06**: Font size setting (Klein/Medium/Groot) propagates to all game text without breaking card or grid layouts
+
 ### Platform
 
 - [ ] **PLT-01**: All game assets cached by service worker for full offline play
@@ -105,7 +114,7 @@ Deferred to future release. Tracked but not in current roadmap.
 | ES module imports | IIFE pattern only for browser compatibility |
 | External API calls at runtime | Must work 100% offline |
 | Image-based card assets | Pure CSS rendering, smaller APK |
-| Drag-to-select in Woord Soek | Tap-first/tap-last is primary; drag is nice-to-have |
+| Theme toggle (MS vs warm-dark) | MS is default, toggle deferred to v2 |
 
 ## Traceability
 
@@ -156,6 +165,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FC-05 | Phase 8: FreeCell | Complete |
 | FC-06 | Phase 8: FreeCell | Complete |
 | FC-07 | Phase 8: FreeCell | Complete |
+| POL-01 | Phase 08.1: Polish & Settings | Pending |
+| POL-02 | Phase 08.1: Polish & Settings | Pending |
+| POL-03 | Phase 08.1: Polish & Settings | Pending |
+| POL-04 | Phase 08.1: Polish & Settings | Pending |
+| POL-05 | Phase 08.1: Polish & Settings | Pending |
+| POL-06 | Phase 08.1: Polish & Settings | Pending |
 | PLT-01 | Phase 9: Packaging | Pending |
 | PLT-02 | Phase 9: Packaging | Pending |
 | PLT-03 | Phase 3: Woord Soek | Complete |
@@ -165,10 +180,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PLT-07 | Phase 3: Woord Soek | Complete |
 
 **Coverage:**
-- v1 requirements: 50 total
-- Mapped to phases: 50
+- v1 requirements: 56 total
+- Mapped to phases: 56
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-08*
-*Last updated: 2026-03-08 after roadmap creation*
+*Last updated: 2026-03-09 after Phase 08.1 planning*

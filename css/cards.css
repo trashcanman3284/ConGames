@@ -148,3 +148,22 @@
   background: transparent;
   opacity: 0.5;
 }
+
+/* === DRAGGING STATE === */
+.card.dragging {
+  opacity: 0.3;
+}
+
+/* Float card for drag-and-drop */
+.sol-float-card {
+  position: fixed;
+  z-index: 50;
+  pointer-events: none;
+  transition: none;
+}
+
+/* Win animation trail cards */
+.sol-win-card {
+  position: absolute;
+  pointer-events: none;
+}

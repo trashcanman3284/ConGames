@@ -485,7 +485,7 @@
         <div style="display:flex;gap:8px;">
           <button class="btn-icon" id="ws-hint-btn" onclick="WoordSoekUI.hint()" title="Wenk">&#128161;</button>
           <button class="btn-icon" id="ws-difficulty-btn" onclick="WoordSoekUI.showDifficultyModal()" title="Moeilikheid">&#9776;</button>
-          <button class="btn-icon" id="ws-layout-btn" onclick="WoordSoekUI.toggleLayout()" title="Skuif woordlys">&#8645;</button>
+          <button class="btn-icon" id="ws-settings-btn" title="Instellings">&#9881;</button>
         </div>
       </header>
 
@@ -536,6 +536,26 @@
           <button class="btn btn-primary" onclick="WoordSoekUI.confirmNewPuzzle()">Ja</button>
           <button class="btn btn-secondary" onclick="WoordSoekUI.closeConfirmModal()">Nee</button>
         </div>
+      </div>
+    </div>
+
+    <!-- Game settings modal -->
+    <div class="win-overlay" id="ws-settings-modal">
+      <div class="win-card">
+        <h2 style="font-size:1.4rem;">Spel Instellings</h2>
+        <div class="setting-row">
+          <label>Wys tyd</label>
+          <label class="toggle"><input type="checkbox" id="ws-toggle-timer" /><span class="toggle-track"></span></label>
+        </div>
+        <div class="setting-row">
+          <label>Outo-hervat</label>
+          <label class="toggle"><input type="checkbox" id="ws-toggle-autocontinue" /><span class="toggle-track"></span></label>
+        </div>
+        <div class="setting-row">
+          <label>Woordlys onder</label>
+          <label class="toggle"><input type="checkbox" id="ws-toggle-layout" /><span class="toggle-track"></span></label>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:16px;width:100%;" id="ws-settings-close">Sluit</button>
       </div>
     </div>
   </section>
@@ -736,6 +756,7 @@
           <button class="btn-icon" id="sdk-undo-btn" title="Ontdoen">&#8617;</button>
           <button class="btn-icon" id="sdk-pause-btn" title="Pouse">&#9646;&#9646;</button>
           <button class="btn-icon" id="sdk-newgame-btn" title="Nuwe Spel">&#x1F504;</button>
+          <button class="btn-icon" id="sdk-settings-btn" title="Instellings">&#9881;</button>
         </div>
       </header>
 
@@ -820,6 +841,26 @@
     <div class="win-overlay" id="sdk-loading-overlay">
       <div class="win-card">
         <p style="font-size:1.2rem;">Genereer legkaart...</p>
+      </div>
+    </div>
+
+    <!-- Game settings modal -->
+    <div class="win-overlay" id="sdk-settings-modal">
+      <div class="win-card">
+        <h2 style="font-size:1.4rem;">Spel Instellings</h2>
+        <div class="setting-row">
+          <label>Wys tyd</label>
+          <label class="toggle"><input type="checkbox" id="sdk-toggle-timer" /><span class="toggle-track"></span></label>
+        </div>
+        <div class="setting-row">
+          <label>Merk dieselfde nommers</label>
+          <label class="toggle"><input type="checkbox" id="sdk-toggle-highlight" /><span class="toggle-track"></span></label>
+        </div>
+        <div class="setting-row">
+          <label>Wys foute</label>
+          <label class="toggle"><input type="checkbox" id="sdk-toggle-errors" /><span class="toggle-track"></span></label>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:16px;width:100%;" id="sdk-settings-close">Sluit</button>
       </div>
     </div>
 

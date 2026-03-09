@@ -620,3 +620,181 @@ body::before {
 .spd-column .card.dragging {
   opacity: 0.3;
 }
+
+/* ══════════════ SUDOKU ══════════════ */
+
+.sdk-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sdk-header-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sdk-game-area {
+  display: flex;
+  flex: 1;
+  padding: 8px 16px;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* 9x9 Grid */
+.sdk-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  aspect-ratio: 1;
+  max-height: calc(100vh - 120px);
+  max-width: calc(100vh - 120px);
+  width: 100%;
+  border: 3px solid var(--accent-gold);
+  background: var(--bg-surface);
+  flex-shrink: 0;
+}
+
+/* Individual cells */
+.sdk-cell {
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-family: var(--font-body);
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background 0.15s;
+}
+
+/* 3x3 box thick gold borders */
+.sdk-cell-border-right {
+  border-right: 2px solid var(--accent-gold);
+}
+.sdk-cell-border-bottom {
+  border-bottom: 2px solid var(--accent-gold);
+}
+
+/* Cell states */
+.sdk-given {
+  color: #f0e6d0;
+  font-weight: 700;
+}
+
+.sdk-entered {
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+
+.sdk-selected {
+  background: rgba(212, 162, 58, 0.3) !important;
+  box-shadow: inset 0 0 0 2px var(--accent-gold);
+}
+
+.sdk-highlighted {
+  background: rgba(212, 162, 58, 0.15);
+}
+
+.sdk-related {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.sdk-error {
+  background: rgba(220, 38, 38, 0.4) !important;
+  transition: background 0.3s;
+}
+
+/* Pencil marks mini-grid */
+.sdk-notes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+}
+
+.sdk-note-digit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(0.45rem, 0.8vw, 0.7rem);
+  color: var(--text-muted, #a09880);
+  font-family: var(--font-body);
+  line-height: 1;
+}
+
+/* Right panel controls */
+.sdk-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  min-width: 200px;
+  max-width: 280px;
+}
+
+/* Number pad 3x3 grid */
+.sdk-numpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.sdk-num-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
+  min-width: var(--tap-min);
+  font-size: 1.5rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sdk-num-btn:active {
+  background: rgba(212, 162, 58, 0.3);
+}
+
+.sdk-num-completed {
+  opacity: 0.3;
+  color: var(--text-muted, #a09880);
+}
+
+/* Action buttons row */
+.sdk-action-btns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.sdk-action-btn {
+  font-size: 0.85rem;
+  padding: 10px 8px;
+  min-height: var(--tap-min);
+  white-space: nowrap;
+}
+
+/* Notes mode active state */
+.sdk-notes-active {
+  background: var(--accent-gold) !important;
+  color: var(--bg-base) !important;
+  border-color: var(--accent-gold) !important;
+}

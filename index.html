@@ -270,8 +270,10 @@
 
     .ws-layout.layout-below { flex-direction:column; }
     .ws-layout.layout-below .ws-grid-container { flex:1 1 0; min-height:0; }
-    .ws-layout.layout-below .ws-word-list-panel { flex:0 0 auto; max-height:25%; border-left:none; border-top:1px solid var(--border-subtle); overflow-y:hidden; display:flex; flex-direction:column; }
-    .ws-layout.layout-below .ws-word-list-panel #ws-word-list { display:flex; flex-wrap:wrap; gap:6px 12px; overflow:hidden; }
+    .ws-layout.layout-below .ws-word-list-panel { flex:0 0 auto; max-height:25%; border-left:none; border-top:1px solid var(--border-subtle); overflow:hidden; display:flex; flex-direction:column; padding:8px var(--gap-md); }
+    .ws-layout.layout-below .ws-word-list-panel h3 { display:none; }
+    .ws-layout.layout-below .ws-word-list-panel #ws-word-list { display:flex; flex-wrap:wrap; gap:4px 8px; overflow:hidden; align-items:center; align-content:flex-start; }
+    .ws-layout.layout-below .ws-word-item { font-size:0.75rem; padding:3px 8px; margin:0; }
 
     .ws-grid {
       display:grid;

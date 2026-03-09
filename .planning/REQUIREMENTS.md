@@ -1,7 +1,7 @@
 # Requirements: Dad se Speletjies
 
 **Defined:** 2026-03-08
-**Core Value:** Dad can pick up his tablet, tap a game, play it to completion, and return to the menu — for all five games — without needing any help.
+**Core Value:** Dad can pick up his tablet, tap a game, play it to completion, and return to the menu -- for all five games -- without needing any help.
 
 ## v1 Requirements
 
@@ -29,7 +29,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **SOL-01**: User can play full Klondike solitaire with 52-card deck, 7 tableau columns, 4 foundations
 - [ ] **SOL-02**: Tableau follows alternating colour, descending rank rules
-- [ ] **SOL-03**: Foundation follows ascending same-suit rules (A→K)
+- [ ] **SOL-03**: Foundation follows ascending same-suit rules (A->K)
 - [ ] **SOL-04**: User can move cards by tapping card then tapping target (auto-move to best target)
 - [ ] **SOL-05**: User can undo moves with unlimited undo stack
 - [ ] **SOL-06**: Auto-complete triggers when all cards are face-up
@@ -40,7 +40,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **SPI-01**: User can play Spider Solitaire with 10 columns, 104 cards, 5 deal piles
 - [ ] **SPI-02**: 1-suit mode available (MVP difficulty)
 - [ ] **SPI-03**: User can move any descending sequence regardless of suit
-- [ ] **SPI-04**: Complete K→A same-suit sequence auto-removes to foundation
+- [ ] **SPI-04**: Complete K->A same-suit sequence auto-removes to foundation
 - [ ] **SPI-05**: User can deal new row of cards from stock pile
 - [ ] **SPI-06**: User can undo moves with unlimited undo stack
 - [ ] **SPI-07**: Win condition detected with celebration animation and stats recorded
@@ -54,7 +54,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **SDK-05**: User can toggle notes/pencil mode to place small candidate numbers per cell
 - [ ] **SDK-06**: User can tap a number to highlight all instances of that number across the grid
 - [ ] **SDK-07**: User can request a hint that reveals one correct cell
-- [ ] **SDK-08**: User can check work — incorrect cells flash red
+- [ ] **SDK-08**: User can check work -- incorrect cells flash red
 - [ ] **SDK-09**: Timer with pause functionality
 - [ ] **SDK-10**: Win condition detected with celebration animation and stats recorded
 
@@ -62,7 +62,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **FC-01**: User can play FreeCell with 8 tableau columns, 4 free cells, 4 foundations
 - [ ] **FC-02**: Standard FreeCell rules: single card to free cell, ordered sequences on tableau
-- [ ] **FC-03**: Multi-card moves calculated by formula: (freeCells+1) × 2^emptyCols
+- [ ] **FC-03**: Multi-card moves calculated by formula: (freeCells+1) x 2^emptyCols
 - [ ] **FC-04**: Auto-move to foundation when safe
 - [ ] **FC-05**: User can undo moves with unlimited undo stack
 - [ ] **FC-06**: Deal number displayed (seed-based for replay)
@@ -100,7 +100,7 @@ Deferred to future release. Tracked but not in current roadmap.
 
 | Feature | Reason |
 |---------|--------|
-| Play Store listing | Sideload only — no store compliance needed |
+| Play Store listing | Sideload only -- no store compliance needed |
 | npm / build pipeline / TypeScript | Vanilla HTML/CSS/JS only, no build step |
 | ES module imports | IIFE pattern only for browser compatibility |
 | External API calls at runtime | Must work 100% offline |
@@ -113,13 +113,62 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (populated during roadmap creation) | | |
+| WS-01 | Phase 3: Woord Soek | Pending |
+| WS-02 | Phase 3: Woord Soek | Pending |
+| WS-03 | Phase 3: Woord Soek | Pending |
+| WS-04 | Phase 3: Woord Soek | Pending |
+| WS-05 | Phase 3: Woord Soek | Pending |
+| WS-06 | Phase 3: Woord Soek | Pending |
+| WS-07 | Phase 3: Woord Soek | Pending |
+| WS-08 | Phase 3: Woord Soek | Pending |
+| CR-01 | Phase 4: Card Renderer | Pending |
+| CR-02 | Phase 4: Card Renderer | Pending |
+| CR-03 | Phase 4: Card Renderer | Pending |
+| CR-04 | Phase 4: Card Renderer | Pending |
+| SOL-01 | Phase 5: Solitaire | Pending |
+| SOL-02 | Phase 5: Solitaire | Pending |
+| SOL-03 | Phase 5: Solitaire | Pending |
+| SOL-04 | Phase 5: Solitaire | Pending |
+| SOL-05 | Phase 5: Solitaire | Pending |
+| SOL-06 | Phase 5: Solitaire | Pending |
+| SOL-07 | Phase 5: Solitaire | Pending |
+| SPI-01 | Phase 6: Spider Solitaire | Pending |
+| SPI-02 | Phase 6: Spider Solitaire | Pending |
+| SPI-03 | Phase 6: Spider Solitaire | Pending |
+| SPI-04 | Phase 6: Spider Solitaire | Pending |
+| SPI-05 | Phase 6: Spider Solitaire | Pending |
+| SPI-06 | Phase 6: Spider Solitaire | Pending |
+| SPI-07 | Phase 6: Spider Solitaire | Pending |
+| SDK-01 | Phase 7: Sudoku | Pending |
+| SDK-02 | Phase 7: Sudoku | Pending |
+| SDK-03 | Phase 7: Sudoku | Pending |
+| SDK-04 | Phase 7: Sudoku | Pending |
+| SDK-05 | Phase 7: Sudoku | Pending |
+| SDK-06 | Phase 7: Sudoku | Pending |
+| SDK-07 | Phase 7: Sudoku | Pending |
+| SDK-08 | Phase 7: Sudoku | Pending |
+| SDK-09 | Phase 7: Sudoku | Pending |
+| SDK-10 | Phase 7: Sudoku | Pending |
+| FC-01 | Phase 8: FreeCell | Pending |
+| FC-02 | Phase 8: FreeCell | Pending |
+| FC-03 | Phase 8: FreeCell | Pending |
+| FC-04 | Phase 8: FreeCell | Pending |
+| FC-05 | Phase 8: FreeCell | Pending |
+| FC-06 | Phase 8: FreeCell | Pending |
+| FC-07 | Phase 8: FreeCell | Pending |
+| PLT-01 | Phase 9: Packaging | Pending |
+| PLT-02 | Phase 9: Packaging | Pending |
+| PLT-03 | Phase 3: Woord Soek | Pending |
+| PLT-04 | Phase 3: Woord Soek | Pending |
+| PLT-05 | Phase 3: Woord Soek | Pending |
+| PLT-06 | Phase 3: Woord Soek | Pending |
+| PLT-07 | Phase 3: Woord Soek | Pending |
 
 **Coverage:**
-- v1 requirements: 38 total
-- Mapped to phases: 0
-- Unmapped: 38 ⚠️
+- v1 requirements: 50 total
+- Mapped to phases: 50
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-08*
-*Last updated: 2026-03-08 after initial definition*
+*Last updated: 2026-03-08 after roadmap creation*

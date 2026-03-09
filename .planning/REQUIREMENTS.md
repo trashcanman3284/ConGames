@@ -47,16 +47,16 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Sudoku
 
-- [ ] **SDK-01**: User can play Sudoku on a 9x9 grid with standard rules
+- [x] **SDK-01**: User can play Sudoku on a 9x9 grid with standard rules
 - [x] **SDK-02**: Puzzle generator creates puzzles at 4 difficulty levels (Easy ~45, Medium ~35, Hard ~27, Expert ~22 revealed cells)
 - [x] **SDK-03**: Each generated puzzle has a unique solution
-- [ ] **SDK-04**: User can input numbers via on-screen number pad (1-9 + erase)
-- [ ] **SDK-05**: User can toggle notes/pencil mode to place small candidate numbers per cell
-- [ ] **SDK-06**: User can tap a number to highlight all instances of that number across the grid
-- [ ] **SDK-07**: User can request a hint that reveals one correct cell
-- [ ] **SDK-08**: User can check work -- incorrect cells flash red
-- [ ] **SDK-09**: Timer with pause functionality
-- [ ] **SDK-10**: Win condition detected with celebration animation and stats recorded
+- [x] **SDK-04**: User can input numbers via on-screen number pad (1-9 + erase)
+- [x] **SDK-05**: User can toggle notes/pencil mode to place small candidate numbers per cell
+- [x] **SDK-06**: User can tap a number to highlight all instances of that number across the grid
+- [x] **SDK-07**: User can request a hint that reveals one correct cell
+- [x] **SDK-08**: User can check work -- incorrect cells flash red
+- [x] **SDK-09**: Timer with pause functionality
+- [x] **SDK-10**: Win condition detected with celebration animation and stats recorded
 
 ### FreeCell
 
@@ -139,16 +139,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SPI-05 | Phase 6: Spider Solitaire | Complete |
 | SPI-06 | Phase 6: Spider Solitaire | Complete |
 | SPI-07 | Phase 6: Spider Solitaire | Complete |
-| SDK-01 | Phase 7: Sudoku | Pending |
+| SDK-01 | Phase 7: Sudoku | Complete |
 | SDK-02 | Phase 7: Sudoku | Complete |
 | SDK-03 | Phase 7: Sudoku | Complete |
-| SDK-04 | Phase 7: Sudoku | Pending |
-| SDK-05 | Phase 7: Sudoku | Pending |
-| SDK-06 | Phase 7: Sudoku | Pending |
-| SDK-07 | Phase 7: Sudoku | Pending |
-| SDK-08 | Phase 7: Sudoku | Pending |
-| SDK-09 | Phase 7: Sudoku | Pending |
-| SDK-10 | Phase 7: Sudoku | Pending |
+| SDK-04 | Phase 7: Sudoku | Complete |
+| SDK-05 | Phase 7: Sudoku | Complete |
+| SDK-06 | Phase 7: Sudoku | Complete |
+| SDK-07 | Phase 7: Sudoku | Complete |
+| SDK-08 | Phase 7: Sudoku | Complete |
+| SDK-09 | Phase 7: Sudoku | Complete |
+| SDK-10 | Phase 7: Sudoku | Complete |
 | FC-01 | Phase 8: FreeCell | Pending |
 | FC-02 | Phase 8: FreeCell | Pending |
 | FC-03 | Phase 8: FreeCell | Pending |

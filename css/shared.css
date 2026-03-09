@@ -798,3 +798,117 @@ body::before {
   color: var(--bg-base) !important;
   border-color: var(--accent-gold) !important;
 }
+
+/* ══════════════ FREECELL ══════════════ */
+
+.fc-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.fc-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px;
+}
+
+.fc-free-cells,
+.fc-foundations {
+  display: flex;
+  gap: 6px;
+}
+
+.fc-pile {
+  width: clamp(56px, 8vw, 80px);
+  height: clamp(78px, 11vw, 112px);
+  border-radius: 6px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fc-free.fc-empty-cell {
+  border: 2px dashed var(--text-muted, #5a5040);
+  background: transparent;
+}
+
+.fc-found.fc-empty-found {
+  border: 2px solid var(--text-muted, #5a5040);
+  background: transparent;
+  color: var(--text-muted, #5a5040);
+  font-size: 1.5rem;
+  opacity: 0.4;
+}
+
+.fc-pile .card {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.fc-center-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.fc-tableau {
+  display: flex;
+  gap: 6px;
+  padding: 4px 12px;
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.fc-column {
+  flex: 1;
+  min-width: 0;
+  max-width: 100px;
+  position: relative;
+}
+
+.fc-column .card {
+  max-width: 100px;
+}
+
+/* Card selected state in FreeCell */
+.fc-column .card.selected,
+.fc-pile .card.selected {
+  box-shadow: 0 0 8px 2px var(--accent-gold);
+  transform: translateY(-2px);
+  z-index: 10;
+}
+
+/* Card dragging state */
+.fc-column .card.dragging,
+.fc-pile .card.dragging {
+  opacity: 0.3;
+}
+
+/* Shake animation for invalid moves */
+@keyframes fc-shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 50%, 90% { transform: translateX(-4px); }
+  30%, 70% { transform: translateX(4px); }
+}
+
+.shake {
+  animation: fc-shake 0.4s ease-in-out;
+}
+
+/* Auto-foundation fly animation helper */
+.fc-flying-card {
+  position: fixed;
+  z-index: 200;
+  transition: top 0.2s ease-out, left 0.2s ease-out;
+  pointer-events: none;
+}

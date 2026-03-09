@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in-progress
-last_updated: "2026-03-09T17:55:13Z"
+last_updated: "2026-03-09T18:02:00Z"
 progress:
   total_phases: 9
   completed_phases: 7
   total_plans: 17
-  completed_plans: 15
+  completed_plans: 16
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-08)
 
 **Core value:** Dad can pick up his tablet, tap a game, play it to completion, and return to the menu -- for all five games -- without needing any help.
-**Current focus:** Phase 8: FreeCell — Engine and HTML skeleton complete. UI next (Plan 02).
+**Current focus:** Phase 8: FreeCell — UI complete. Integration next (Plan 03).
 
 ## Current Position
 
 Phase: 8 of 9 (FreeCell)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: In Progress
-Last activity: 2026-03-09 -- Completed 08-01-PLAN.md (FreeCell Engine + HTML)
+Last activity: 2026-03-09 -- Completed 08-02-PLAN.md (FreeCell UI)
 
-Progress: [#########_] 88% (15 of 17 plans complete)
+Progress: [#########_] 94% (16 of 17 plans complete)
 
 ## Performance Metrics
 
@@ -59,6 +59,7 @@ Progress: [#########_] 88% (15 of 17 plans complete)
 | Phase 07 P01 | 3min | 2 tasks | 3 files |
 | Phase 07 P02 | 3min | 2 tasks | 2 files |
 | Phase 08 P01 | 3min | 2 tasks | 3 files |
+| Phase 08 P02 | 4min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -100,6 +101,9 @@ Recent decisions affecting current work:
 - [Phase 08]: Foundation suit assignment: first ace placed establishes ownership
 - [Phase 08]: Auto-foundation uses safe-move algorithm (aces/2s always, rank 3+ when both opposite-colour rank-1 on foundations)
 - [Phase 08]: Grouped undo: player action + cascaded auto-moves share groupId
+- [Phase 08]: Auto-foundation animation uses staggered sound cues (200ms) rather than visual card-flying
+- [Phase 08]: Double-tap auto-move tries foundation first, then free cell
+- [Phase 08]: No confirmation dialogs on new game/restart for fast interaction flow
 
 ### Pending Todos
 
@@ -112,5 +116,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-09
-Stopped at: Completed 08-01-PLAN.md -- FreeCell Engine + HTML
+Stopped at: Completed 08-02-PLAN.md -- FreeCell UI
 Resume file: None

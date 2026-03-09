@@ -66,7 +66,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **FC-04**: Auto-move to foundation when safe
 - [x] **FC-05**: User can undo moves with unlimited undo stack
 - [x] **FC-06**: Deal number displayed (seed-based for replay)
-- [ ] **FC-07**: Win condition detected with celebration animation and stats recorded
+- [x] **FC-07**: Win condition detected with celebration animation and stats recorded
 
 ### Platform
 
@@ -155,7 +155,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FC-04 | Phase 8: FreeCell | Complete |
 | FC-05 | Phase 8: FreeCell | Complete |
 | FC-06 | Phase 8: FreeCell | Complete |
-| FC-07 | Phase 8: FreeCell | Pending |
+| FC-07 | Phase 8: FreeCell | Complete |
 | PLT-01 | Phase 9: Packaging | Pending |
 | PLT-02 | Phase 9: Packaging | Pending |
 | PLT-03 | Phase 3: Woord Soek | Complete |

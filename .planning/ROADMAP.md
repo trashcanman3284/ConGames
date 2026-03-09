@@ -141,7 +141,7 @@ Plans:
   3. User can drag from first letter to last letter in Woord Soek to select a word (alongside tap-tap)
   4. All 5 games have a gear-icon settings modal with consistent styling and game-specific toggles
   5. Font size Klein/Medium/Groot scales text across all games without breaking card or grid layouts
-**Plans:** 2/4 plans executed
+**Plans:** 3/4 plans executed
 
 Plans:
 - [ ] 08.1-01-PLAN.md — CSS themes (green felt, parchment, MS card backs) + apply to game containers
@@ -179,5 +179,5 @@ Phases execute in numeric order: 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 08.1 -> 9
 | 6. Spider Solitaire | 0/3 | Not started | - |
 | 7. Sudoku | 1/3 | In progress | - |
 | 8. FreeCell | 0/3 | Not started | - |
-| 08.1. Polish & Settings | 2/4 | In Progress|  |
+| 08.1. Polish & Settings | 3/4 | In Progress|  |
 | 9. Packaging | 0/2 | Not started | - |

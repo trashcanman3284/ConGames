@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-09T19:35:14Z"
+last_updated: "2026-03-09T19:40:19Z"
 progress:
   total_phases: 7
   completed_phases: 6
   total_plans: 21
-  completed_plans: 19
+  completed_plans: 21
 ---
 
 # Project State
@@ -23,11 +23,11 @@ See: .planning/PROJECT.md (updated 2026-03-08)
 ## Current Position
 
 Phase: 08.1 of 9 (Polish & Settings)
-Plan: 3 of 4 in current phase (just completed 08.1-01)
+Plan: 4 of 4 in current phase (just completed 08.1-03)
 Status: In Progress
-Last activity: 2026-03-09 -- Completed 08.1-01-PLAN.md (Game themes + card backs)
+Last activity: 2026-03-09 -- Completed 08.1-03-PLAN.md (Settings modals standardization)
 
-Progress: [#########-] 90% (19 of 21 plans complete)
+Progress: [##########] 100% (21 of 21 plans complete)
 
 ## Performance Metrics
 
@@ -63,6 +63,7 @@ Progress: [#########-] 90% (19 of 21 plans complete)
 | Phase 08 P03 | 1min | 1 tasks | 0 files |
 | Phase 08.1 P01 | 2min | 2 tasks | 3 files |
 | Phase 08.1 P02 | 1min | 1 tasks | 1 files |
+| Phase 08.1 P03 | 2min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -113,6 +114,9 @@ Recent decisions affecting current work:
 - [Phase 08.1]: Woord Soek difficulty icon changed from gear to bars to reserve gear for settings
 - [Phase 08.1]: 2-cell movement threshold before drag activates to avoid false triggers on taps
 - [Phase 08.1]: 400ms ghost-click prevention timeout after drag completion
+- [Phase 08.1]: Sudoku highlight same numbers defaults to true (matching existing always-on behavior)
+- [Phase 08.1]: Sudoku show errors defaults to false (only on explicit check button)
+- [Phase 08.1]: Woord Soek layout toggle moved from header button to settings modal
 
 ### Pending Todos
 
@@ -129,5 +133,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-09
-Stopped at: Completed 08.1-01-PLAN.md -- Game themes and card backs applied.
+Stopped at: Completed 08.1-03-PLAN.md -- Settings modals standardized across all 5 games.
 Resume file: None

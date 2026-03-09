@@ -60,12 +60,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### FreeCell
 
-- [ ] **FC-01**: User can play FreeCell with 8 tableau columns, 4 free cells, 4 foundations
-- [ ] **FC-02**: Standard FreeCell rules: single card to free cell, ordered sequences on tableau
-- [ ] **FC-03**: Multi-card moves calculated by formula: (freeCells+1) x 2^emptyCols
-- [ ] **FC-04**: Auto-move to foundation when safe
-- [ ] **FC-05**: User can undo moves with unlimited undo stack
-- [ ] **FC-06**: Deal number displayed (seed-based for replay)
+- [x] **FC-01**: User can play FreeCell with 8 tableau columns, 4 free cells, 4 foundations
+- [x] **FC-02**: Standard FreeCell rules: single card to free cell, ordered sequences on tableau
+- [x] **FC-03**: Multi-card moves calculated by formula: (freeCells+1) x 2^emptyCols
+- [x] **FC-04**: Auto-move to foundation when safe
+- [x] **FC-05**: User can undo moves with unlimited undo stack
+- [x] **FC-06**: Deal number displayed (seed-based for replay)
 - [ ] **FC-07**: Win condition detected with celebration animation and stats recorded
 
 ### Platform
@@ -149,12 +149,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SDK-08 | Phase 7: Sudoku | Complete |
 | SDK-09 | Phase 7: Sudoku | Complete |
 | SDK-10 | Phase 7: Sudoku | Complete |
-| FC-01 | Phase 8: FreeCell | Pending |
-| FC-02 | Phase 8: FreeCell | Pending |
-| FC-03 | Phase 8: FreeCell | Pending |
-| FC-04 | Phase 8: FreeCell | Pending |
-| FC-05 | Phase 8: FreeCell | Pending |
-| FC-06 | Phase 8: FreeCell | Pending |
+| FC-01 | Phase 8: FreeCell | Complete |
+| FC-02 | Phase 8: FreeCell | Complete |
+| FC-03 | Phase 8: FreeCell | Complete |
+| FC-04 | Phase 8: FreeCell | Complete |
+| FC-05 | Phase 8: FreeCell | Complete |
+| FC-06 | Phase 8: FreeCell | Complete |
 | FC-07 | Phase 8: FreeCell | Pending |
 | PLT-01 | Phase 9: Packaging | Pending |
 | PLT-02 | Phase 9: Packaging | Pending |

@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: unknown
-last_updated: "2026-03-09T16:48:58.733Z"
+status: in-progress
+last_updated: "2026-03-09T17:55:13Z"
 progress:
-  total_phases: 5
-  completed_phases: 5
-  total_plans: 14
-  completed_plans: 14
+  total_phases: 9
+  completed_phases: 7
+  total_plans: 17
+  completed_plans: 15
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-08)
 
 **Core value:** Dad can pick up his tablet, tap a game, play it to completion, and return to the menu -- for all five games -- without needing any help.
-**Current focus:** Phase 7: Sudoku — Engine, HTML skeleton, and UI complete. Verification next (Plan 03).
+**Current focus:** Phase 8: FreeCell — Engine and HTML skeleton complete. UI next (Plan 02).
 
 ## Current Position
 
-Phase: 7 of 9 (Sudoku)
-Plan: 2 of 3 in current phase
+Phase: 8 of 9 (FreeCell)
+Plan: 1 of 3 in current phase
 Status: In Progress
-Last activity: 2026-03-09 -- Completed 07-02-PLAN.md (Sudoku UI + CSS)
+Last activity: 2026-03-09 -- Completed 08-01-PLAN.md (FreeCell Engine + HTML)
 
-Progress: [#########_] 93% (13 of 14 plans complete)
+Progress: [#########_] 88% (15 of 17 plans complete)
 
 ## Performance Metrics
 
@@ -58,6 +58,7 @@ Progress: [#########_] 93% (13 of 14 plans complete)
 | Phase 06 P02 | 3min | 2 tasks | 2 files |
 | Phase 07 P01 | 3min | 2 tasks | 3 files |
 | Phase 07 P02 | 3min | 2 tasks | 2 files |
+| Phase 08 P01 | 3min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -96,6 +97,9 @@ Recent decisions affecting current work:
 - [Phase 07]: Undo does not restore cascading note clears in related cells (MS Sudoku behavior)
 - [Phase 07]: getSavedGame excludes undoStack for serialization efficiency
 - [Phase 07]: Comment wording adjusted to avoid false positive on const/let regex check
+- [Phase 08]: Foundation suit assignment: first ace placed establishes ownership
+- [Phase 08]: Auto-foundation uses safe-move algorithm (aces/2s always, rank 3+ when both opposite-colour rank-1 on foundations)
+- [Phase 08]: Grouped undo: player action + cascaded auto-moves share groupId
 
 ### Pending Todos
 
@@ -108,5 +112,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-09
-Stopped at: Completed 07-02-PLAN.md -- Sudoku UI + CSS
+Stopped at: Completed 08-01-PLAN.md -- FreeCell Engine + HTML
 Resume file: None

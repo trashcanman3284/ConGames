@@ -1018,7 +1018,7 @@
 
   // ── Register PWA service worker ─────────────────────────
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(err => {
+    navigator.serviceWorker.register('/ConGames/sw.js', { scope: '/ConGames/' }).catch(err => {
       console.log('SW registration failed (normal in dev):', err);
     });
   }

@@ -3,37 +3,40 @@
  * Caches all app assets for full offline support
  */
 
-const CACHE_NAME = 'congames-v5';
+const CACHE_NAME = 'congames-v6';
 
 // All files to cache on install
+// Note: sw.js itself is NOT included (browser manages SW updates separately)
+// Note: woordsoek has no index.html (embedded in main index.html)
 const CORE_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/css/shared.css',
-  '/css/cards.css',
-  '/js/cards.js',
-  '/js/router.js',
-  '/js/settings.js',
-  '/js/audio.js',
-  '/words.json',
-  '/word_found.mp3',
-  '/board_finished.mp3',
-  '/games/woordsoek/index.html',
-  '/games/woordsoek/engine.js',
-  '/games/woordsoek/ui.js',
-  '/games/solitaire/index.html',
-  '/games/solitaire/engine.js',
-  '/games/solitaire/ui.js',
-  '/games/spider/index.html',
-  '/games/spider/engine.js',
-  '/games/spider/ui.js',
-  '/games/sudoku/index.html',
-  '/games/sudoku/engine.js',
-  '/games/sudoku/ui.js',
-  '/games/freecell/index.html',
-  '/games/freecell/engine.js',
-  '/games/freecell/ui.js',
+  '/ConGames/',
+  '/ConGames/index.html',
+  '/ConGames/manifest.json',
+  '/ConGames/css/shared.css',
+  '/ConGames/css/cards.css',
+  '/ConGames/js/cards.js',
+  '/ConGames/js/router.js',
+  '/ConGames/js/settings.js',
+  '/ConGames/js/audio.js',
+  '/ConGames/words.json',
+  '/ConGames/word_found.mp3',
+  '/ConGames/board_finished.mp3',
+  '/ConGames/icons/icon-192.png',
+  '/ConGames/icons/icon-512.png',
+  '/ConGames/games/woordsoek/engine.js',
+  '/ConGames/games/woordsoek/ui.js',
+  '/ConGames/games/solitaire/index.html',
+  '/ConGames/games/solitaire/engine.js',
+  '/ConGames/games/solitaire/ui.js',
+  '/ConGames/games/spider/index.html',
+  '/ConGames/games/spider/engine.js',
+  '/ConGames/games/spider/ui.js',
+  '/ConGames/games/sudoku/index.html',
+  '/ConGames/games/sudoku/engine.js',
+  '/ConGames/games/sudoku/ui.js',
+  '/ConGames/games/freecell/index.html',
+  '/ConGames/games/freecell/engine.js',
+  '/ConGames/games/freecell/ui.js',
 ];
 
 // Google Fonts (cache separately — external)
@@ -99,7 +102,7 @@ self.addEventListener('fetch', event => {
           .catch(() => {
             // Offline fallback — return cached index.html for navigation requests
             if (event.request.mode === 'navigate') {
-              return caches.match('/index.html');
+              return caches.match('/ConGames/index.html');
             }
             // Otherwise just fail gracefully
             return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });

@@ -2,7 +2,8 @@
   "name": "Con se Speletjies",
   "short_name": "Speletjies",
   "description": "Five classic games for Con — Woord Soek, Solitaire, Spider, Sudoku, FreeCell",
-  "start_url": "/index.html",
+  "start_url": "/ConGames/index.html",
+  "scope": "/ConGames/",
   "display": "fullscreen",
   "orientation": "landscape",
   "background_color": "#1a1610",
@@ -11,16 +12,28 @@
   "categories": ["games", "entertainment"],
   "icons": [
     {
-      "src": "icons/icon-192.png",
+      "src": "/ConGames/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "icons/icon-512.png",
+      "src": "/ConGames/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/ConGames/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/ConGames/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "screenshots": [],

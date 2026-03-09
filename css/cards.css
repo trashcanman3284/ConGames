@@ -116,6 +116,7 @@
   position: relative;
 }
 
+/* Default overlap — UI.js overrides with inline styles for dynamic compression */
 .card-stack .card {
   margin-top: -75%;
 }
@@ -126,7 +127,7 @@
 
 /* Face-down cards overlap more (show less) */
 .card-stack .card.face-down {
-  margin-top: -82%;
+  margin-top: -85%;
 }
 
 .card-stack .card.face-down:first-child {

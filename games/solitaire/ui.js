@@ -281,7 +281,7 @@ var SolitaireUI = (function() {
   }
 
   function renderTableau(state) {
-    // Calculate available height for dynamic compression
+    // Calculate available height for tableau area
     var viewportHeight = window.innerHeight;
     var headerHeight = 56;
     var topRowHeight = el('sol-top-row') ? el('sol-top-row').offsetHeight : 140;
@@ -304,13 +304,11 @@ var SolitaireUI = (function() {
         continue;
       }
 
-      // Calculate overlap for tall columns
-      // Card aspect ratio is 5:7, so card height is roughly colWidth * 1.4
+      // Card dimensions from actual column width
       var colWidth = colEl.offsetWidth || 100;
-      var cardHeight = colWidth * 1.4;
-      var defaultFaceDownOverlap = cardHeight * 0.18; // shows 18% of face-down
-      var defaultFaceUpOverlap = cardHeight * 0.25;   // shows 25% of face-up
+      var cardHeight = colWidth * 1.4; // 5:7 aspect ratio
 
+      // Count face-up and face-down cards
       var faceDownCount = 0;
       var faceUpCount = 0;
       for (var ci = 0; ci < col.length; ci++) {
@@ -318,8 +316,23 @@ var SolitaireUI = (function() {
         else faceDownCount++;
       }
 
-      var neededHeight = cardHeight + (faceDownCount * defaultFaceDownOverlap) + (faceUpCount > 0 ? (faceUpCount - 1) * defaultFaceUpOverlap : 0);
-      var compress = neededHeight > availableHeight && col.length > 1;
+      // Default visible portions (in pixels)
+      var faceDownShow = Math.max(16, cardHeight * 0.12); // thin sliver for face-down
+      var faceUpShow = Math.max(28, cardHeight * 0.22);   // more for face-up
+
+      // Total height needed = card height + visible portions of all but last card
+      var neededHeight = cardHeight
+        + (faceDownCount * faceDownShow)
+        + (faceUpCount > 0 ? (faceUpCount - 1) * faceUpShow : 0);
+
+      // Compress if it would overflow
+      if (neededHeight > availableHeight && col.length > 1) {
+        var excessCards = col.length - 1;
+        var spaceForOverlaps = availableHeight - cardHeight;
+        if (spaceForOverlaps < excessCards * 10) spaceForOverlaps = excessCards * 10; // minimum 10px per card
+        faceDownShow = Math.max(8, (spaceForOverlaps * 0.3) / Math.max(1, faceDownCount));
+        faceUpShow = Math.max(16, (spaceForOverlaps * 0.7) / Math.max(1, faceUpCount > 0 ? faceUpCount - 1 : 1));
+      }
 
       for (var i = 0; i < col.length; i++) {
         var card = col[i];
@@ -329,14 +342,11 @@ var SolitaireUI = (function() {
         cardEl.setAttribute('data-col', String(c));
         cardEl.setAttribute('data-card-index', String(i));
 
-        // Dynamic overlap compression
-        if (i > 0 && compress) {
-          var ratio = availableHeight / neededHeight;
-          if (card.faceUp) {
-            cardEl.style.marginTop = -(100 - (25 * ratio)) + '%';
-          } else {
-            cardEl.style.marginTop = -(100 - (18 * ratio)) + '%';
-          }
+        // Apply overlap as pixel-based negative margin
+        if (i > 0) {
+          var show = card.faceUp ? faceUpShow : faceDownShow;
+          var overlap = cardHeight - show;
+          cardEl.style.marginTop = -overlap + 'px';
         }
 
         if (card.faceUp) {

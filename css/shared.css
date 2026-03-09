@@ -519,3 +519,104 @@ body::before {
 .screen.active {
   animation: screen-in var(--dur-mid) var(--ease-out);
 }
+
+/* ══════════════ SPIDER SOLITAIRE ══════════════ */
+
+.spd-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.spd-header-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.spd-tableau {
+  display: flex;
+  gap: 6px;
+  padding: 4px 12px;
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.spd-column {
+  flex: 1;
+  min-width: 0;
+  max-width: 80px;
+  position: relative;
+}
+
+.spd-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 12px 8px;
+  min-height: 56px;
+}
+
+.spd-foundations {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.spd-foundation-pile {
+  width: 40px;
+  height: 56px;
+  position: relative;
+}
+
+.spd-foundation-pile .card {
+  width: 40px !important;
+  height: 56px !important;
+  font-size: 0.5rem;
+}
+
+.spd-foundation-pile .card-corner {
+  font-size: 0.35rem;
+}
+
+.spd-foundation-pile .card-center {
+  font-size: 0.7rem;
+}
+
+.spd-stock {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.spd-stock-pile {
+  width: 40px;
+  height: 56px;
+  position: relative;
+}
+
+.spd-stock-pile .card {
+  width: 40px !important;
+  height: 56px !important;
+}
+
+/* Narrower cards for 10-column layout */
+.spd-column .card {
+  max-width: 80px;
+}
+
+/* Card selected state in Spider */
+.spd-column .card.selected {
+  box-shadow: 0 0 8px 2px var(--accent-gold);
+  transform: translateY(-2px);
+  z-index: 10;
+}
+
+/* Card dragging state */
+.spd-column .card.dragging {
+  opacity: 0.3;
+}

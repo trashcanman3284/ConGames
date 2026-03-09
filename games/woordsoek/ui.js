@@ -19,6 +19,13 @@ var WoordSoekUI = (function() {
   var _isBelow = false;
   var _gameActive = false;
 
+  // Drag-to-select state
+  var _isDragging = false;
+  var _dragStartCell = null;
+  var _lastDragRow = null;
+  var _lastDragCol = null;
+  var _justCompletedDrag = false;
+
   // ── DOM references (cached after first use) ────────────────
 
   var _els = {};
@@ -72,6 +79,11 @@ var WoordSoekUI = (function() {
     _selectionState = 'idle';
     _firstCell = null;
     _gameActive = false;
+    _isDragging = false;
+    _dragStartCell = null;
+    _lastDragRow = null;
+    _lastDragCol = null;
+    _justCompletedDrag = false;
     clearPreview();
   }
 
@@ -204,7 +216,8 @@ var WoordSoekUI = (function() {
       }
     }
 
-    // Preview line handlers on grid container
+    // Drag-to-select + preview line handlers on grid container
+    grid.addEventListener('touchstart', onGridTouchStart, { passive: true });
     grid.addEventListener('touchmove', onTouchMove, { passive: true });
     grid.addEventListener('mousemove', onMouseMove);
     grid.addEventListener('touchend', onTouchEnd);
@@ -237,6 +250,7 @@ var WoordSoekUI = (function() {
   // ── Tap-Tap Selection ──────────────────────────────────────
 
   function onCellTap(row, col) {
+    if (_justCompletedDrag) return;
     if (!_gameActive) return;
 
     if (_selectionState === 'idle') {
@@ -318,13 +332,59 @@ var WoordSoekUI = (function() {
     }
   }
 
+  // ── Drag-to-select (touchstart) ────────────────────────────
+
+  function onGridTouchStart(e) {
+    var touch = e.touches[0];
+    if (!touch) return;
+    var target = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (!target || !target.classList.contains('ws-cell')) return;
+
+    var r = parseInt(target.getAttribute('data-row'), 10);
+    var c = parseInt(target.getAttribute('data-col'), 10);
+    _dragStartCell = { row: r, col: c };
+    _isDragging = false;
+    _lastDragRow = null;
+    _lastDragCol = null;
+  }
+
   // ── Preview Line (touchmove / mousemove) ───────────────────
 
   function onTouchMove(e) {
-    if (_selectionState !== 'first_selected' || !_firstCell) return;
     var touch = e.touches[0];
     if (!touch) return;
-    showPreviewTo(touch.clientX, touch.clientY);
+
+    // Existing behaviour: preview during tap-tap selection
+    if (_selectionState === 'first_selected' && _firstCell && !_isDragging) {
+      showPreviewTo(touch.clientX, touch.clientY);
+      return;
+    }
+
+    // Drag-to-select: detect drag from touchstart origin
+    if (_dragStartCell) {
+      var target = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (!target || !target.classList.contains('ws-cell')) return;
+
+      var r = parseInt(target.getAttribute('data-row'), 10);
+      var c = parseInt(target.getAttribute('data-col'), 10);
+      var dist = Math.max(Math.abs(r - _dragStartCell.row), Math.abs(c - _dragStartCell.col));
+
+      if (dist >= 2) {
+        _isDragging = true;
+      }
+
+      if (_isDragging) {
+        // Set first cell from drag origin if not yet set for this drag
+        if (!_firstCell || _selectionState !== 'first_selected') {
+          _firstCell = _dragStartCell;
+          _selectionState = 'first_selected';
+          addClassToCell(_dragStartCell.row, _dragStartCell.col, 'selected');
+        }
+        showPreviewTo(touch.clientX, touch.clientY);
+        _lastDragRow = r;
+        _lastDragCol = c;
+      }
+    }
   }
 
   function onMouseMove(e) {
@@ -333,8 +393,48 @@ var WoordSoekUI = (function() {
   }
 
   function onTouchEnd() {
-    // Only clear preview, don't reset selection
-    clearPreview();
+    if (_isDragging && _firstCell && _lastDragRow !== null) {
+      // Attempt word selection from drag
+      var dir = WoordSoekEngine.getDirection(_firstCell.row, _firstCell.col, _lastDragRow, _lastDragCol);
+      if (dir) {
+        var result = WoordSoekEngine.checkSelection(
+          _firstCell.row, _firstCell.col, _lastDragRow, _lastDragCol, _puzzle.placedWords
+        );
+
+        if (result.found && !_foundWords.has(result.word)) {
+          _foundWords.add(result.word);
+          _foundCount++;
+
+          var pw = _puzzle.placedWords[result.index];
+          highlightFoundWord(result.word, pw.cells);
+          markWordInList(result.word);
+
+          el('ws-counter').textContent = _foundCount + ' / ' + _puzzle.placedWords.length;
+          Audio.play('word_found');
+
+          if (_foundCount === _puzzle.placedWords.length) {
+            onPuzzleComplete();
+          }
+        }
+      }
+
+      // Silent clear regardless of result
+      clearSelection();
+      clearPreview();
+
+      // Prevent ghost click from firing tap handler
+      _justCompletedDrag = true;
+      setTimeout(function() { _justCompletedDrag = false; }, 400);
+    } else {
+      // Not dragging -- just clear preview (preserve tap-tap behaviour)
+      clearPreview();
+    }
+
+    // Reset drag state
+    _isDragging = false;
+    _dragStartCell = null;
+    _lastDragRow = null;
+    _lastDragCol = null;
   }
 
   function showPreviewTo(clientX, clientY) {

@@ -632,16 +632,90 @@
   </section>
 
   <section id="screen-spider" data-screen="spider" class="screen">
-    <div style="display:flex;flex-direction:column;height:100%;">
+    <div class="spd-container">
+      <!-- Header bar -->
       <header class="game-header">
-        <button class="btn-back" onclick="Router.back()">← Terug</button>
-        <h1>🕷️ Spider Solitaire</h1>
-        <div style="width:80px"></div>
+        <button class="btn-back" onclick="Router.back()">&#8592; Terug</button>
+        <div class="spd-header-center">
+          <span class="timer" id="spd-timer" style="display:none;">0:00</span>
+          <span class="badge badge-gold" id="spd-moves" style="display:none;">0 skuiwe</span>
+          <span class="badge" id="spd-score" style="display:none;">500 punte</span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn-icon" id="spd-undo-btn" title="Ontdoen">&#8617;</button>
+          <button class="btn-icon" id="spd-newgame-btn" title="Nuwe Spel">&#x1F504;</button>
+          <button class="btn-icon" id="spd-settings-btn" title="Instellings">&#9881;</button>
+        </div>
       </header>
-      <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:1.1rem;">
-        Kom binnekort — Phase 5
+
+      <!-- Tableau: 10 columns -->
+      <div class="spd-tableau" id="spd-tableau">
+        <div class="spd-column card-stack" id="spd-col0"></div>
+        <div class="spd-column card-stack" id="spd-col1"></div>
+        <div class="spd-column card-stack" id="spd-col2"></div>
+        <div class="spd-column card-stack" id="spd-col3"></div>
+        <div class="spd-column card-stack" id="spd-col4"></div>
+        <div class="spd-column card-stack" id="spd-col5"></div>
+        <div class="spd-column card-stack" id="spd-col6"></div>
+        <div class="spd-column card-stack" id="spd-col7"></div>
+        <div class="spd-column card-stack" id="spd-col8"></div>
+        <div class="spd-column card-stack" id="spd-col9"></div>
+      </div>
+
+      <!-- Bottom bar: foundations left, stock right -->
+      <div class="spd-bottom-row" id="spd-bottom-row">
+        <div class="spd-foundations" id="spd-foundations"></div>
+        <div class="spd-stock" id="spd-stock"></div>
       </div>
     </div>
+
+    <!-- Difficulty selector modal -->
+    <div class="win-overlay" id="spd-difficulty-modal">
+      <div class="win-card">
+        <h2 style="font-size:1.8rem;">Spider Solitaire</h2>
+        <p>Kies moeilikheidsgraad</p>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <button class="btn btn-secondary" id="spd-diff-1suit">Maklik (1 kleur)</button>
+          <button class="btn btn-secondary" id="spd-diff-2suit">Medium (2 kleure)</button>
+          <button class="btn btn-secondary" id="spd-diff-4suit">Moeilik (4 kleure)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Win overlay -->
+    <div class="win-overlay" id="spd-win-overlay">
+      <div class="win-card">
+        <h2>Geluk!</h2>
+        <p id="spd-win-message"></p>
+        <div style="display:flex;gap:12px;justify-content:center;">
+          <button class="btn btn-primary" id="spd-win-newgame">Nuwe Spel</button>
+          <button class="btn btn-secondary" id="spd-win-home">Tuis</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings modal -->
+    <div class="win-overlay" id="spd-settings-modal">
+      <div class="win-card">
+        <h2 style="font-size:1.4rem;">Spel Instellings</h2>
+        <div class="setting-row">
+          <label>Wys tyd</label>
+          <label class="toggle"><input type="checkbox" id="spd-toggle-timer" /><span class="toggle-track"></span></label>
+        </div>
+        <div class="setting-row">
+          <label>Wys skuiwe</label>
+          <label class="toggle"><input type="checkbox" id="spd-toggle-moves" /><span class="toggle-track"></span></label>
+        </div>
+        <div class="setting-row">
+          <label>Puntestelsel</label>
+          <label class="toggle"><input type="checkbox" id="spd-toggle-scoring" /><span class="toggle-track"></span></label>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:16px;width:100%;" id="spd-settings-close">Sluit</button>
+      </div>
+    </div>
+
+    <!-- Win animation container -->
+    <div id="spd-win-animation" style="display:none;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:100;"></div>
   </section>
 
   <section id="screen-sudoku" data-screen="sudoku" class="screen">
@@ -725,6 +799,8 @@
 <script src="games/woordsoek/ui.js"></script>
 <script src="games/solitaire/engine.js"></script>
 <script src="games/solitaire/ui.js"></script>
+<script src="games/spider/engine.js"></script>
+<script src="games/spider/ui.js"></script>
 
 <script>
   // ── App init ────────────────────────────────────────────

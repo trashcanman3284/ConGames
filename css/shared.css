@@ -912,3 +912,156 @@ body::before {
   transition: top 0.2s ease-out, left 0.2s ease-out;
   pointer-events: none;
 }
+
+/* ══════════════ GAME THEMES ══════════════ */
+
+/* Green felt — applied to card game containers (Solitaire, Spider, FreeCell) */
+.theme-felt {
+  background-color: #1a7e3c;
+  background-image:
+    radial-gradient(ellipse at 30% 40%, rgba(40,160,70,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 60%, rgba(10,80,30,0.15) 0%, transparent 50%);
+  --bg-surface: #157032;
+  --border-subtle: #1b6b35;
+}
+
+.theme-felt .game-header {
+  background: #10602a;
+  border-bottom: 1px solid #1b6b35;
+}
+
+.theme-felt .btn-back {
+  color: #b8d8c4;
+  border-color: #2a8a4a;
+}
+
+.theme-felt .btn-back:hover {
+  color: #fff;
+  border-color: var(--accent-gold);
+}
+
+.theme-felt .btn-icon {
+  background: rgba(0,0,0,0.2);
+  color: #b8d8c4;
+  border-color: #2a8a4a;
+}
+
+.theme-felt .btn-icon:hover {
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+}
+
+.theme-felt .card-placeholder {
+  border-color: rgba(255,255,255,0.15);
+}
+
+.theme-felt .fc-free.fc-empty-cell {
+  border-color: rgba(255,255,255,0.2);
+}
+
+.theme-felt .fc-found.fc-empty-found {
+  border-color: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.25);
+}
+
+/* Parchment — applied to Woord Soek */
+.theme-parchment {
+  background-color: #f0e6cc;
+  background-image:
+    radial-gradient(ellipse at 50% 50%, rgba(245,235,200,0.5) 0%, transparent 70%);
+  --bg-base: #f0e6cc;
+  --bg-surface: #e8debb;
+  --bg-card: #e6d9b8;
+  --bg-raised: #dfd2b0;
+  --text-primary: #3a3020;
+  --text-secondary: #5a4d38;
+  --text-muted: #8a7d65;
+  --border-subtle: #c8b890;
+  --border-accent: #a08040;
+}
+
+.theme-parchment .game-header {
+  background: #e2d5b5;
+  border-bottom-color: #c8b890;
+}
+
+.theme-parchment .btn-back {
+  color: #5a4d38;
+  border-color: #c8b890;
+}
+
+.theme-parchment .btn-back:hover {
+  color: #3a3020;
+  border-color: #a08040;
+}
+
+.theme-parchment .btn-icon {
+  background: #dfd2b0;
+  color: #5a4d38;
+  border-color: #c8b890;
+}
+
+.theme-parchment .btn-icon:hover {
+  color: #a08040;
+  border-color: #a08040;
+}
+
+.theme-parchment .badge {
+  background: rgba(160,128,64,0.15);
+  color: #7a6530;
+  border-color: rgba(160,128,64,0.3);
+}
+
+.theme-parchment .timer {
+  color: #5a4d38;
+}
+
+.theme-parchment .surface {
+  background: #e2d5b5;
+  border-color: #c8b890;
+}
+
+.theme-parchment h3 {
+  color: #7a6530;
+}
+
+.theme-parchment .ws-cell {
+  background: #e6d9b8;
+  color: #3a3020;
+}
+
+.theme-parchment .ws-cell.selected {
+  background: #c8973a;
+  color: #fff;
+}
+
+.theme-parchment .ws-cell.preview {
+  background: rgba(200,151,58,0.35);
+}
+
+.theme-parchment .ws-cell.hint-flash {
+  animation: ws-hint-flash-parchment 1.2s ease-out;
+}
+
+@keyframes ws-hint-flash-parchment {
+  0%,100% { background: #e6d9b8; }
+  20%,60% { background: var(--blue-hint); color: white; }
+}
+
+.theme-parchment .ws-word-item {
+  background: #dfd2b0;
+  color: #3a3020;
+}
+
+.theme-parchment .ws-word-item.found {
+  color: #8a7d65;
+  background: transparent;
+}
+
+.theme-parchment .ws-word-list-panel {
+  border-left-color: #c8b890;
+}
+
+.theme-parchment .ws-layout.layout-below .ws-word-list-panel {
+  border-top-color: #c8b890;
+}

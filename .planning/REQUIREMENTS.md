@@ -43,7 +43,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **SPI-04**: Complete K->A same-suit sequence auto-removes to foundation
 - [x] **SPI-05**: User can deal new row of cards from stock pile
 - [x] **SPI-06**: User can undo moves with unlimited undo stack
-- [ ] **SPI-07**: Win condition detected with celebration animation and stats recorded
+- [x] **SPI-07**: Win condition detected with celebration animation and stats recorded
 
 ### Sudoku
 
@@ -138,7 +138,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SPI-04 | Phase 6: Spider Solitaire | Complete |
 | SPI-05 | Phase 6: Spider Solitaire | Complete |
 | SPI-06 | Phase 6: Spider Solitaire | Complete |
-| SPI-07 | Phase 6: Spider Solitaire | Pending |
+| SPI-07 | Phase 6: Spider Solitaire | Complete |
 | SDK-01 | Phase 7: Sudoku | Pending |
 | SDK-02 | Phase 7: Sudoku | Pending |
 | SDK-03 | Phase 7: Sudoku | Pending |

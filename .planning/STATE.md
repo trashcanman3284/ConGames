@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-08)
 
 **Core value:** Dad can pick up his tablet, tap a game, play it to completion, and return to the menu -- for all five games -- without needing any help.
-**Current focus:** Phase 08.1: Polish & Settings -- in progress.
+**Current focus:** Phase 09: Packaging -- in progress.
 
 ## Current Position
 
-Phase: 08.1 of 9 (Polish & Settings)
-Plan: 4 of 4 in current phase (all plans complete)
-Status: Verifying
-Last activity: 2026-03-09 -- Completed 08.1-04 (Human verification approved)
+Phase: 09 of 9 (Packaging)
+Plan: 1 of 1 in current phase (all plans complete)
+Status: Executing
+Last activity: 2026-03-09 -- Completed 09-01 (Packaging prep)
 
-Progress: [##########] 100% (21 of 21 plans complete)
+Progress: [##########] 100% (22 of 22 plans complete)
 
 ## Performance Metrics
 
@@ -64,6 +64,7 @@ Progress: [##########] 100% (21 of 21 plans complete)
 | Phase 08.1 P01 | 2min | 2 tasks | 3 files |
 | Phase 08.1 P02 | 1min | 1 tasks | 1 files |
 | Phase 08.1 P03 | 2min | 2 tasks | 3 files |
+| Phase 09 P01 | 3min | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -117,6 +118,10 @@ Recent decisions affecting current work:
 - [Phase 08.1]: Sudoku highlight same numbers defaults to true (matching existing always-on behavior)
 - [Phase 08.1]: Sudoku show errors defaults to false (only on explicit check button)
 - [Phase 08.1]: Woord Soek layout toggle moved from header button to settings modal
+- [Phase 09]: All absolute paths use /ConGames/ prefix for GitHub Pages subdirectory hosting
+- [Phase 09]: Split icon purpose entries (any + maskable separately) for PWABuilder compatibility
+- [Phase 09]: Splash uses inline CSS only to prevent flash of unstyled content
+- [Phase 09]: forceUpdate clears all SWs and caches before reloading
 
 ### Pending Todos
 
@@ -133,5 +138,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-09
-Stopped at: Completed 08.1-03-PLAN.md -- Settings modals standardized across all 5 games.
+Stopped at: Completed 09-01-PLAN.md -- Packaging prep (paths, splash, update button).
 Resume file: None

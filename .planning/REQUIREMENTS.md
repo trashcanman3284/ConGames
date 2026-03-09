@@ -79,7 +79,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Platform
 
-- [ ] **PLT-01**: All game assets cached by service worker for full offline play
+- [x] **PLT-01**: All game assets cached by service worker for full offline play
 - [ ] **PLT-02**: APK packaged via PWA Builder, signed, and sideloadable on Samsung Galaxy Tab S6 Lite
 - [x] **PLT-03**: Sound toggle (on/off) accessible from settings panel
 - [x] **PLT-04**: Game timer counts up per session, wins/played stats shown on welcome screen buttons
@@ -171,7 +171,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | POL-04 | Phase 08.1: Polish & Settings | Complete |
 | POL-05 | Phase 08.1: Polish & Settings | Complete |
 | POL-06 | Phase 08.1: Polish & Settings | Complete |
-| PLT-01 | Phase 9: Packaging | Pending |
+| PLT-01 | Phase 9: Packaging | Complete |
 | PLT-02 | Phase 9: Packaging | Pending |
 | PLT-03 | Phase 3: Woord Soek | Complete |
 | PLT-04 | Phase 3: Woord Soek | Complete |

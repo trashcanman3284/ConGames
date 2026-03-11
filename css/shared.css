@@ -537,18 +537,19 @@ body::before {
 
 .spd-tableau {
   display: flex;
-  gap: 6px;
-  padding: 4px 12px;
+  gap: clamp(3px, 0.5vw, 6px);
+  padding: 4px clamp(6px, 1vw, 12px);
   flex: 1;
   align-items: flex-start;
   justify-content: center;
   overflow: hidden;
+  min-height: 0;
 }
 
 .spd-column {
   flex: 1;
   min-width: 0;
-  max-width: 80px;
+  max-width: min(80px, 8.5vw);
   position: relative;
 }
 
@@ -557,25 +558,25 @@ body::before {
   justify-content: space-between;
   align-items: center;
   padding: 4px 12px 8px;
-  min-height: 92px;
+  min-height: clamp(64px, 12vh, 92px);
   flex-shrink: 0;
 }
 
 .spd-foundations {
   display: flex;
-  gap: 4px;
+  gap: clamp(2px, 0.4vw, 4px);
   align-items: center;
 }
 
 .spd-foundation-pile {
-  width: 40px;
-  height: 56px;
+  width: clamp(32px, 4vw, 44px);
+  height: clamp(45px, 5.5vw, 62px);
   position: relative;
 }
 
 .spd-foundation-pile .card {
-  width: 40px !important;
-  height: 56px !important;
+  width: 100% !important;
+  height: 100% !important;
   font-size: 0.5rem;
 }
 
@@ -595,14 +596,14 @@ body::before {
 }
 
 .spd-stock-pile {
-  width: 60px;
-  height: 84px;
+  width: clamp(44px, 6vw, 64px);
+  height: clamp(62px, 8.4vw, 90px);
   position: relative;
 }
 
 .spd-stock-pile .card {
-  width: 60px !important;
-  height: 84px !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* Narrower cards for 10-column layout */

@@ -1,6 +1,7 @@
 {
   "name": "Con se Speletjies",
   "short_name": "Speletjies",
+  "version": "1.0.1",
   "description": "Five classic games for Con — Woord Soek, Solitaire, Spider, Sudoku, FreeCell",
   "start_url": "/ConGames/index.html",
   "id": "/ConGames/",

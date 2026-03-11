@@ -198,10 +198,12 @@ var SpiderUI = (function() {
   }
 
   function renderTableau(state) {
-    // Calculate available height for tableau area
+    // Calculate available height for tableau area from actual DOM elements
     var viewportHeight = window.innerHeight;
-    var headerHeight = 56;
-    var bottomRowHeight = 64;
+    var headerEl = document.querySelector('#screen-spider .game-header');
+    var bottomEl = el('spd-bottom-row');
+    var headerHeight = headerEl ? headerEl.offsetHeight : 56;
+    var bottomRowHeight = bottomEl ? bottomEl.offsetHeight : 92;
     var tableauPadding = 8;
     var availableHeight = viewportHeight - headerHeight - bottomRowHeight - tableauPadding;
 
@@ -327,9 +329,9 @@ var SpiderUI = (function() {
       var cardEl = CardRenderer.createCard('A', 'spades', false);
       pile.appendChild(cardEl);
 
-      // Offset slightly to show stacking
+      // Offset slightly to show stacking — use pile width to stay responsive
       if (d > 0) {
-        pile.style.marginLeft = '-48px';
+        pile.style.marginLeft = '-75%';
       }
 
       stockEl.appendChild(pile);

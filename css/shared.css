@@ -589,9 +589,7 @@ body::before {
 }
 
 .spd-stock {
-  display: flex;
-  gap: 2px;
-  align-items: center;
+  position: relative;
   cursor: pointer;
 }
 

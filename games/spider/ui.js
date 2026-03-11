@@ -321,18 +321,21 @@ var SpiderUI = (function() {
     }
 
     // Show stacked face-down piles for remaining deals
+    // First pile is relative (sets container size), rest are absolute with slight offsets
     for (var d = 0; d < state.dealsRemaining; d++) {
       var pile = document.createElement('div');
       pile.className = 'spd-stock-pile';
-      pile.style.position = 'relative';
+
+      if (d === 0) {
+        pile.style.position = 'relative';
+      } else {
+        pile.style.position = 'absolute';
+        pile.style.left = (d * 3) + 'px';
+        pile.style.top = (d * -2) + 'px';
+      }
 
       var cardEl = CardRenderer.createCard('A', 'spades', false);
       pile.appendChild(cardEl);
-
-      // Offset slightly to show stacking — use pile width to stay responsive
-      if (d > 0) {
-        pile.style.marginLeft = '-75%';
-      }
 
       stockEl.appendChild(pile);
     }

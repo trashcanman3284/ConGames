@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "io.github.trashcanman3284.twa",
+    "sha256_cert_fingerprints": [
+      "3A:F9:DD:38:2B:3D:19:36:30:A3:17:3C:2C:5A:F3:92:C8:3C:D3:3A:27:51:1A:61:69:AE:9D:40:87:85:10:50"
+    ]
+  }
+}]

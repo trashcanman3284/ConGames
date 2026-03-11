@@ -558,6 +558,7 @@ body::before {
   align-items: center;
   padding: 4px 12px 8px;
   min-height: 56px;
+  flex-shrink: 0;
 }
 
 .spd-foundations {

@@ -1165,6 +1165,8 @@
 
   // ── Force update (Dateer op) ──────────────────────────────
   function forceUpdate() {
+    showToast('Besig om op te dateer...');
+
     var swPromise = navigator.serviceWorker
       ? navigator.serviceWorker.getRegistrations().then(function(regs) {
           return Promise.all(regs.map(function(r) { return r.unregister(); }));
@@ -1176,6 +1178,9 @@
     });
 
     Promise.all([swPromise, cachePromise]).then(function() {
+      location.reload();
+    }).catch(function() {
+      showToast('Herlaai...');
       location.reload();
     });
   }

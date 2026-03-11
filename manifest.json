@@ -3,6 +3,7 @@
   "short_name": "Speletjies",
   "description": "Five classic games for Con — Woord Soek, Solitaire, Spider, Sudoku, FreeCell",
   "start_url": "/ConGames/index.html",
+  "id": "/ConGames/",
   "scope": "/ConGames/",
   "display": "fullscreen",
   "orientation": "landscape",

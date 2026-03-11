@@ -17,7 +17,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      height: 100%;
       padding: 24px 40px;
       gap: 32px;
       position: relative;
@@ -272,7 +272,7 @@
       display:grid;
       gap:2px;
       aspect-ratio:1;
-      max-height:calc(100vh - 80px);
+      max-height:calc(100dvh - 80px);
       height:100%;
       width:auto;
       max-width:100%;
@@ -280,7 +280,7 @@
 
     .ws-layout.layout-below .ws-grid {
       max-height:100%;
-      max-width:calc(100vh - 80px);
+      max-width:calc(100dvh - 80px);
     }
 
     .ws-cell {
@@ -434,6 +434,19 @@
   });
 })();
 </script>
+<script>
+// TWA address bar compensation: set --twa-bar for browsers without dvh support
+(function() {
+  if (!CSS.supports('height', '100dvh')) {
+    function setTwaBar() {
+      var bar = window.outerHeight - window.innerHeight;
+      if (bar > 10) document.documentElement.style.setProperty('--twa-bar', bar + 'px');
+    }
+    setTwaBar();
+    window.addEventListener('resize', setTwaBar);
+  }
+})();
+</script>
 
 <div id="app">
 
@@ -488,7 +501,7 @@
       <button class="btn btn-ghost" onclick="openSettings()" style="font-size:1.4rem; padding: 0 16px;">⚙️</button>
     </footer>
 
-    <span style="position:absolute;bottom:8px;right:16px;font-size:0.7rem;color:rgba(240,230,208,0.3);">v1.0.3</span>
+    <span style="position:absolute;bottom:8px;right:16px;font-size:0.7rem;color:rgba(240,230,208,0.3);">v1.0.4</span>
 
   </section>
 

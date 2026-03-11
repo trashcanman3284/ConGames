@@ -102,9 +102,13 @@ body::before {
 /* ── App Shell ─────────────────────────────────────────────── */
 #app {
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - var(--twa-bar, 0px)); /* fallback for browsers without dvh */
   overflow: hidden;
   position: relative;
+}
+
+@supports (height: 100dvh) {
+  #app { height: 100dvh; }
 }
 
 /* ── Screen System ─────────────────────────────────────────── */
@@ -118,6 +122,7 @@ body::before {
 .screen.active {
   display: flex;
   flex-direction: column;
+  padding-bottom: max(0px, env(safe-area-inset-bottom, 0px));
 }
 
 /* ── Header Bar ────────────────────────────────────────────── */
@@ -652,8 +657,8 @@ body::before {
   grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(9, 1fr);
   aspect-ratio: 1;
-  max-height: calc(100vh - 120px);
-  max-width: calc(100vh - 120px);
+  max-height: calc(100dvh - 120px);
+  max-width: calc(100dvh - 120px);
   width: 100%;
   border: 3px solid var(--accent-gold);
   background: var(--bg-surface);

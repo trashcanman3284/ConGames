@@ -557,7 +557,7 @@ body::before {
   justify-content: space-between;
   align-items: center;
   padding: 4px 12px 8px;
-  min-height: 56px;
+  min-height: 92px;
   flex-shrink: 0;
 }
 
@@ -595,14 +595,14 @@ body::before {
 }
 
 .spd-stock-pile {
-  width: 40px;
-  height: 56px;
+  width: 60px;
+  height: 84px;
   position: relative;
 }
 
 .spd-stock-pile .card {
-  width: 40px !important;
-  height: 56px !important;
+  width: 60px !important;
+  height: 84px !important;
 }
 
 /* Narrower cards for 10-column layout */

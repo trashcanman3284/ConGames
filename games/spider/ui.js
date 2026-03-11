@@ -329,7 +329,7 @@ var SpiderUI = (function() {
 
       // Offset slightly to show stacking
       if (d > 0) {
-        pile.style.marginLeft = '-32px';
+        pile.style.marginLeft = '-48px';
       }
 
       stockEl.appendChild(pile);

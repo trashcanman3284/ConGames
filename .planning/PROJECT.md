@@ -4,9 +4,20 @@
 
 A personal Android game suite for Dewald's dad (Con) — five classic games (Woord Soek, Solitaire, Spider Solitaire, Sudoku, FreeCell) in a single offline-first PWA, packaged as an APK via PWA Builder and sideloaded onto a Samsung Galaxy Tab S6 Lite. Shipped v1.0 with all five games playable, MS-style visual themes, and GitHub Pages auto-deployment.
 
+## Current Milestone: v1.1 Kruiswoordraaisel
+
+**Goal:** Add the 6th and final game — an Afrikaans crossword puzzle — to complete the game suite.
+
+**Target features:**
+- Afrikaans crossword puzzle with generated grids
+- Three difficulty levels (Easy 9×9 / Medium 13×13 / Hard 17×17)
+- Cell tap + hidden input for S Pen handwriting support
+- Clue navigation (tap clue → jump to word)
+- Word completion feedback + congratulations modal
+
 ## Core Value
 
-Con can pick up his tablet, tap a game, play it to completion, and return to the menu — for all five games — without needing any help.
+Con can pick up his tablet, tap a game, play it to completion, and return to the menu — for all six games — without needing any help.
 
 ## Requirements
 
@@ -27,7 +38,14 @@ Con can pick up his tablet, tap a game, play it to completion, and return to the
 
 ### Active
 
-(None — start next milestone to define new requirements)
+- [ ] Kruiswoordraaisel clue dataset (~300 word+clue pairs from kaikki.org + words.json)
+- [ ] Crossword grid generation engine (place words with letter intersections)
+- [ ] Three difficulty levels (Easy/Medium/Hard)
+- [ ] Full game UI with cell selection, clue highlighting, hidden input for S Pen
+- [ ] Word completion detection with sound + visual feedback
+- [ ] Congratulations modal + stats recording
+- [ ] Integration into index.html (game card, screen section, script tags, stats)
+- [ ] Service worker cache update for new game files
 
 ### Out of Scope
 
@@ -78,4 +96,4 @@ All 56 v1 requirements validated. Five games fully playable offline.
 | Split icon purpose entries | PWABuilder compatibility (any + maskable separately) | ✓ Good |
 
 ---
-*Last updated: 2026-03-09 after v1.0 milestone*
+*Last updated: 2026-03-19 after v1.1 milestone start*

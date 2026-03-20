@@ -95,79 +95,88 @@ var KruiswoordEngine = (function() {
   /**
    * selectWords(clues, config)
    * Bucket clues into short/medium/long, shuffle each, pick 30/40/30 mix.
-   * Returns array of {word, clue} sorted by length descending (anchor first).
+   * Returns a candidate pool of ~2x wordCount words, sorted by length desc (anchor first).
+   * Anchor is guaranteed to fit in the grid (length <= config.size - 2).
    */
   function selectWords(clues, config) {
+    var maxAnchorLen = config.size - 2;   // anchor must fit with 1-cell margin each side
     var short  = [];  // 4-5 chars
     var medium = [];  // 6-7 chars
-    var long_  = [];  // 8-10 chars
+    var long_  = [];  // 8-max chars, capped to fit grid
 
     for (var i = 0; i < clues.length; i++) {
       var len = clues[i].word.length;
-      if (len <= 5)       short.push(clues[i]);
-      else if (len <= 7)  medium.push(clues[i]);
-      else                long_.push(clues[i]);
+      if (len > config.size) continue;     // word longer than grid — skip entirely
+      if (len <= 5)          short.push(clues[i]);
+      else if (len <= 7)     medium.push(clues[i]);
+      else                   long_.push(clues[i]);
     }
 
     short  = shuffle(short);
     medium = shuffle(medium);
     long_  = shuffle(long_);
 
-    var shortCount  = Math.round(config.wordCount * 0.3);
-    var medCount    = Math.round(config.wordCount * 0.4);
-    var longCount   = config.wordCount - shortCount - medCount;
+    // Target count is 3x wordCount to give placement loop plenty of extras to try
+    var target = config.wordCount * 3;
+    var shortCount = Math.round(target * 0.3);
+    var medCount   = Math.round(target * 0.4);
+    var longCount  = target - shortCount - medCount;
 
-    // Guarantee anchor is from long bucket (longest word, min len 8 for moeilik)
-    // Pull anchor word out first, then fill the rest
+    // Pick anchor: longest word that fits in grid (length <= maxAnchorLen)
     var anchorWord = null;
-    if (long_.length > 0) {
-      // Find longest word in long_ bucket
-      var maxLen = 0;
-      var maxIdx = 0;
-      for (var j = 0; j < long_.length; j++) {
-        if (long_[j].word.length > maxLen) {
-          maxLen = long_[j].word.length;
-          maxIdx = j;
-        }
+    var maxLen = 0;
+    var maxIdx = -1;
+    for (var j = 0; j < long_.length; j++) {
+      if (long_[j].word.length <= maxAnchorLen && long_[j].word.length > maxLen) {
+        maxLen = long_[j].word.length;
+        maxIdx = j;
       }
+    }
+    if (maxIdx >= 0) {
       anchorWord = long_[maxIdx];
       long_.splice(maxIdx, 1);
       longCount = Math.max(0, longCount - 1);
+    } else if (medium.length > 0) {
+      // Fallback: take longest from medium that fits
+      for (var k = 0; k < medium.length; k++) {
+        if (medium[k].word.length <= maxAnchorLen && medium[k].word.length > maxLen) {
+          maxLen = medium[k].word.length;
+          maxIdx = k;
+        }
+      }
+      if (maxIdx >= 0) {
+        anchorWord = medium[maxIdx];
+        medium.splice(maxIdx, 1);
+        medCount = Math.max(0, medCount - 1);
+      }
+    }
+    if (!anchorWord && short.length > 0) {
+      anchorWord = short[0];
+      short.splice(0, 1);
+      shortCount = Math.max(0, shortCount - 1);
     }
 
-    // Take from each bucket, fill from others if short
-    var selected = [];
-
-    // Long words (anchorWord already reserved)
-    var fromLong = long_.slice(0, longCount);
-    var longShortfall = longCount - fromLong.length;
-
-    // Medium words
+    // Build candidate pool from buckets
+    var fromLong   = long_.slice(0, longCount);
     var fromMedium = medium.slice(0, medCount);
-    var medShortfall = medCount - fromMedium.length;
+    var fromShort  = short.slice(0, shortCount);
 
-    // Short words
-    var fromShort = short.slice(0, shortCount);
-    var shortShortfall = shortCount - fromShort.length;
+    var selected = fromLong.concat(fromMedium).concat(fromShort);
 
-    selected = fromLong.concat(fromMedium).concat(fromShort);
-
-    // Fill any shortfall from whichever bucket has surplus
+    // Fill any gap from bucket overflows
     var extras = long_.slice(fromLong.length)
                  .concat(medium.slice(fromMedium.length))
                  .concat(short.slice(fromShort.length));
-    var totalShortfall = longShortfall + medShortfall + shortShortfall;
-    for (var k = 0; k < totalShortfall && k < extras.length; k++) {
-      selected.push(extras[k]);
+    var needed = target - selected.length - (anchorWord ? 1 : 0);
+    for (var e = 0; e < needed && e < extras.length; e++) {
+      selected.push(extras[e]);
     }
 
-    // Sort by length descending
+    // Sort pool by length descending
     selected.sort(function(a, b) { return b.word.length - a.word.length; });
 
-    // Prepend anchor (longest word goes first)
-    if (anchorWord) {
-      selected.unshift(anchorWord);
-    }
+    // Anchor goes first
+    if (anchorWord) selected.unshift(anchorWord);
 
     return selected;
   }
@@ -201,10 +210,9 @@ var KruiswoordEngine = (function() {
   /**
    * canPlace(grid, word, row, col, direction, size)
    * Returns true if word can be placed at (row, col) in given direction.
-   * A cell must be either:
-   *   - currently black (will be turned white), OR
-   *   - already have the exact same letter (shared intersection)
-   * A cell with a different letter → conflict → false.
+   * Each cell must be either:
+   *   - black (will be turned white), OR
+   *   - already white with the exact same letter (intersection)
    */
   function canPlace(grid, word, row, col, direction, size) {
     var dr = direction === 'down' ? 1 : 0;
@@ -214,12 +222,8 @@ var KruiswoordEngine = (function() {
       var c = col + i * dc;
       if (r < 0 || r >= size || c < 0 || c >= size) return false;
       var cell = grid[r][c];
-      if (cell.isBlack) {
-        // Black cell — fine, will be converted
-        continue;
-      }
-      // White cell (already placed) — must match
-      if (cell.letter !== '' && cell.letter !== word[i]) return false;
+      if (cell.isBlack) continue;                       // black → will be converted, OK
+      if (cell.letter !== word[i]) return false;        // white but wrong letter → conflict
     }
     return true;
   }
@@ -249,7 +253,7 @@ var KruiswoordEngine = (function() {
 
   /**
    * isPartOfWordInDirection(placedWords, r, c, direction)
-   * Returns true if cell (r, c) is within any placed word of the given direction.
+   * Returns true if cell (r, c) falls within any placed word of the given direction.
    */
   function isPartOfWordInDirection(placedWords, r, c, direction) {
     for (var i = 0; i < placedWords.length; i++) {
@@ -267,27 +271,27 @@ var KruiswoordEngine = (function() {
   /**
    * checkParallelAdjacency(grid, word, row, col, direction, size, placedWords)
    * Prevent side-by-side parallel words creating phantom perpendicular "words".
-   * For each cell the candidate occupies, check perpendicular neighbours.
-   * If a neighbour has a letter AND belongs to a word of the same direction → reject.
+   * For each cell the candidate would occupy, check perpendicular neighbours.
+   * If a neighbour has a letter AND belongs to a word of the SAME direction → reject.
    */
   function checkParallelAdjacency(grid, word, row, col, direction, size, placedWords) {
     var dr = direction === 'down' ? 1 : 0;
     var dc = direction === 'across' ? 1 : 0;
-    // Perpendicular offset (check neighbours in the cross direction)
+    // Perpendicular offset — for across words check rows above/below; for down words check cols left/right
     var pr = direction === 'across' ? 1 : 0;
     var pc = direction === 'down'   ? 1 : 0;
 
     for (var i = 0; i < word.length; i++) {
       var r = row + i * dr;
       var c = col + i * dc;
-      // Check both sides
+      // Check both perpendicular sides
       for (var side = -1; side <= 1; side += 2) {
         var nr = r + side * pr;
         var nc = c + side * pc;
         if (nr < 0 || nr >= size || nc < 0 || nc >= size) continue;
         var neighbour = grid[nr][nc];
         if (!neighbour.isBlack && neighbour.letter !== '') {
-          // This neighbour has a letter — is it part of a word in the same direction as candidate?
+          // Neighbour has a letter — is it part of a word in the same direction?
           if (isPartOfWordInDirection(placedWords, nr, nc, direction)) {
             return false;  // parallel adjacency violation
           }
@@ -355,7 +359,7 @@ var KruiswoordEngine = (function() {
         for (var wi = 0; wi < word.length; wi++) {
           if (word[wi] !== placedLetter) continue;
 
-          // Compute candidate start from intersection
+          // Compute candidate start from the intersection point
           var cDr = candidateDirection === 'down' ? 1 : 0;
           var cDc = candidateDirection === 'across' ? 1 : 0;
           var startRow = placedR - wi * cDr;
@@ -366,13 +370,13 @@ var KruiswoordEngine = (function() {
           if (!checkEndpointClearance(grid, startRow, startCol, candidateDirection, word.length, size)) continue;
           if (!checkParallelAdjacency(grid, word, startRow, startCol, candidateDirection, size, placedWords)) continue;
 
-          // Count all intersections (with ALL placed words, not just this one)
+          // Count all intersections with ALL placed words for scoring
           var intersections = countIntersections(grid, word, startRow, startCol, candidateDirection);
 
           candidates.push({
-            row:          startRow,
-            col:          startCol,
-            direction:    candidateDirection,
+            row:           startRow,
+            col:           startCol,
+            direction:     candidateDirection,
             intersections: intersections
           });
         }
@@ -411,31 +415,34 @@ var KruiswoordEngine = (function() {
   /**
    * assignCellNumbers(grid, words, size)
    * Scan row-major (left-to-right, top-to-bottom).
-   * Assign sequential numbers to cells that start an Across or Down word.
-   * One number per cell even if it starts both directions.
+   * A cell gets a number if any placed word starts there.
+   * Assign the same number to all words that start at that cell.
+   * Sequential numbering follows reading order.
    */
   function assignCellNumbers(grid, words, size) {
+    // Build a lookup: for each (r,c) record which words start there
+    // so we can assign numbers from the word list (source of truth for starts)
     var num = 1;
+
     for (var r = 0; r < size; r++) {
       for (var c = 0; c < size; c++) {
         if (grid[r][c].isBlack) continue;
 
-        // startsAcross: left edge or previous cell is black, AND next cell exists and is white
-        var startsAcross = (c === 0 || grid[r][c - 1].isBlack) &&
-                           (c + 1 < size && !grid[r][c + 1].isBlack);
+        // Find all words that start at this cell
+        var startsHere = false;
+        for (var i = 0; i < words.length; i++) {
+          if (words[i].row === r && words[i].col === c) {
+            startsHere = true;
+            break;
+          }
+        }
 
-        // startsDown: top edge or cell above is black, AND cell below exists and is white
-        var startsDown   = (r === 0 || grid[r - 1][c].isBlack) &&
-                           (r + 1 < size && !grid[r + 1][c].isBlack);
-
-        if (startsAcross || startsDown) {
+        if (startsHere) {
           grid[r][c].number = num;
-          // Back-fill the number into matching word entries
-          for (var i = 0; i < words.length; i++) {
-            var w = words[i];
-            if (w.row === r && w.col === c) {
-              if (w.direction === 'across' && startsAcross) w.number = num;
-              if (w.direction === 'down'   && startsDown)   w.number = num;
+          // Assign number to all words starting at this cell
+          for (var j = 0; j < words.length; j++) {
+            if (words[j].row === r && words[j].col === c) {
+              words[j].number = num;
             }
           }
           num++;
@@ -449,6 +456,9 @@ var KruiswoordEngine = (function() {
   /**
    * _tryGenerate(config, clues, startTime)
    * Single generation attempt. Returns {grid, words}.
+   * Stops when wordCount is reached or no more progress can be made.
+   * Uses multi-pass approach: words that couldn't be placed earlier may fit
+   * after new words have been added to the grid.
    */
   function _tryGenerate(config, clues, startTime) {
     var wordList    = selectWords(clues, config);
@@ -457,32 +467,50 @@ var KruiswoordEngine = (function() {
 
     if (wordList.length === 0) return { grid: grid, words: [] };
 
-    // Place anchor (first/longest word) horizontally at centre
+    // Place anchor (first word) horizontally at centre
     var anchorEntry = placeAnchor(grid, wordList[0], config.size);
     placedWords.push(anchorEntry);
 
-    // Place remaining words (already in descending length order after anchor)
-    for (var i = 1; i < wordList.length; i++) {
+    // Build queue of remaining candidates (index 1 onward)
+    var queue = wordList.slice(1);
+
+    // Multi-pass: keep looping through unplaced words until no more progress
+    var madeProgress = true;
+    while (madeProgress && placedWords.length < config.wordCount) {
       if (Date.now() - startTime >= 2000) break;
+      madeProgress = false;
+      var nextQueue = [];
 
-      var wordObj    = wordList[i];
-      var candidates = findCandidatePlacements(wordObj, placedWords, grid, config.size, startTime);
+      for (var i = 0; i < queue.length; i++) {
+        if (Date.now() - startTime >= 2000) break;
+        if (placedWords.length >= config.wordCount) break;
 
-      if (candidates.length === 0) continue;
+        var wordObj    = queue[i];
+        var candidates = findCandidatePlacements(wordObj, placedWords, grid, config.size, startTime);
 
-      // Pick best candidate by score
-      var best      = candidates[0];
-      var bestScore = scoreCandidate(candidates[0], config.size);
-      for (var j = 1; j < candidates.length; j++) {
-        var s = scoreCandidate(candidates[j], config.size);
-        if (s > bestScore) {
-          bestScore = s;
-          best      = candidates[j];
+        if (candidates.length === 0) {
+          nextQueue.push(wordObj);  // couldn't place — try again next pass
+          continue;
         }
+
+        // Pick best candidate by score
+        var best      = candidates[0];
+        var bestScore = scoreCandidate(candidates[0], config.size);
+        for (var j = 1; j < candidates.length; j++) {
+          var s = scoreCandidate(candidates[j], config.size);
+          if (s > bestScore) {
+            bestScore = s;
+            best      = candidates[j];
+          }
+        }
+
+        var entry = commitPlacement(grid, wordObj, best.row, best.col, best.direction);
+        placedWords.push(entry);
+        madeProgress = true;
+        // Don't add to nextQueue — word is placed
       }
 
-      var entry = commitPlacement(grid, wordObj, best.row, best.col, best.direction);
-      placedWords.push(entry);
+      queue = nextQueue;
     }
 
     return { grid: grid, words: placedWords };
@@ -504,8 +532,8 @@ var KruiswoordEngine = (function() {
     var startTime  = Date.now();
     var bestResult = null;
 
-    for (var attempt = 0; attempt < 5; attempt++) {
-      if (Date.now() - startTime >= 2000) break;
+    for (var attempt = 0; attempt < 100; attempt++) {
+      if (Date.now() - startTime >= 1500) break;  // leave 500ms margin for safety
 
       var result = _tryGenerate(config, clues, startTime);
 
@@ -583,10 +611,11 @@ var KruiswoordEngine = (function() {
    * Returns true when every placed word is marked complete.
    */
   function isComplete() {
+    if (_state.words.length === 0) return false;
     for (var i = 0; i < _state.words.length; i++) {
       if (!_state.words[i].complete) return false;
     }
-    return _state.words.length > 0;
+    return true;
   }
 
   /**

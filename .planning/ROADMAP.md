@@ -44,7 +44,9 @@ Full details archived to `milestones/v1.0-ROADMAP.md`
   2. Every word is 4-10 characters, alphabetic only, with no proper nouns or offensive terms
   3. Every clue is in Afrikaans, at most 8 words, and contains neither the answer word nor its root
   4. The file cross-references words.json — every word in clues.json is present in the existing dictionary
-**Plans**: TBD
+**Plans:** 1 plan
+Plans:
+- [ ] 10-01-PLAN.md — Download kaikki.org data, filter, translate to Afrikaans clues, validate, write clues.json
 
 ### Phase 11: Crossword Engine
 **Goal**: The engine reliably generates a valid, numbered crossword grid for any difficulty level on demand
@@ -84,6 +86,6 @@ Full details archived to `milestones/v1.0-ROADMAP.md`
 | 8. FreeCell | v1.0 | 3/3 | Complete | 2026-03-09 |
 | 8.1. Polish & Settings | v1.0 | 4/4 | Complete | 2026-03-09 |
 | 9. Packaging | v1.0 | 2/2 | Complete | 2026-03-09 |
-| 10. Clue Data Pipeline | v1.1 | 0/TBD | Not started | - |
+| 10. Clue Data Pipeline | v1.1 | 0/1 | Planning | - |
 | 11. Crossword Engine | v1.1 | 0/TBD | Not started | - |
 | 12. UI & Integration | v1.1 | 0/TBD | Not started | - |

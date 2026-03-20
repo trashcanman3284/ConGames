@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Kruiswoordraaisel
-status: unknown
-stopped_at: Phase 11 context gathered
-last_updated: "2026-03-20T03:44:26.169Z"
+status: executing
+stopped_at: "Completed 11-01-PLAN.md"
+last_updated: "2026-03-19T04:08:00Z"
 progress:
   total_phases: 3
   completed_phases: 1
-  total_plans: 1
-  completed_plans: 1
+  total_plans: 2
+  completed_plans: 2
 ---
 
 # Project State
@@ -19,27 +19,27 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-19)
 
 **Core value:** Con can pick up his tablet, tap a game, play it to completion, and return to the menu — for all six games — without needing any help.
-**Current focus:** Phase 10 — clue-data-pipeline
+**Current focus:** Phase 11 — crossword-engine
 
 ## Current Position
 
-Phase: 10 (clue-data-pipeline) — EXECUTING
-Plan: 1 of 1
+Phase: 11 (crossword-engine) — COMPLETE
+Plan: 1 of 1 (done)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 0
+- Total plans completed: 1
 - Timeline: Started 2026-03-19
-- Total commits: 0
-- Lines of code: 0
+- Total commits: 3
+- Lines of code: 987
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 11-crossword-engine | 1 | 8min | 8min |
 
 ## Accumulated Context
 
@@ -56,6 +56,9 @@ v1.1 decisions:
 - clues.json sourced from kaikki.org cross-referenced with words.json, clues translated to Afrikaans
 - S Pen input via hidden `<input>` — Samsung OS handles handwriting automatically, no custom code needed
 - [Phase 10]: Sourced words from kaikki.org JSONL cross-referenced with words.json; clues translated to Afrikaans with root-leak guard and 30/40/30 length distribution
+- [Phase 11-01]: Multi-pass greedy placement with 100-retry/1500ms budget achieves reliable word count targets
+- [Phase 11-01]: Word-list-based cell numbering (not topology scan) avoids number=0 bugs at direction-intersection cells
+- [Phase 11-01]: Anchor word capped to grid.size-2 to guarantee fit; 3x candidate pool per attempt
 
 ### Pending Todos
 
@@ -67,6 +70,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-20T03:44:26.167Z
-Stopped at: Phase 11 context gathered
-Resume file: .planning/phases/11-crossword-engine/11-CONTEXT.md
+Last session: 2026-03-19T04:08:00Z
+Stopped at: Completed 11-01-PLAN.md
+Resume file: .planning/phases/11-crossword-engine/11-01-SUMMARY.md

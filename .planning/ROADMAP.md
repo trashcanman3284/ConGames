@@ -30,7 +30,7 @@ Full details archived to `milestones/v1.0-ROADMAP.md`
 **Milestone Goal:** Add the 6th and final game — an Afrikaans crossword puzzle — to complete Con's game suite.
 
 - [x] **Phase 10: Clue Data Pipeline** - Build and validate clues.json (~300 Afrikaans word+clue pairs) (completed 2026-03-20)
-- [ ] **Phase 11: Crossword Engine** - Generate valid grids for all three difficulty levels
+- [x] **Phase 11: Crossword Engine** - Generate valid grids for all three difficulty levels (completed 2026-03-20)
 - [ ] **Phase 12: UI & Integration** - Full playable game with cell interaction, clue navigation, win flow, and SW cache update
 
 ## Phase Details
@@ -58,7 +58,7 @@ Plans:
   3. Calling the engine with Hard produces a 17×17 grid with at least 18 placed, intersecting words
   4. Every word-start cell carries the correct superscript number, assigned left-to-right then top-to-bottom
   5. When the minimum word count is not reached, the engine retries up to 5 times before returning the best result
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 Plans:
 - [ ] 11-01-PLAN.md — Build complete KruiswoordEngine IIFE with grid generation algorithm and game state API
 
@@ -89,5 +89,5 @@ Plans:
 | 8.1. Polish & Settings | v1.0 | 4/4 | Complete | 2026-03-09 |
 | 9. Packaging | v1.0 | 2/2 | Complete | 2026-03-09 |
 | 10. Clue Data Pipeline | 1/1 | Complete    | 2026-03-20 | - |
-| 11. Crossword Engine | v1.1 | 0/1 | Planning | - |
+| 11. Crossword Engine | 1/1 | Complete   | 2026-03-20 | - |
 | 12. UI & Integration | v1.1 | 0/TBD | Not started | - |

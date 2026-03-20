@@ -38,7 +38,7 @@ Con can pick up his tablet, tap a game, play it to completion, and return to the
 
 ### Active
 
-- [ ] Kruiswoordraaisel clue dataset (~300 word+clue pairs from kaikki.org + words.json)
+- [x] Kruiswoordraaisel clue dataset (~300 word+clue pairs from kaikki.org + words.json) — Validated in Phase 10: clue-data-pipeline
 - [ ] Crossword grid generation engine (place words with letter intersections)
 - [ ] Three difficulty levels (Easy/Medium/Hard)
 - [ ] Full game UI with cell selection, clue highlighting, hidden input for S Pen
@@ -96,4 +96,4 @@ All 56 v1 requirements validated. Five games fully playable offline.
 | Split icon purpose entries | PWABuilder compatibility (any + maskable separately) | ✓ Good |
 
 ---
-*Last updated: 2026-03-19 after v1.1 milestone start*
+*Last updated: 2026-03-19 after Phase 10 (clue-data-pipeline) complete*

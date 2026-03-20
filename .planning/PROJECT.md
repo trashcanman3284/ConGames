@@ -2,7 +2,7 @@
 
 ## What This Is
 
-A personal Android game suite for Dewald's dad (Con) — five classic games (Woord Soek, Solitaire, Spider Solitaire, Sudoku, FreeCell) in a single offline-first PWA, packaged as an APK via PWA Builder and sideloaded onto a Samsung Galaxy Tab S6 Lite. Shipped v1.0 with all five games playable, MS-style visual themes, and GitHub Pages auto-deployment.
+A personal Android game suite for Dewald's dad (Con) — six classic games (Woord Soek, Solitaire, Spider Solitaire, Sudoku, FreeCell, Kruiswoordraaisel) in a single offline-first PWA, packaged as an APK via PWA Builder and sideloaded onto a Samsung Galaxy Tab S6 Lite. Shipped v1.0 with five games, v1.1 adds the final crossword puzzle game.
 
 ## Current Milestone: v1.1 Kruiswoordraaisel
 
@@ -41,11 +41,11 @@ Con can pick up his tablet, tap a game, play it to completion, and return to the
 - [x] Kruiswoordraaisel clue dataset (~300 word+clue pairs from kaikki.org + words.json) — Validated in Phase 10: clue-data-pipeline
 - [x] Crossword grid generation engine (place words with letter intersections) — Validated in Phase 11: crossword-engine
 - [x] Three difficulty levels (Easy/Medium/Hard) — Validated in Phase 11: crossword-engine
-- [ ] Full game UI with cell selection, clue highlighting, hidden input for S Pen
-- [ ] Word completion detection with sound + visual feedback
-- [ ] Congratulations modal + stats recording
-- [ ] Integration into index.html (game card, screen section, script tags, stats)
-- [ ] Service worker cache update for new game files
+- [x] Full game UI with cell selection, clue highlighting, hidden input for S Pen — Validated in Phase 12: UI & Integration
+- [x] Word completion detection with sound + visual feedback — Validated in Phase 12: UI & Integration
+- [x] Congratulations modal + stats recording — Validated in Phase 12: UI & Integration
+- [x] Integration into index.html (game card, screen section, script tags, stats) — Validated in Phase 12: UI & Integration
+- [x] Service worker cache update for new game files — Validated in Phase 12: UI & Integration
 
 ### Out of Scope
 
@@ -60,11 +60,11 @@ Con can pick up his tablet, tap a game, play it to completion, and return to the
 
 ## Context
 
-Shipped v1.0 with 15,603 LOC (HTML/CSS/JS) across 105 files.
+Shipped v1.0 with 15,603 LOC (HTML/CSS/JS) across 105 files. v1.1 adds Kruiswoordraaisel (crossword puzzle).
 Tech stack: HTML + CSS + Vanilla JS, Tailwind via CDN, Google Fonts, pure CSS card rendering.
 Device: Samsung Galaxy Tab S6 Lite (10.4", landscape, Android 10+).
 Distribution: GitHub Pages (`/ConGames/`) with PWA auto-update, APK sideloaded once.
-All 56 v1 requirements validated. Five games fully playable offline.
+All 56 v1 requirements validated. Six games fully playable offline.
 
 ## Constraints
 
@@ -96,4 +96,4 @@ All 56 v1 requirements validated. Five games fully playable offline.
 | Split icon purpose entries | PWABuilder compatibility (any + maskable separately) | ✓ Good |
 
 ---
-*Last updated: 2026-03-19 after Phase 11 (crossword-engine) complete*
+*Last updated: 2026-03-20 after Phase 12 (UI & Integration) complete — v1.1 Kruiswoordraaisel milestone complete*

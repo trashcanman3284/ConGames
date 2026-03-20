@@ -9,9 +9,9 @@ Requirements for Kruiswoordraaisel milestone. Each maps to roadmap phases.
 
 ### Data Pipeline
 
-- [ ] **DATA-01**: Clues.json contains ~300 quality word+clue pairs sourced from kaikki.org cross-referenced with words.json
-- [ ] **DATA-02**: Words filtered to 4–10 chars, alphabetic only, no proper nouns or vulgar/offensive terms
-- [ ] **DATA-03**: Clues translated to Afrikaans, max 8 words, must not contain the answer word or its root
+- [x] **DATA-01**: Clues.json contains ~300 quality word+clue pairs sourced from kaikki.org cross-referenced with words.json
+- [x] **DATA-02**: Words filtered to 4–10 chars, alphabetic only, no proper nouns or vulgar/offensive terms
+- [x] **DATA-03**: Clues translated to Afrikaans, max 8 words, must not contain the answer word or its root
 
 ### Engine
 
@@ -61,9 +61,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DATA-01 | Phase 10 | Pending |
-| DATA-02 | Phase 10 | Pending |
-| DATA-03 | Phase 10 | Pending |
+| DATA-01 | Phase 10 | Complete |
+| DATA-02 | Phase 10 | Complete |
+| DATA-03 | Phase 10 | Complete |
 | ENG-01 | Phase 11 | Pending |
 | ENG-02 | Phase 11 | Pending |
 | ENG-03 | Phase 11 | Pending |

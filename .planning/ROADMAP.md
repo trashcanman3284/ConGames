@@ -58,7 +58,9 @@ Plans:
   3. Calling the engine with Hard produces a 17×17 grid with at least 18 placed, intersecting words
   4. Every word-start cell carries the correct superscript number, assigned left-to-right then top-to-bottom
   5. When the minimum word count is not reached, the engine retries up to 5 times before returning the best result
-**Plans**: TBD
+**Plans:** 1 plan
+Plans:
+- [ ] 11-01-PLAN.md — Build complete KruiswoordEngine IIFE with grid generation algorithm and game state API
 
 ### Phase 12: UI & Integration
 **Goal**: Con can tap Kruiswoordraaisel, choose a difficulty, fill in the grid with his S Pen, and reach a congratulations screen when complete — with the game card on the welcome screen and all files in the SW cache
@@ -87,5 +89,5 @@ Plans:
 | 8.1. Polish & Settings | v1.0 | 4/4 | Complete | 2026-03-09 |
 | 9. Packaging | v1.0 | 2/2 | Complete | 2026-03-09 |
 | 10. Clue Data Pipeline | 1/1 | Complete    | 2026-03-20 | - |
-| 11. Crossword Engine | v1.1 | 0/TBD | Not started | - |
+| 11. Crossword Engine | v1.1 | 0/1 | Planning | - |
 | 12. UI & Integration | v1.1 | 0/TBD | Not started | - |

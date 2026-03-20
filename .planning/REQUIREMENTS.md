@@ -15,17 +15,17 @@ Requirements for Kruiswoordraaisel milestone. Each maps to roadmap phases.
 
 ### Engine
 
-- [ ] **ENG-01**: Generate valid crossword grid for Easy difficulty (9×9, 7 words)
-- [ ] **ENG-02**: Generate valid crossword grid for Medium difficulty (13×13, 13 words)
-- [ ] **ENG-03**: Generate valid crossword grid for Hard difficulty (17×17, 18 words)
-- [ ] **ENG-04**: Cell numbers assigned left-to-right, top-to-bottom for across/down word starts
-- [ ] **ENG-05**: Retry logic (up to 5 attempts) if placed word count does not meet minimum
+- [x] **ENG-01**: Generate valid crossword grid for Easy difficulty (9×9, 7 words)
+- [x] **ENG-02**: Generate valid crossword grid for Medium difficulty (13×13, 13 words)
+- [x] **ENG-03**: Generate valid crossword grid for Hard difficulty (17×17, 18 words)
+- [x] **ENG-04**: Cell numbers assigned left-to-right, top-to-bottom for across/down word starts
+- [x] **ENG-05**: Retry logic (up to 5 attempts) if placed word count does not meet minimum
 
 ### UI & Integration
 
-- [ ] **UI-01**: Game card appears on welcome screen with stats chip
+- [x] **UI-01**: Game card appears on welcome screen with stats chip
 - [ ] **UI-02**: Difficulty modal on game entry (Easy/Medium/Hard)
-- [ ] **UI-03**: Grid renders with black cells, white cells, and superscript cell numbers
+- [x] **UI-03**: Grid renders with black cells, white cells, and superscript cell numbers
 - [ ] **UI-04**: Tap cell selects it and highlights full word in that direction
 - [ ] **UI-05**: Tap already-selected cell toggles between Across and Down
 - [ ] **UI-06**: Tap clue jumps to first empty cell of that word
@@ -34,8 +34,8 @@ Requirements for Kruiswoordraaisel milestone. Each maps to roadmap phases.
 - [ ] **UI-09**: Puzzle complete triggers congratulations modal and board_finished sound
 - [ ] **UI-10**: Stats recorded via Settings.recordWin('kruiswoord', timeSeconds)
 - [ ] **UI-11**: Back button returns to welcome screen with confirmation if puzzle in progress
-- [ ] **UI-12**: New game files added to sw.js CORE_ASSETS cache list
-- [ ] **UI-13**: Version number incremented on final commit
+- [x] **UI-12**: New game files added to sw.js CORE_ASSETS cache list
+- [x] **UI-13**: Version number incremented on final commit
 
 ## Future Requirements
 
@@ -64,14 +64,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DATA-01 | Phase 10 | Complete |
 | DATA-02 | Phase 10 | Complete |
 | DATA-03 | Phase 10 | Complete |
-| ENG-01 | Phase 11 | Pending |
-| ENG-02 | Phase 11 | Pending |
-| ENG-03 | Phase 11 | Pending |
-| ENG-04 | Phase 11 | Pending |
-| ENG-05 | Phase 11 | Pending |
-| UI-01 | Phase 12 | Pending |
+| ENG-01 | Phase 11 | Complete |
+| ENG-02 | Phase 11 | Complete |
+| ENG-03 | Phase 11 | Complete |
+| ENG-04 | Phase 11 | Complete |
+| ENG-05 | Phase 11 | Complete |
+| UI-01 | Phase 12 | Complete |
 | UI-02 | Phase 12 | Pending |
-| UI-03 | Phase 12 | Pending |
+| UI-03 | Phase 12 | Complete |
 | UI-04 | Phase 12 | Pending |
 | UI-05 | Phase 12 | Pending |
 | UI-06 | Phase 12 | Pending |
@@ -80,8 +80,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | UI-09 | Phase 12 | Pending |
 | UI-10 | Phase 12 | Pending |
 | UI-11 | Phase 12 | Pending |
-| UI-12 | Phase 12 | Pending |
-| UI-13 | Phase 12 | Pending |
+| UI-12 | Phase 12 | Complete |
+| UI-13 | Phase 12 | Complete |
 
 **Coverage:**
 - v1.1 requirements: 21 total

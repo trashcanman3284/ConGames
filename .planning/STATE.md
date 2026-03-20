@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Kruiswoordraaisel
 status: unknown
-stopped_at: Phase 12 context gathered
-last_updated: "2026-03-20T13:31:36.873Z"
+stopped_at: Completed 12-01-PLAN.md
+last_updated: "2026-03-20T13:51:21.851Z"
 progress:
   total_phases: 3
   completed_phases: 2
-  total_plans: 2
-  completed_plans: 2
+  total_plans: 4
+  completed_plans: 3
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-19)
 
 **Core value:** Con can pick up his tablet, tap a game, play it to completion, and return to the menu — for all six games — without needing any help.
-**Current focus:** Phase 11 — crossword-engine
+**Current focus:** Phase 12 — ui-integration
 
 ## Current Position
 
-Phase: 11 (crossword-engine) — COMPLETE
-Plan: 1 of 1 (done)
+Phase: 12 (ui-integration) — EXECUTING
+Plan: 2 of 2
 
 ## Performance Metrics
 
@@ -40,6 +40,7 @@ Plan: 1 of 1 (done)
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 11-crossword-engine | 1 | 8min | 8min |
+| Phase 12-ui-integration P01 | 3 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -59,6 +60,8 @@ v1.1 decisions:
 - [Phase 11-01]: Multi-pass greedy placement with 100-retry/1500ms budget achieves reliable word count targets
 - [Phase 11-01]: Word-list-based cell numbering (not topology scan) avoids number=0 bugs at direction-intersection cells
 - [Phase 11-01]: Anchor word capped to grid.size-2 to guarantee fit; 3x candidate pool per attempt
+- [Phase 12-ui-integration]: Changed game-grid to repeat(3) columns for 6-game 2x3 layout
+- [Phase 12-ui-integration]: Back button uses KruiswoordUI.handleBack() not Router.back() to support quit confirmation flow
 
 ### Pending Todos
 
@@ -70,6 +73,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-20T13:31:36.871Z
-Stopped at: Phase 12 context gathered
-Resume file: .planning/phases/12-ui-integration/12-CONTEXT.md
+Last session: 2026-03-20T13:51:21.849Z
+Stopped at: Completed 12-01-PLAN.md
+Resume file: None

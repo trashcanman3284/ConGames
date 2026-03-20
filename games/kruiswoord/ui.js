@@ -129,6 +129,7 @@ var KruiswoordUI = (function() {
     _cellEls = [];
     var size = state.grid.length;
     gridEl.style.gridTemplateColumns = 'repeat(' + size + ', 1fr)';
+    gridEl.style.gridTemplateRows = 'repeat(' + size + ', 1fr)';
 
     for (var r = 0; r < size; r++) {
       _cellEls[r] = [];

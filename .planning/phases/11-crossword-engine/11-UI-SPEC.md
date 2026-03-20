@@ -5,6 +5,7 @@ status: draft
 shadcn_initialized: false
 preset: none
 created: 2026-03-20
+revised: 2026-03-20
 ---
 
 # Phase 11 — UI Design Contract: Crossword Engine
@@ -42,24 +43,39 @@ Uses existing project token set from `css/shared.css`. These values are already 
 | `--gap-lg` | 32px | Layout section gaps |
 | `--gap-xl` | 48px | Major section breaks |
 
-Exceptions:
+### Exceptions
+
+The following tokens are outside the standard 4/8/16/24/32/48/64 set. They are pre-existing project tokens from `css/shared.css` and must not be changed — altering them would break backwards compatibility across 5 already-shipped games.
+
+| Token | Value | Deviation | Justification |
+|-------|-------|-----------|---------------|
+| `--gap-xs` | 6px | Not a multiple of 4 | Pre-existing token used throughout Woord Soek, Solitaire, Spider, Sudoku, FreeCell UIs |
+| `--gap-sm` | 12px | Not in standard set | Pre-existing token; changing it breaks clue and card padding across all shipped games |
+| `--gap-md` | 20px | Not in standard set | Pre-existing token; used as the default section spacing token in all game layouts |
+
+Additional exceptions:
 - Crossword grid cells: size is **computed** from available viewport height, not a fixed token. Grid must be square and fill available height. Each cell = `floor(gridContainerHeight / gridSize)` px. Minimum cell size: 32px on 17×17. Maximum: uncapped.
-- Superscript cell numbers: 8px font size, positioned top-left inside the cell with 1px padding — below the grid token system, not a layout gap.
+- Superscript cell numbers (8px) are an internal grid rendering detail, not a layout spacing value — excluded from the spacing scale.
 
 ---
 
 ## Typography
 
+**Declared type scale: 4 sizes, 2 weights.**
+
 | Role | Size | Weight | Line Height | CSS | Source |
 |------|------|--------|-------------|-----|--------|
 | Body / clue list | 18px (1rem, base size) | 400 | 1.5 | `var(--font-body)` | `css/shared.css` html `font-size: 18px` |
-| Label / clue number prefix | 18px (1rem) | 600 | 1.4 | `var(--font-body)` weight 600 | Established label pattern |
 | Heading / section title (Reg/Af) | ~22px (1.2rem) | 700 | 1.2 | `var(--font-body)` weight 700 | Established game header pattern |
 | Display / game title | ~25px (1.4rem) | 700 | 1.0 | `var(--font-display)` | `.game-header h1` in shared.css |
+| Cell entered letter | `clamp(1rem, 2.5vw, 1.6rem)` (18–29px) | 700 | 1.0 | `var(--font-body)` | Must be legible at minimum 32px cell size |
 
-Crossword-specific typography:
-- **Cell letter** (entered answer): `var(--font-body)`, weight 700, font-size computed (`clamp(1rem, 2.5vw, 1.6rem)`) — must be legible at minimum 32px cell size.
-- **Cell superscript number**: `var(--font-body)`, weight 400, size fixed at 8px, positioned `top: 1px; left: 1px; line-height: 1`.
+> **Weight 400** is used for body/clue list text only.
+> **Weight 700** is used for all headings, the game title, and cell letters.
+> Weight 600 is not used. "Label / clue number prefix" rows in the clue list are distinguished from body text via `--accent-gold` colour, not a third weight.
+
+Crossword-specific typography note (internal grid rendering — excluded from type scale):
+- **Cell superscript number**: `var(--font-body)`, weight 400, size fixed at **8px**, positioned `top: 1px; left: 1px; line-height: 1`. This value is below the layout type scale and is a grid-internal rendering detail only.
 
 ---
 
@@ -81,6 +97,9 @@ Accent (`--accent-gold`) reserved for:
 - Cell number superscripts on selected word
 - Clue list item — active/selected state highlight
 - Grid outer border
+- Clue number prefix label (distinguishes label from body weight, not weight)
+
+> **Phase 12 note:** The `Verlaat raaisel` button in the back-confirmation modal should be styled with `--red-error` or a derived destructive variant — not `btn-primary`. This is a destructive action (discards progress) and must not share the same visual weight as a constructive primary action.
 
 Crossword cell color mapping (engine data → Phase 12 CSS):
 - `isBlack: true` → background `var(--bg-base)` (`#1a1610`), no border
@@ -88,6 +107,12 @@ Crossword cell color mapping (engine data → Phase 12 CSS):
 - `isBlack: false` (selected word, not active cell) → background `rgba(212,162,58,0.20)` (gold tint)
 - `isBlack: false` (active cell — cursor position) → background `rgba(212,162,58,0.45)` (strong gold tint), border `2px solid var(--accent-gold)`
 - `complete: true` word cells → flash `var(--green-found)` background for 600ms, then lock to `rgba(76,175,120,0.15)` tint
+
+---
+
+## Visual Focal Point
+
+**Primary focal point:** The crossword grid, occupying the upper 70% of the viewport. The clue list panel sits below the grid in portrait and to the side in landscape. All layout decisions in Phase 12 must preserve the grid's dominance — it is the primary interactive surface.
 
 ---
 
@@ -190,7 +215,7 @@ KruiswoordEngine.DIFFICULTY = {
 | Congratulations body | `Jy het die kruiswoordraaisel voltooi in {time}.` | `win-card p` — time via `window.formatTime(seconds)` |
 | Primary CTA (new game) | `Nuwe Raaisel` | `btn-primary` in win modal |
 | Back button label | `← Terug` | `btn-back` in game header |
-| Back confirmation (in-progress) | `Verlaat raaisel? Jou vordering sal verlore gaan.` | Confirmation modal body — two buttons: `Bly` (stay, `btn-secondary`) and `Verlaat` (leave, `btn-primary`) |
+| Back confirmation (in-progress) | `Verlaat raaisel? Jou vordering sal verlore gaan.` | Confirmation modal body — two buttons: `Bly hier` (stay, `btn-secondary`) and `Verlaat raaisel` (leave, destructive button — see Phase 12 note in Color section) |
 | Empty grid state (generation fallback) | No message shown | Engine always returns a grid — never an empty state |
 | Error state | No error state exposed to Con | Engine silently returns best attempt; developer console.error only |
 
@@ -200,7 +225,7 @@ KruiswoordEngine.DIFFICULTY = {
 
 | Action | Trigger | Confirmation approach |
 |--------|---------|----------------------|
-| Leave in-progress puzzle | Tap back button while `isComplete()` is false | Inline confirmation modal: two buttons, no toast. `Bly` = stay. `Verlaat` = leave and discard. |
+| Leave in-progress puzzle | Tap back button while `isComplete()` is false | Inline confirmation modal: two buttons, no toast. `Bly hier` = stay. `Verlaat raaisel` = leave and discard. |
 | New game while playing | `Nuwe Raaisel` tap (from win modal only) | No confirmation — win modal only appears after completion, puzzle is already done |
 
 ---

@@ -281,6 +281,12 @@
     .kw-clue-item:hover { background: #f0f0f0; }
     .kw-clue-item.kw-clue-active { background: #e0e0e0; color: #000; }
     .kw-clue-item.kw-clue-done { text-decoration: line-through; opacity: 0.5; }
+    .kw-clue-row { display: flex; align-items: center; gap: 6px; }
+    .kw-clue-row > span { flex: 1; }
+    .kw-hint-btn { background: none; border: none; color: #999; font-size: 0.8rem; cursor: pointer; padding: 0 4px; flex-shrink: 0; }
+    .kw-hint-btn:hover { color: #555; }
+    .kw-hint-text:empty { display: none; }
+    .kw-hint-text { font-family: monospace; font-size: 13px; color: #111; padding: 2px 0 0 12px; letter-spacing: 1px; }
 
     /* ── Woord Soek ──────────────────────────────────────────── */
     .ws-layout { display:flex; flex:1; overflow:hidden; }

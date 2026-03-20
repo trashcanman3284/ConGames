@@ -183,13 +183,68 @@ var KruiswoordUI = (function() {
       div.className = 'kw-clue-item';
       div.setAttribute('data-number', String(w.number));
       div.setAttribute('data-direction', w.direction);
-      div.textContent = w.number + '. ' + w.clue;
+
+      // Clue row: text + hint button
+      var row = document.createElement('div');
+      row.className = 'kw-clue-row';
+      var textSpan = document.createElement('span');
+      textSpan.textContent = w.number + '. ' + w.clue;
+      row.appendChild(textSpan);
+
+      var hintBtn = document.createElement('button');
+      hintBtn.className = 'kw-hint-btn';
+      hintBtn.textContent = '?';
+      row.appendChild(hintBtn);
+      div.appendChild(row);
+
+      // Hint display area (hidden until clicked)
+      var hintDiv = document.createElement('div');
+      hintDiv.className = 'kw-hint-text';
+      div.appendChild(hintDiv);
+
+      // Wire hint button
+      (function(word, hintEl, btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          hintEl.textContent = generateHint(word);
+        });
+      })(w.word, hintDiv, hintBtn);
+
       (function(num, dir) {
         div.addEventListener('click', function() { handleClueClick(num, dir); });
       })(w.number, w.direction);
       if (w.direction === 'across') { acrossEl.appendChild(div); }
       else { downEl.appendChild(div); }
     }
+  }
+
+  // ── Hint generator ──────────────────────────────────────────────────────────
+  // Show 40–70% of letters, always reveal first letter, randomize obscured positions
+
+  function generateHint(word) {
+    var len = word.length;
+    var minShow = Math.ceil(len * 0.4);
+    var maxShow = Math.floor(len * 0.7);
+    var showCount = minShow + Math.floor(Math.random() * (maxShow - minShow + 1));
+
+    // Always reveal index 0; pick remaining from indices 1..len-1
+    var indices = [];
+    for (var i = 1; i < len; i++) { indices.push(i); }
+    // Shuffle
+    for (var j = indices.length - 1; j > 0; j--) {
+      var k = Math.floor(Math.random() * (j + 1));
+      var tmp = indices[j]; indices[j] = indices[k]; indices[k] = tmp;
+    }
+    var revealed = { 0: true };
+    for (var r = 0; r < showCount - 1 && r < indices.length; r++) {
+      revealed[indices[r]] = true;
+    }
+
+    var result = '';
+    for (var c = 0; c < len; c++) {
+      result += revealed[c] ? word[c] : '*';
+    }
+    return result;
   }
 
   // ── Cell click handler ─────────────────────────────────────────────────────
@@ -461,7 +516,14 @@ var KruiswoordUI = (function() {
   function markClueDone(number, direction) {
     var selector = '.kw-clue-item[data-number="' + number + '"][data-direction="' + direction + '"]';
     var clueEl = document.querySelector(selector);
-    if (clueEl) { clueEl.classList.add('kw-clue-done'); clueEl.classList.remove('kw-clue-active'); }
+    if (clueEl) {
+      clueEl.classList.add('kw-clue-done');
+      clueEl.classList.remove('kw-clue-active');
+      var btn = clueEl.querySelector('.kw-hint-btn');
+      if (btn) { btn.style.display = 'none'; }
+      var hint = clueEl.querySelector('.kw-hint-text');
+      if (hint) { hint.textContent = ''; }
+    }
   }
 
   // ── Puzzle complete ────────────────────────────────────────────────────────

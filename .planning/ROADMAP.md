@@ -31,7 +31,7 @@ Full details archived to `milestones/v1.0-ROADMAP.md`
 
 - [x] **Phase 10: Clue Data Pipeline** - Build and validate clues.json (~300 Afrikaans word+clue pairs) (completed 2026-03-20)
 - [x] **Phase 11: Crossword Engine** - Generate valid grids for all three difficulty levels (completed 2026-03-20)
-- [ ] **Phase 12: UI & Integration** - Full playable game with cell interaction, clue navigation, win flow, and SW cache update
+- [x] **Phase 12: UI & Integration** - Full playable game with cell interaction, clue navigation, win flow, and SW cache update (completed 2026-03-20)
 
 ## Phase Details
 
@@ -72,7 +72,7 @@ Plans:
   3. Letters entered via keyboard or S Pen handwriting appear in the correct cell and the cursor advances automatically to the next empty cell in the word
   4. Completing a correct word flashes it green and plays the word_found sound; completing all words triggers the congratulations modal and plays board_finished, then records the win via Settings.recordWin
   5. The back button from an in-progress puzzle shows a confirmation prompt before returning to the welcome screen
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 Plans:
 - [ ] 12-01-PLAN.md — HTML scaffold, welcome screen card, SW cache, version bump
 - [ ] 12-02-PLAN.md — Build KruiswoordUI IIFE with full game interaction
@@ -93,4 +93,4 @@ Plans:
 | 9. Packaging | v1.0 | 2/2 | Complete | 2026-03-09 |
 | 10. Clue Data Pipeline | 1/1 | Complete    | 2026-03-20 | - |
 | 11. Crossword Engine | 1/1 | Complete    | 2026-03-20 | - |
-| 12. UI & Integration | 1/2 | In Progress|  | - |
+| 12. UI & Integration | 2/2 | Complete   | 2026-03-20 | - |

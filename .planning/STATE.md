@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Kruiswoordraaisel
 status: unknown
-stopped_at: Completed 12-01-PLAN.md
-last_updated: "2026-03-20T13:51:21.851Z"
+stopped_at: Completed 12-02-PLAN.md
+last_updated: "2026-03-20T13:55:58.576Z"
 progress:
   total_phases: 3
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 4
-  completed_plans: 3
+  completed_plans: 4
 ---
 
 # Project State
@@ -41,6 +41,7 @@ Plan: 2 of 2
 |-------|-------|-------|----------|
 | 11-crossword-engine | 1 | 8min | 8min |
 | Phase 12-ui-integration P01 | 3 | 2 tasks | 3 files |
+| Phase 12-ui-integration P02 | 136 | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -62,6 +63,7 @@ v1.1 decisions:
 - [Phase 11-01]: Anchor word capped to grid.size-2 to guarantee fit; 3x candidate pool per attempt
 - [Phase 12-ui-integration]: Changed game-grid to repeat(3) columns for 6-game 2x3 layout
 - [Phase 12-ui-integration]: Back button uses KruiswoordUI.handleBack() not Router.back() to support quit confirmation flow
+- [Phase 12-ui-integration]: getWordAtCell checks incomplete words first for selection priority; advanceCursor only advances to next empty cell
 
 ### Pending Todos
 
@@ -73,6 +75,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-20T13:51:21.849Z
-Stopped at: Completed 12-01-PLAN.md
+Last session: 2026-03-20T13:55:58.573Z
+Stopped at: Completed 12-02-PLAN.md
 Resume file: None

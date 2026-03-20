@@ -93,4 +93,4 @@ Plans:
 | 9. Packaging | v1.0 | 2/2 | Complete | 2026-03-09 |
 | 10. Clue Data Pipeline | 1/1 | Complete    | 2026-03-20 | - |
 | 11. Crossword Engine | 1/1 | Complete    | 2026-03-20 | - |
-| 12. UI & Integration | 2/2 | Complete   | 2026-03-20 | - |
+| 12. UI & Integration | 2/2 | Complete    | 2026-03-20 | - |

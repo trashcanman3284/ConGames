@@ -3,7 +3,7 @@
  * Caches all app assets for full offline support
  */
 
-const CACHE_NAME = 'congames-v1.0.4';
+const CACHE_NAME = 'congames-v1.1.0';
 
 // All files to cache on install
 // Note: sw.js itself is NOT included (browser manages SW updates separately)
@@ -37,6 +37,9 @@ const CORE_ASSETS = [
   '/ConGames/games/freecell/index.html',
   '/ConGames/games/freecell/engine.js',
   '/ConGames/games/freecell/ui.js',
+  '/ConGames/games/kruiswoord/clues.json',
+  '/ConGames/games/kruiswoord/engine.js',
+  '/ConGames/games/kruiswoord/ui.js',
 ];
 
 // Google Fonts (cache separately — external)

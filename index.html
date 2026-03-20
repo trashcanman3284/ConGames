@@ -67,7 +67,7 @@
     /* ── Game Grid ─────────────────────────────────────────── */
     .game-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
       width: 100%;
       max-width: 1100px;
@@ -138,6 +138,9 @@
     .game-btn[data-game="freecell"]:hover { background: rgba(224, 87, 87, 0.08); }
     .game-btn[data-game="freecell"] .game-icon { color: #e05757; text-shadow: 0 0 20px rgba(224,87,87,0.4); }
 
+    .game-btn[data-game="kruiswoord"]:hover { background: rgba(100, 180, 220, 0.08); }
+    .game-btn[data-game="kruiswoord"] .game-icon { color: #64b4dc; text-shadow: 0 0 20px rgba(100,180,220,0.4); }
+
     .game-icon {
       font-size: 3rem;
       line-height: 1;
@@ -196,6 +199,7 @@
     .game-btn:nth-child(3) { animation-delay: 240ms; }
     .game-btn:nth-child(4) { animation-delay: 320ms; }
     .game-btn:nth-child(5) { animation-delay: 400ms; }
+    .game-btn:nth-child(6) { animation-delay: 480ms; }
 
     @keyframes btn-appear {
       from { opacity: 0; transform: translateY(20px) scale(0.95); }
@@ -245,9 +249,6 @@
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: auto auto;
       }
-
-      .game-btn:nth-child(4) { grid-column: 1; }
-      .game-btn:nth-child(5) { grid-column: 2; }
     }
 
     @media (max-width: 700px) {
@@ -255,6 +256,30 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
+
+    /* ── Kruiswoord layout ──────────────────────────────────────── */
+    .kw-container { padding: 8px 16px; max-width: 1200px; margin: 0 auto; height: 100%; display: flex; flex-direction: column; }
+    .kw-game-area { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 16px; overflow-y: auto; padding-bottom: 20px; }
+    .kw-grid { display: grid; gap: 1px; background: #555; border: 2px solid #555; margin: 0 auto; max-width: 90vw; max-height: 50vh; aspect-ratio: 1; }
+    .kw-cell { display: flex; align-items: center; justify-content: center; position: relative; font-family: var(--font-body); font-weight: 700; }
+    .kw-cell-black { background: var(--bg-base); }
+    .kw-cell-white { background: #f5f0e6; color: #1a1610; cursor: pointer; }
+    .kw-cell-white:active { background: #e8e0cc; }
+    .kw-cell-num { position: absolute; top: 1px; left: 2px; font-size: 0.55em; font-weight: 400; color: rgba(26,22,16,0.5); line-height: 1; }
+    .kw-cell-letter { font-size: 1em; text-transform: uppercase; }
+    .kw-cell-selected { background: var(--accent-gold) !important; color: #1a1610; }
+    .kw-cell-highlighted { background: rgba(212,162,58,0.3) !important; }
+    .kw-cell-correct { background: #4caf78 !important; color: #fff; transition: background 0.1s; }
+    .kw-cell-locked { background: rgba(76,175,120,0.15) !important; pointer-events: none; color: #2a5a3a; }
+
+    /* Clue panels */
+    .kw-clues { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; max-width: 800px; }
+    .kw-clue-heading { font-family: var(--font-display); font-size: 1rem; color: var(--accent-gold); margin: 0 0 8px; }
+    .kw-clue-list { display: flex; flex-direction: column; gap: 4px; max-height: 200px; overflow-y: auto; }
+    .kw-clue-item { font-family: var(--font-body); font-size: 0.85rem; color: var(--text-primary); padding: 4px 8px; border-radius: 4px; cursor: pointer; }
+    .kw-clue-item:hover { background: rgba(212,162,58,0.1); }
+    .kw-clue-item.kw-clue-active { background: rgba(212,162,58,0.25); color: var(--accent-gold); }
+    .kw-clue-item.kw-clue-done { text-decoration: line-through; opacity: 0.5; }
 
     /* ── Woord Soek ──────────────────────────────────────────── */
     .ws-layout { display:flex; flex:1; overflow:hidden; }
@@ -495,13 +520,20 @@
         <span class="game-stats-chip" id="stats-freecell"></span>
       </button>
 
+      <button class="game-btn" data-game="kruiswoord" onclick="Router.go('kruiswoord')">
+        <span class="game-icon">✏️</span>
+        <span class="game-name">Kruiswoord</span>
+        <span class="game-sub">Raaisel</span>
+        <span class="game-stats-chip" id="stats-kruiswoord"></span>
+      </button>
+
     </div>
 
     <footer class="welcome-footer">
       <button class="btn btn-ghost" onclick="openSettings()" style="font-size:1.4rem; padding: 0 16px;">⚙️</button>
     </footer>
 
-    <span style="position:absolute;bottom:8px;right:16px;font-size:0.7rem;color:rgba(240,230,208,0.3);">v1.0.4</span>
+    <span style="position:absolute;bottom:8px;right:16px;font-size:0.7rem;color:rgba(240,230,208,0.3);">v1.1.0</span>
 
   </section>
 
@@ -984,6 +1016,83 @@
     <div id="fc-win-animation" style="display:none;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:100;"></div>
   </section>
 
+  <section id="screen-kruiswoord" data-screen="kruiswoord" class="screen">
+    <div class="kw-container">
+      <!-- Header -->
+      <header class="game-header">
+        <button class="btn-back" onclick="KruiswoordUI.handleBack()">&#8592; Terug</button>
+        <div class="kw-header-center">
+          <h1 style="font-family:var(--font-display);font-size:1.3rem;margin:0;">Kruiswoordraaisel</h1>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn-icon" id="kw-undo-btn" title="Ontdoen">&#8617;</button>
+          <button class="btn-icon" id="kw-newgame-btn" title="Nuwe Spel">&#x1F504;</button>
+        </div>
+      </header>
+
+      <!-- Game area -->
+      <div class="kw-game-area">
+        <div class="kw-grid" id="kw-grid">
+          <!-- Cells generated by JS -->
+        </div>
+
+        <!-- Clue panels -->
+        <div class="kw-clues">
+          <div class="kw-clue-col">
+            <h3 class="kw-clue-heading">Dwarsrigting</h3>
+            <div class="kw-clue-list" id="kw-clues-across"></div>
+          </div>
+          <div class="kw-clue-col">
+            <h3 class="kw-clue-heading">Afrigting</h3>
+            <div class="kw-clue-list" id="kw-clues-down"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hidden input for S Pen / keyboard -->
+      <input id="kw-hidden-input" type="text"
+             autocomplete="off" autocorrect="off" autocapitalize="characters"
+             style="position:fixed;top:-200px;left:-200px;opacity:0;width:1px;height:1px;" />
+    </div>
+
+    <!-- Difficulty modal (visible on entry) -->
+    <div class="win-overlay" id="kw-difficulty-modal" style="display:flex;">
+      <div class="win-card">
+        <h2 style="font-size:1.8rem;">Kruiswoordraaisel</h2>
+        <p>Kies moeilikheidsgraad</p>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <button class="btn btn-secondary" id="kw-diff-maklik">Maklik (9&times;9)</button>
+          <button class="btn btn-secondary" id="kw-diff-medium">Medium (13&times;13)</button>
+          <button class="btn btn-secondary" id="kw-diff-moeilik">Moeilik (17&times;17)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Win overlay -->
+    <div class="win-overlay" id="kw-win-overlay">
+      <div class="win-card">
+        <h2>Geluk!</h2>
+        <p id="kw-win-message"></p>
+        <div style="display:flex;gap:12px;justify-content:center;">
+          <button class="btn btn-primary" id="kw-win-newgame">Nuwe Spel</button>
+          <button class="btn btn-secondary" id="kw-win-home">Tuis</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quit confirmation -->
+    <div class="win-overlay" id="kw-confirm-quit">
+      <div class="win-card">
+        <h2 style="font-size:1.5rem;">Wil jy opgee?</h2>
+        <p>Vordering sal verlore gaan.</p>
+        <div style="display:flex;gap:12px;justify-content:center;">
+          <button class="btn btn-primary" id="kw-quit-yes">Ja</button>
+          <button class="btn btn-secondary" id="kw-quit-no">Nee</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ══════════════ SETTINGS PANEL ════════════════════════ -->
   <div id="settings-panel" class="settings-panel">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
@@ -1058,6 +1167,8 @@
 <script src="games/sudoku/ui.js"></script>
 <script src="games/freecell/engine.js"></script>
 <script src="games/freecell/ui.js"></script>
+<script src="games/kruiswoord/engine.js"></script>
+<script src="games/kruiswoord/ui.js"></script>
 
 <script>
   // ── App init ────────────────────────────────────────────
@@ -1073,7 +1184,7 @@
 
   // ── Load win stats onto welcome buttons ─────────────────
   function refreshStats() {
-    const games = ['woordsoek', 'solitaire', 'spider', 'sudoku', 'freecell'];
+    const games = ['woordsoek', 'solitaire', 'spider', 'sudoku', 'freecell', 'kruiswoord'];
     games.forEach(id => {
       const s = Settings.getStats(id);
       const el = document.getElementById(`stats-${id}`);
@@ -1101,11 +1212,12 @@
 
     // Render stats
     const games = [
-      { id: 'woordsoek', label: '🔤 Woord Soek' },
-      { id: 'solitaire', label: '♠️ Solitaire' },
-      { id: 'spider',    label: '🕷️ Spider' },
-      { id: 'sudoku',    label: '🔢 Sudoku' },
-      { id: 'freecell',  label: '🃏 FreeCell' },
+      { id: 'woordsoek',  label: '🔤 Woord Soek' },
+      { id: 'solitaire',  label: '♠️ Solitaire' },
+      { id: 'spider',     label: '🕷️ Spider' },
+      { id: 'sudoku',     label: '🔢 Sudoku' },
+      { id: 'freecell',   label: '🃏 FreeCell' },
+      { id: 'kruiswoord', label: '✏️ Kruiswoord' },
     ];
 
     const container = document.getElementById('all-stats');

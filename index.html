@@ -260,7 +260,7 @@
     /* ── Kruiswoord layout ──────────────────────────────────────── */
     .kw-container { padding: 8px 16px; max-width: 1200px; margin: 0 auto; height: 100%; display: flex; flex-direction: column; }
     .kw-game-area { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 16px; overflow-y: auto; padding-bottom: 20px; }
-    .kw-grid { display: grid; gap: 1px; background: #555; border: 2px solid #555; margin: 0 auto; max-width: 90vw; max-height: 50vh; aspect-ratio: 1; }
+    .kw-grid { display: grid; gap: 1px; background: #555; border: 2px solid #555; margin: 0 auto; width: min(90vw, 50vh); aspect-ratio: 1; }
     .kw-cell { display: flex; align-items: center; justify-content: center; position: relative; font-family: var(--font-body); font-weight: 700; }
     .kw-cell-black { background: var(--bg-base); }
     .kw-cell-white { background: #f5f0e6; color: #1a1610; cursor: pointer; }
@@ -1056,7 +1056,7 @@
     </div>
 
     <!-- Difficulty modal (visible on entry) -->
-    <div class="win-overlay" id="kw-difficulty-modal" style="display:flex;">
+    <div class="win-overlay" id="kw-difficulty-modal">
       <div class="win-card">
         <h2 style="font-size:1.8rem;">Kruiswoordraaisel</h2>
         <p>Kies moeilikheidsgraad</p>

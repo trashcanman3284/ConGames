@@ -31,12 +31,12 @@ var KruiswoordUI = (function() {
 
   function showOverlay(id) {
     var o = el(id);
-    if (o) { o.style.display = 'flex'; }
+    if (o) { o.classList.add('active'); }
   }
 
   function hideOverlay(id) {
     var o = el(id);
-    if (o) { o.style.display = 'none'; }
+    if (o) { o.classList.remove('active'); }
   }
 
   // ── Init ───────────────────────────────────────────────────────────────────
